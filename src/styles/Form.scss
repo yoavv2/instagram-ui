@@ -1,0 +1,76 @@
+@import "./variables";
+
+.form-container {
+  background: $background-white;
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  margin: auto;
+  margin-top: 20px;
+
+  padding: 30px;
+  padding-bottom: 80px;
+  border: 1px solid $border-color-grey;
+
+  .form-logo {
+    display: flex;
+    justify-content: space-around;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .input-rapper {
+    position: relative;
+    display: inline-block;
+
+    margin-bottom: 5px;
+    width: 90%;
+    .form-input {
+      width: 100%;
+      height: 35px;
+      font-family: inherit;
+      background-color: $background-grey;
+      border: 1px solid $border-color-grey-secondary;
+      border-radius: 2px;
+      padding-top: 20px;
+      outline: none;
+    }
+    .lable-name {
+      position: absolute;
+      bottom: 0%;
+      left: 1%;
+      font-size: 80%;
+      pointer-events: none;
+    }
+    .form-input:focus + .lable-name,
+    .form-input:valid + .lable-name {
+      transform: translateY(-2px);
+      transition: transform 2s cubic-bezier(0.68, 0.44, 0.83, 0.99);
+      top: 0;
+      font-size: 70%;
+      color: #5fa8d3;
+    }
+  }
+  .btn-secondary {
+    color: $background-white;
+    background-color: $link-color;
+    font-family: inherit;
+    width: 90%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 900;
+    cursor: pointer;
+  }
+  .btn-secondary[disabled] {
+    background-color: $link-color;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .error-massage {
+    color: red;
+    font-size: 30px;
+  }
+}
