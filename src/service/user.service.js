@@ -12,14 +12,15 @@ async function register(user) {
 }
 
 async function checkAvailabilityUser(username) {
-  const res = await fetch(`${config.apiUrl}/get`)
-    .then((res) => res.json())
-    .then((users) => {
-      const isValid = users.find((user) => user.username === username);
-      return isValid;
-    })
-    .catch(false);
-  return !res;
+  const res = await fetch(`${config.apiUrl}/user/available`, {
+    method: "POST",
+    body: JSON.stringify({ username }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  const isAvailable = await res.json();
+  return isAvailable;
 }
 
 async function login({ username, password }) {

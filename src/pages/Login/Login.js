@@ -6,6 +6,7 @@ import "./Login.scss";
 import { loginSchema } from "./login.schema";
 import { UserContext } from "../../App";
 import { login } from "../../service/user.service";
+import IconsValidate from "../IconsValidate/IconsValidate";
 
 function Login() {
   const { loggedIn, setLoggedIn } = useContext(UserContext);
@@ -32,7 +33,7 @@ function Login() {
         initialErrors={{ username: "required", password: "required" }}
         onSubmit={submit}
       >
-        {({ isValid, isSubmitting }) => (
+        {({ isValid, isSubmitting, touched, errors }) => (
           <div className="name-form">
             <Form className="form">
               <div className="input-rapper">
@@ -40,19 +41,25 @@ function Login() {
                   className="form-input "
                   type="text"
                   name="username"
-                  // placeholder="Username"
                   autoComplete="off"
                   required
                 />
+
                 <label className="lable-name lable2" htmlFor="name">
                   <span className="content-name">Username</span>
                 </label>
+                <IconsValidate
+                  isTouch={touched.username}
+                  err={errors.username}
+                />
               </div>
+
               <ErrorMessage
                 className="error-massage"
                 name="username"
                 component="span"
               />
+
               <div className="input-rapper">
                 <Field
                   className="form-input "
@@ -65,6 +72,10 @@ function Login() {
                 <label className="lable-name lable4" htmlFor="name">
                   <span className="content-name">Password</span>
                 </label>
+                <IconsValidate
+                  isTouch={touched.password}
+                  err={errors.password}
+                />
               </div>
               <ErrorMessage
                 className="error-massage"
@@ -82,6 +93,10 @@ function Login() {
           </div>
         )}
       </Formik>
+
+      <p className="link">
+        Don't have an account ? <a href="Register">Sign up</a>
+      </p>
     </div>
   );
 }

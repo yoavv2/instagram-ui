@@ -3,9 +3,9 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { registerSchema } from "./register.schema";
 import { register } from "../../service/user.service";
+import IconsValidate from "../IconsValidate/IconsValidate";
 import "../../styles/Form.scss";
 import "./Register.scss";
-
 
 function Register() {
   async function submit(values) {
@@ -43,7 +43,7 @@ function Register() {
 
         // onChange={(values) => console.log(values)}
       >
-        {({ isValid, isSubmitting }) => (
+        {({ isValid, isSubmitting, touched, errors }) => (
           <div className="name-form">
             <Form className="form">
               <div className="input-rapper">
@@ -58,6 +58,7 @@ function Register() {
                 <label className="lable-name lable1" htmlFor="name">
                   <span className="content-name">Email</span>
                 </label>
+                <IconsValidate isTouch={touched.email} err={errors.email} />
               </div>
               <ErrorMessage
                 className="error-massage"
@@ -76,6 +77,10 @@ function Register() {
                 <label className="lable-name lable2" htmlFor="name">
                   <span className="content-name">Username</span>
                 </label>
+                <IconsValidate
+                  isTouch={touched.username}
+                  err={errors.username}
+                />
               </div>
               <ErrorMessage
                 className="error-massage"
@@ -94,6 +99,10 @@ function Register() {
                 <label className="lable-name lable3" htmlFor="name">
                   <span className="content-name">Full Name</span>
                 </label>
+                <IconsValidate
+                  isTouch={touched.fullname}
+                  err={errors.fullname}
+                />
               </div>
               <ErrorMessage
                 className="error-massage"
@@ -112,6 +121,10 @@ function Register() {
                 <label className="lable-name lable4" htmlFor="name">
                   <span className="content-name">Password</span>
                 </label>
+                <IconsValidate
+                  isTouch={touched.password}
+                  err={errors.password}
+                />
               </div>
               <ErrorMessage
                 className="error-massage"
@@ -129,6 +142,9 @@ function Register() {
           </div>
         )}
       </Formik>
+      <p className="link">
+        Have an account ? <a href="Login">Log In</a>
+      </p>
     </div>
   );
 }

@@ -25,7 +25,7 @@
     position: relative;
     display: inline-block;
 
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     width: 90%;
     .form-input {
       width: 100%;
@@ -39,18 +39,25 @@
     }
     .lable-name {
       position: absolute;
-      bottom: 0%;
-      left: 1%;
+      // bottom: 0%;
+      // left: 1%;
+      top: 10%;
+      left: -10%;
       font-size: 80%;
       pointer-events: none;
+      transform: translate(50%, 50%);
     }
+    .lable1 {
+      left: -5%;
+    }
+
     .form-input:focus + .lable-name,
     .form-input:valid + .lable-name {
-      transform: translateY(-2px);
-      transition: transform 2s cubic-bezier(0.68, 0.44, 0.83, 0.99);
+      transform: translateX(50%);
+      transition: transform 0.3s cubic-bezier(0.68, 0.44, 0.83, 0.99);
       top: 0;
       font-size: 70%;
-      color: #5fa8d3;
+      // color: #5fa8d3;
     }
   }
   .btn-secondary {
@@ -69,8 +76,24 @@
     opacity: 0.5;
     pointer-events: none;
   }
+
+  .link {
+    font-family: inherit;
+    margin-top: 30px;
+    text-align: center;
+    a {
+      color: $link-color;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+
   .error-massage {
-    color: red;
-    font-size: 30px;
+    // color: red;
+    font-size: 12px;
+
+    margin-left: 20px;
+    // display: none;
   }
 }
