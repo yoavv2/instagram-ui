@@ -1,25 +1,35 @@
 import React, { useContext } from "react";
+import { useHistory } from "react-router";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 
 import "./Login.scss";
 
 import { loginSchema } from "./login.schema";
 import { UserContext } from "../../App";
-import { login } from "../../service/user.service";
+import { login, me } from "../../service/user.service";
 import IconsValidate from "../IconsValidate/IconsValidate";
 
 function Login() {
-  const { loggedIn, setLoggedIn } = useContext(UserContext);
-  console.log("loggedIn ", loggedIn);
+
+
+  const history = useHistory();
+    const { setUser } = useContext(UserContext);
+
+  
+  // const { loggedIn, setLoggedIn } = useContext(UserContext);
+  // console.log("loggedIn ", loggedIn);
+
   async function submit(values) {
-    try {
-      const { token } = await login(values);
-      setLoggedIn(true);
-      localStorage.setItem("loggedIn", token);
-    } catch (e) {
-      console.log(e);
+        try {
+            const { token } = await login(values);
+            const loggedUser = await me();
+            setUser(loggedUser);
+            localStorage.setItem('token', token);
+            history.push('/');
+        } catch (e) {
+            console.log(e);
+        }
     }
-  }
   return (
     <div className="form-container login-container">
       <h1 className="form-logo">
@@ -32,6 +42,7 @@ function Login() {
         validationSchema={loginSchema}
         initialErrors={{ username: "required", password: "required" }}
         onSubmit={submit}
+       
       >
         {({ isValid, isSubmitting, touched, errors }) => (
           <div className="name-form">
@@ -87,6 +98,7 @@ function Login() {
                 className="btn-secondary"
                 type="submit"
               >
+                {}
                 {isSubmitting ? "Submitting" : "Login"}
               </button>
             </Form>

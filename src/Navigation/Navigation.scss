@@ -1,0 +1,30 @@
+// .menu-bar{
+//      display: flex;
+//   padding-right: 1.5em;
+
+//   .profileIcon {
+//     margin-top: -3px;
+//   }
+// }
+.navigation{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 60px;
+  padding: 10px;
+  background: #fff;
+  margin-bottom: 20px;
+}
+.profileIcon{
+  justify-content:flex-end;
+}
+.container{
+   
+  
+  // background:red;
+  // justify-content:center;
+  .logo{
+    width:50%;
+  }
+  
+}

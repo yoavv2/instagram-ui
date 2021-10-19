@@ -1,6 +1,7 @@
 import React from "react";
-
+import { useHistory } from "react-router";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+
 import { registerSchema } from "./register.schema";
 import { register } from "../../service/user.service";
 import IconsValidate from "../IconsValidate/IconsValidate";
@@ -8,18 +9,16 @@ import "../../styles/Form.scss";
 import "./Register.scss";
 
 function Register() {
+  const history = useHistory();
+
   async function submit(values) {
     try {
       const user = await register(values);
-      console.log(user);
+      history.push("/login");
     } catch (e) {
       console.log(e);
     }
   }
-  //* Using useEfect to fech all the users usename when first relaod the page
-  // const [username, setUsername] = useState([]);
-
-  // useEffect(() => {}, []);
 
   return (
     <div className="form-container">
