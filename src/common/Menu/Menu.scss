@@ -1,0 +1,17 @@
+.menu {
+  // flex: 1;
+  // position: absolute;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  // // width: 10%;
+
+  // // background-color: aqua;
+}
+.menu-icon {
+  margin: 10px;
+  &:hover {
+    cursor: pointer;
+  }
+}

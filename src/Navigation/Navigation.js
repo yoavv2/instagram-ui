@@ -1,20 +1,30 @@
 import React from "react";
-import Avatar from "../common/Avatar/Avatar";
+
 import Menu from "../common/Menu/Menu";
 import "./Navigation.scss";
 
 function Navigation() {
   return (
     <div className="navigation">
-      <div className="container">
-        <img className="logo" src="/images/logo.png" alt="imstagram logo" />
-        <div className="search">
-          <ion-icon name="search-outline"></ion-icon>
+      <img
+        className="insta-logo"
+        src="/images/insta-logo.png"
+        alt="imstagram logo"
+      />
+      <form className="search-wrap">
+        <input className="search" type="text" required />
 
-          <span className="searchText">search</span>
-        </div>
+        <label className="search-lable">
+          <span className="search-icon">
+            <ion-icon name="search-outline"></ion-icon>
+          </span>
+          <span className="search-text">search</span>
+        </label>
+      </form>
+      <div className="nav-menu">
+        <Menu />
       </div>
-      <Menu />
+      <div></div>
     </div>
   );
 }

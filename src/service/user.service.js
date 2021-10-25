@@ -11,7 +11,6 @@ async function register(user) {
   return res.json();
 }
 
-
 async function login({ username, password }) {
   const res = await fetch(`${config.apiUrl}/login`, {
     method: "POST",
@@ -34,19 +33,18 @@ async function checkAvailabilityUser(username) {
   return isAvailable;
 }
 
-
 async function me() {
-	const token = localStorage.getItem('token');
-	if (!token) {
-		return {};
-	}
-	const res = await fetch(config.apiUrl + '/user/me', {
-		method: 'GET',
-		headers: {
-			'Content-Type': 'application/json',
-			Authorization: token
-		}
-	});
-	return res.json();
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return {};
+  }
+  const res = await fetch(config.apiUrl + "/user/me", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  });
+  return res.json();
 }
-export { register, login, checkAvailabilityUser ,me};
+export { register, login, checkAvailabilityUser, me };

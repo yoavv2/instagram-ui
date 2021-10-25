@@ -1,9 +1,11 @@
 @import "./variables";
-// .App {
-//    display: flex;
- 
-//   height: 100vh;
-//   // align-items: center;
-// //   background:red;
-// }
+.App {
+  display: flex;
 
+  flex-direction: column;
+  position: relative;
+
+  //   height: 100vh;
+  // align-items: center;
+  //   background:red;
+}

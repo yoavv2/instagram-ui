@@ -1,0 +1,97 @@
+@import "../../styles/variables";
+
+.container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 400px;
+  height: 250px;
+
+  background-color: $background-white;
+  border-radius: 3px;
+
+  .btn-exit {
+    position: absolute;
+    left: 93%;
+    top: 0%;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .header {
+    font-family: $font;
+    font-size: 1.3em;
+    font-weight: 900;
+  }
+
+  .create-form {
+    display: flex;
+    min-width: 400px;
+    height: 150px;
+    position: relative;
+
+    flex-direction: column;
+    align-items: center;
+    // background: black;
+    .text-area {
+      width: 80%;
+      height: 80%;
+      border: none;
+
+      border-radius: 3px;
+      // background-color: $background-white;
+      outline: none;
+      padding-left: 5%;
+      color: $font-color-secondary;
+      font-family: $font;
+      font-size: 1.2em;
+      font-weight: 300;
+
+      resize: none;
+    }
+    .btn-add {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .create-lable {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      font-size: 80%;
+      pointer-events: none;
+      top: 35%;
+      left: 30%;
+
+      .create-text {
+        color: $font-color-secondary;
+        font-family: $font;
+        font-size: 1.2em;
+        font-weight: 300;
+      }
+    }
+    .create:focus + .create-lable {
+      transform: translateX(-40%);
+    }
+    .create:valid + .create-lable {
+      display: none;
+    }
+  }
+  .btn-create {
+    border: 1px solid $border-color-grey;
+    border-radius: 3px;
+    background-color: $background-grey;
+    height: 30px;
+    width: 80%;
+    color: $font-color-secondary;
+    font-family: $font;
+    font-size: 1.2em;
+    font-weight: 300;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

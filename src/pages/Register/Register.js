@@ -13,7 +13,7 @@ function Register() {
 
   async function submit(values) {
     try {
-      const user = await register(values);
+      await register(values);
       history.push("/login");
     } catch (e) {
       console.log(e);
@@ -23,7 +23,7 @@ function Register() {
   return (
     <div className="form-container">
       <h1 className="form-logo">
-        <img src="/images/logo.png" alt="imstagram" className="logo" />
+        <img src="/images/insta-logo.png" alt="imstagram" className="logo" />
       </h1>
       <h2 className="description">
         Sign up to see photos and videos from your friends.

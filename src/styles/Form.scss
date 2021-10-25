@@ -35,7 +35,8 @@
       background-color: $background-grey;
       border: 1px solid $border-color-grey-secondary;
       border-radius: 2px;
-      padding-top: 20px;
+      // padding-top: 20px;
+      padding: 10px;
       outline: none;
     }
     .lable-name {
@@ -43,7 +44,7 @@
       // bottom: 0%;
       // left: 1%;
       top: 10%;
-      left: -10%;
+      left: -9%;
       font-size: 80%;
       pointer-events: none;
       transform: translate(50%, 50%);
@@ -54,7 +55,7 @@
 
     .form-input:focus + .lable-name,
     .form-input:valid + .lable-name {
-      transform: translateX(50%);
+      transform: translate(50%, -20%);
       transition: transform 0.3s cubic-bezier(0.68, 0.44, 0.83, 0.99);
       top: 0;
       font-size: 70%;

@@ -1,30 +1,82 @@
-// .menu-bar{
-//      display: flex;
-//   padding-right: 1.5em;
+@import "../styles/variables";
 
-//   .profileIcon {
-//     margin-top: -3px;
-//   }
-// }
-.navigation{
+.navigation {
+  // display: flex;
+  // justify-content: center;
+
   display: flex;
+
+  background-color: aquamarine;
   justify-content: space-evenly;
   align-items: center;
   height: 60px;
   padding: 10px;
-  background: #fff;
+  background: $background-white;
   margin-bottom: 20px;
-}
-.profileIcon{
-  justify-content:flex-end;
-}
-.container{
-   
-  
-  // background:red;
-  // justify-content:center;
-  .logo{
-    width:50%;
+  border-bottom: 1px solid $border-color-grey-secondary;
+  .search-wrap {
+    position: relative;
+    display: inline-block;
+
+    .search {
+      border: 1px solid $border-color-grey;
+      border-radius: 3px;
+      background-color: $background-grey;
+
+      min-width: 225px;
+      height: 26px;
+      outline: none;
+      padding-left: 20%;
+    }
+    .search-lable {
+      position: absolute;
+      // bottom: 0%;
+      // left: 1%;
+      top: 10%;
+      left: -10%;
+      font-size: 80%;
+      pointer-events: none;
+      top: 15%;
+      left: 45%;
+
+      .search-text {
+        color: $font-color-secondary;
+        font-family: $font;
+        font-size: 1.2em;
+        font-weight: 300;
+      }
+    }
   }
+  .search-icon {
+    position: absolute;
+    top: 15%;
+    left: -55%;
+
+    ion-icon {
+      font-size: 100%;
+    }
+  }
+
+  .search:focus + .search-lable {
+    transform: translate(-120%, 0%);
+    .search-icon {
+      display: none;
+    }
+  }
+
+  .search:valid + .search-lable {
+    display: none;
+  }
+  .insta-logo {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+.nav-menu {
+  width: 250px;
+ 
+  display: flex;
+  justify-content: center;
   
 }

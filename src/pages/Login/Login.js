@@ -10,30 +10,28 @@ import { login, me } from "../../service/user.service";
 import IconsValidate from "../IconsValidate/IconsValidate";
 
 function Login() {
-
-
   const history = useHistory();
-    const { setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
 
-  
   // const { loggedIn, setLoggedIn } = useContext(UserContext);
   // console.log("loggedIn ", loggedIn);
 
   async function submit(values) {
-        try {
-            const { token } = await login(values);
-            const loggedUser = await me();
-            setUser(loggedUser);
-            localStorage.setItem('token', token);
-            history.push('/');
-        } catch (e) {
-            console.log(e);
-        }
+    try {
+      const { token } = await login(values);
+      localStorage.setItem("token", token);
+      const loggedUser = await me();
+      setUser(loggedUser);
+      
+      history.push("/");
+    } catch (e) {
+      console.log(e);
     }
+  }
   return (
     <div className="form-container login-container">
       <h1 className="form-logo">
-        <img src="/images/logo.png" alt="imstagram" className="logo" />
+        <img src="/images/insta-logo.png" alt="imstagram" className="logo" />
       </h1>
 
       <Formik
@@ -42,7 +40,6 @@ function Login() {
         validationSchema={loginSchema}
         initialErrors={{ username: "required", password: "required" }}
         onSubmit={submit}
-       
       >
         {({ isValid, isSubmitting, touched, errors }) => (
           <div className="name-form">
