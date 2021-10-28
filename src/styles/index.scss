@@ -9,15 +9,20 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
-  // background: #fafafa;
+  // overflow: hidden; /* Hide scrollbars */
   background: #fff;
   background-color: $background-grey;
   color: #5a5a5a;
+
   font-family: $font;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+// .create_post__wrapper {
+//   // background-color: rgba(0, 0, 0, 0.85);
+//   z-index: 1;
+// }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

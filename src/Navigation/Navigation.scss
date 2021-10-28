@@ -73,10 +73,30 @@
     }
   }
 }
+
+.insta-logo-small {
+  display: none;
+}
 .nav-menu {
   width: 250px;
- 
+
   display: flex;
   justify-content: center;
+}
+@media only screen and (max-width: 620px) {
+  .insta-logo {
+    display: none;
+  }
+  .insta-logo-small {
+    display: block;
+    width: 35px;
+  }
+}
+@media only screen and (max-width: 530px) {
+  .search,
+  .search-icon,
+  .search-lable {
+    display: none;
+  }
   
 }

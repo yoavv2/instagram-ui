@@ -1,12 +1,13 @@
 import config from "../config/index";
 
-async function create(post) {
+async function create(form) {
+  // console.log("form data : ", post);
+
   const token = localStorage.getItem("token");
   const res = await fetch(config.apiUrl + "/post", {
     method: "POST",
-    body: JSON.stringify(post),
+    body: form,
     headers: {
-      "Content-Type": "application/json",
       Authorization: token,
     },
   });

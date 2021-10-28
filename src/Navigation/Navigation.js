@@ -3,6 +3,7 @@ import React from "react";
 import Menu from "../common/Menu/Menu";
 import "./Navigation.scss";
 
+import { ReactComponent as Insta } from "../images/insta-logo-small.svg";
 function Navigation() {
   return (
     <div className="navigation">
@@ -11,7 +12,8 @@ function Navigation() {
         src="/images/insta-logo.png"
         alt="imstagram logo"
       />
-      <form className="search-wrap">
+      <Insta className="insta-logo-small" />
+      <form className="search-wrap" role="search">
         <input className="search" type="text" required />
 
         <label className="search-lable">

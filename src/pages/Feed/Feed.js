@@ -1,18 +1,10 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Feed.scss";
-import { useHistory } from "react-router-dom";
-import { UserContext } from "../../App";
-import { CardContext } from "../Create/card-context";
+
 import Post from "../../common/Post/Post.js";
 import { getFeed } from "../../service/post.service";
-import Avatar from "../../common/Avatar/Avatar";
-import Create from "../Create/Create";
 
 function Feed() {
-  const { setUser } = useContext(UserContext);
-  const [isShown, setIsShown] = useState(false);
-  const history = useHistory();
-
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -29,19 +21,16 @@ function Feed() {
 
   return (
     <div className="feed-container">
-      <div className="create-wrap">
-        <Avatar className="profileIcon" image="./images/avatar.png" />
-
-        <button onClick={() => setIsShown(!isShown)} className="btn-create">
-          whats on your mind? name
-        </button>
-        <div className="border"></div>
+      <div className="posts">
+        {posts.map((post, index) => (
+          <Post key={index} data={post} />
+        ))}
       </div>
+    </div>
+  );
+}
 
-      <CardContext.Provider value={{ isShown, setIsShown }}>
-        <Create className="create-card" />
-      </CardContext.Provider>
-      {/* <button
+/* <button
         className="logout"
         onClick={() => {
           localStorage.removeItem("token");
@@ -50,20 +39,6 @@ function Feed() {
         }}
       >
         log out
-      </button> */}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-        }}
-      >
-        {posts.map((post) => (
-          <Post data={post} />
-        ))}
-      </div>
-    </div>
-  );
-}
+      </button> */
 
 export default Feed;

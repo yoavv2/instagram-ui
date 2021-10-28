@@ -47,4 +47,20 @@ async function me() {
   });
   return res.json();
 }
-export { register, login, checkAvailabilityUser, me };
+
+async function getUser(username) {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    return {};
+  }
+  const res = await fetch(config.apiUrl + "/user/" + username, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  });
+  return res.json();
+}
+
+export { register, login, checkAvailabilityUser, me, getUser };

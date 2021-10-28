@@ -2,12 +2,11 @@ import React from "react";
 import "./Avatar.scss";
 
 function Avatar(props) {
-  const { image } = props;
+  const { iconSize, image } = props;
 
-  let profileImage = image;
   return (
     <div>
-      <img className={`avatar `} src={profileImage} alt="profile" />
+      <img className={`avatar  ${iconSize}`} src={image} alt="profile" />
     </div>
   );
 }
