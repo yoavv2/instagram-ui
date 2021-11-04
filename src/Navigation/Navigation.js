@@ -65,10 +65,12 @@ function Navigation() {
           {isClicked ? (
             <>
               <div className="search_result__square"></div>
+
               <div
                 className="search_result__background "
                 onClick={(e) => e.stopPropagation()}
               >
+                <div className="serach_result__border"></div>
                 {results.map((result) => (
                   <SearchResult
                     onClose={() => setIsClicked(false)}

@@ -1,9 +1,6 @@
 @import "../styles/variables";
 
 .navigation {
-  // display: flex;
-  // justify-content: center;
-
   display: flex;
   background: $background-white;
   justify-content: space-around;
@@ -17,8 +14,7 @@
     width: 70%;
     height: 60px;
     padding: 10px;
-    // background: black;
-    // margin-bottom: 20px;
+
     border-bottom: 1px solid $border-color-grey-secondary;
   }
 
@@ -38,8 +34,7 @@
     }
     .search-lable {
       position: absolute;
-      // bottom: 0%;
-      // left: 1%;
+
       top: 10%;
       left: -10%;
       font-size: 80%;
@@ -53,39 +48,46 @@
         font-size: 1.2em;
         font-weight: 300;
       }
-    }
-    .search-icon {
-      position: absolute;
-      top: 15%;
-      left: -55%;
 
-      ion-icon {
-        font-size: 100%;
+      .search-icon {
+        position: absolute;
+        top: 15%;
+        left: -55%;
+
+        ion-icon {
+          font-size: 100%;
+        }
       }
     }
-  }
-  .search_result__square {
-    position: absolute;
-    top: 115%;
-    right: 50%;
-    width: 20px;
-    height: 20px;
-    transform: rotate(45deg);
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px -2px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 3px;
-    background-color: white;
-    z-index: 1;
-  }
-  .search_result__background {
-    position: absolute;
-    top: 140%;
-    right: -34%;
-    width: 170%;
-    height: 400px;
 
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    border-radius: 3px;
-    background-color: white;
+    .search_result__square {
+      position: absolute;
+      top: 115%;
+      right: 50%;
+      width: 20px;
+      height: 20px;
+      transform: rotate(45deg);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px -2px 0 rgba(0, 0, 0, 0.19);
+      border-radius: 3px;
+      background-color: white;
+      z-index: 1;
+    }
+    .search_result__background {
+      position: absolute;
+      top: 140%;
+      right: -34%;
+      width: 170%;
+      height: 400px;
+
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+        0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      border-radius: 3px;
+      background-color: white;
+    }
+    .serach_result__border {
+      margin: 15px;
+    }
   }
 
   .search:focus + .search-lable {
@@ -115,12 +117,8 @@
 .nav-menu {
   display: flex;
   justify-content: flex-start;
-  // background-color: aqua;
 }
 @media only screen and (max-width: 720px) {
-  // * {
-  //   overflow: hidden;
-  // }
   .nav_container {
     width: 100% !important;
     align-content: space-around !important;
