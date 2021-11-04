@@ -10,7 +10,7 @@ import { ReactComponent as Add } from "../../images/add.svg";
 import { UserContext } from "../../App";
 import Avatar from "../Avatar/Avatar";
 function Menu() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const history = useHistory();
   const location = history.location;
@@ -26,6 +26,17 @@ function Menu() {
       <Explore className="menu-icon explore" />
       <Notifications className="menu-icon notifications" />
       <Avatar className="profileIcon" image={user.avatar} iconSize="sm" />
+
+      <button
+        className="logout"
+        onClick={() => {
+          localStorage.removeItem("token");
+          history.push("/login");
+          setUser({});
+        }}
+      >
+        log out
+      </button>
     </div>
   );
 }

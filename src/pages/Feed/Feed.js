@@ -31,15 +31,6 @@ function Feed() {
   );
 }
 
-/* <button
-        className="logout"
-        onClick={() => {
-          localStorage.removeItem("token");
-          history.push("/login");
-          setUser({});
-        }}
-      >
-        log out
-      </button> */
+
 
 export default Feed;

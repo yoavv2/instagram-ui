@@ -64,18 +64,41 @@
       }
     }
   }
-
-  .search_reasult__wrap {
+  .search_result__square {
     position: absolute;
-    top: 100%;
+    top: 115%;
+    right: 50%;
+    width: 20px;
+    height: 20px;
+    transform: rotate(45deg);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px -2px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 3px;
+    background-color: white;
+    z-index: 1;
   }
+  .search_result__background {
+    position: absolute;
+    top: 140%;
+    right: -34%;
+    width: 170%;
+    height: 400px;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 3px;
+    background-color: white;
+  }
+
   .search:focus + .search-lable {
     transform: translate(-120%, 0%);
     .search-icon {
       display: none;
     }
   }
-
+  .search:focus {
+    .search_result__square {
+      display: block !important;
+    }
+  }
   .search:valid + .search-lable {
     display: none;
   }
@@ -105,9 +128,7 @@
     .insta-logo {
       display: none;
     }
-    .search {
-      // width: 135px !important;
-    }
+
     .insta-logo-small {
       display: block;
       width: 35px;
