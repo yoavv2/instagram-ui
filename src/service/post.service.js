@@ -19,4 +19,16 @@ async function getFeed() {
   return res.json();
 }
 
-export { create, getFeed };
+async function getPosts(username) {
+  const token = localStorage.getItem("token");
+  if (!token) return [];
+  const res = await fetch(config.apiUrl + "/post/" + username, {
+    method: "GET",
+    headers: {
+      Authorization: token,
+    },
+  });
+  return res.json();
+}
+
+export { create, getFeed, getPosts };

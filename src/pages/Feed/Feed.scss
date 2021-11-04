@@ -1,1 +1,17 @@
 @import "../../styles/variables";
+
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+
+.posts {
+  width: 600px;
+}
+@media only screen and (max-width: 600px) {
+  .posts {
+    width: 100%;
+  }
+}

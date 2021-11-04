@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import "./Menu.scss";
 
@@ -7,12 +7,13 @@ import { ReactComponent as Explore } from "../../images/explore.svg";
 import { ReactComponent as Messenger } from "../../images/messenger.svg";
 import { ReactComponent as Notifications } from "../../images/notifications.svg";
 import { ReactComponent as Add } from "../../images/add.svg";
-
+import { UserContext } from "../../App";
 import Avatar from "../Avatar/Avatar";
 function Menu() {
+  const { user } = useContext(UserContext);
+
   const history = useHistory();
   const location = history.location;
-  console.log(`location`, location);
 
   return (
     <div className="menu">
@@ -24,7 +25,7 @@ function Menu() {
       />
       <Explore className="menu-icon explore" />
       <Notifications className="menu-icon notifications" />
-      <Avatar className="profileIcon" image="./images/avatar.png" />
+      <Avatar className="profileIcon" image={user.avatar} iconSize="sm" />
     </div>
   );
 }

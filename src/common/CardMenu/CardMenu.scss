@@ -1,0 +1,18 @@
+.card_menu {
+  // flex: 1;
+  // position: absolute;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  .card_icon {
+    margin: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .like {
+    height: 24px;
+    width: 24px;
+  }
+}

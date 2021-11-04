@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { useHistory } from "react-router-dom";
-import Exitbtn from "./Exitbtn/Exitbtn";
+import Exitbtn from "../../common/Exitbtn/Exitbtn";
 
 import "./CreatePost.scss";
 
@@ -30,7 +30,7 @@ function CreatePost() {
       //* then close the menu
 
       if (ref.current && !ref.current.contains(e.target)) {
-        history.push("/");
+        history.goBack();
       }
     };
 
@@ -67,11 +67,7 @@ function CreatePost() {
         <div className="creat__post_form">
           <h3 className="header">Create post</h3>
           <div className="border"></div>
-          <form
-            className="create-form"
-
-            // onSubmit={step === 1 && submit}
-          >
+          <form className="create-form" onSubmit={submit}>
             <div className="drag-drop-wrap">
               <div
                 className="drag-area"

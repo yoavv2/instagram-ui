@@ -11,7 +11,7 @@ function Feed() {
     const getPosts = async () => {
       try {
         const posts = await getFeed();
-        setPosts(posts);
+        setPosts(posts.slice(0).reverse());
       } catch (err) {
         console.log(err);
       }
@@ -21,9 +21,10 @@ function Feed() {
 
   return (
     <div className="feed-container">
+      <div className="feed_position"></div>
       <div className="posts">
         {posts.map((post, index) => (
-          <Post key={index} data={post} />
+          <Post key={post._id} data={post} />
         ))}
       </div>
     </div>

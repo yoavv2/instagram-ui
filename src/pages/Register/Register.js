@@ -23,7 +23,7 @@ function Register() {
   return (
     <div className="form-container">
       <h1 className="form-logo">
-        <img src="/images/insta-logo.png" alt="imstagram" className="logo" />
+        <img src="/images/insta-logo.png" alt="instagram" className="logo" />
       </h1>
       <h2 className="description">
         Sign up to see photos and videos from your friends.

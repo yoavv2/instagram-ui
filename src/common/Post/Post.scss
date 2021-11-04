@@ -1,4 +1,65 @@
+@import "../../styles/variables";
+
 .Post__image {
-  min-width: 50%;
-  max-width: 70%;
+  width: 100%;
+  display: block;
+}
+.post_wrapper {
+  border: 1px solid $border-color-grey;
+  background-color: $background-white;
+  margin-bottom: 3.5em;
+  border-radius: 3px;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75em;
+    // background-color: aqua;
+
+    .Post__user {
+      display: flex;
+      align-items: center;
+      width: 15%;
+      justify-content: space-between;
+    }
+    .profileIcon {
+      margin-bottom: 0;
+    }
+  }
+  .Post__image {
+    max-height: 600px;
+  }
+  .timePosted {
+    font-size: 0.9em;
+    padding-left: 1em;
+    padding-bottom: 1em;
+    color: $font-color-secondary;
+    border-bottom: 1px solid $border-color-grey-secondary;
+  }
+  .card_menu {
+    padding-left: 0.5em;
+  }
+}
+.link {
+  text-decoration: none;
+  color: $font-color-primary;
+  font-family: $font;
+  font-weight: 700;
+  &.link:visited {
+    text-decoration: none;
+  }
+}
+.like_count {
+  padding-left: 1em;
+}
+.likedBy {
+  padding-left: 1em;
+}
+@media only screen and (max-width: 640px) {
+  .post_wrapper {
+    border: none;
+    background-color: $background-grey;
+    margin-bottom: 0.75em;
+  }
 }

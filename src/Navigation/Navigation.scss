@@ -5,15 +5,23 @@
   // justify-content: center;
 
   display: flex;
-
-  background-color: aquamarine;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 60px;
-  padding: 10px;
   background: $background-white;
-  margin-bottom: 20px;
-  border-bottom: 1px solid $border-color-grey-secondary;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+
+  .nav_container {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 70%;
+    height: 60px;
+    padding: 10px;
+    // background: black;
+    // margin-bottom: 20px;
+    border-bottom: 1px solid $border-color-grey-secondary;
+  }
+
   .search-wrap {
     position: relative;
     display: inline-block;
@@ -23,7 +31,7 @@
       border-radius: 3px;
       background-color: $background-grey;
 
-      min-width: 225px;
+      width: 225px;
       height: 26px;
       outline: none;
       padding-left: 20%;
@@ -46,17 +54,21 @@
         font-weight: 300;
       }
     }
-  }
-  .search-icon {
-    position: absolute;
-    top: 15%;
-    left: -55%;
+    .search-icon {
+      position: absolute;
+      top: 15%;
+      left: -55%;
 
-    ion-icon {
-      font-size: 100%;
+      ion-icon {
+        font-size: 100%;
+      }
     }
   }
 
+  .search_reasult__wrap {
+    position: absolute;
+    top: 100%;
+  }
   .search:focus + .search-lable {
     transform: translate(-120%, 0%);
     .search-icon {
@@ -78,18 +90,29 @@
   display: none;
 }
 .nav-menu {
-  width: 250px;
-
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  // background-color: aqua;
 }
-@media only screen and (max-width: 620px) {
-  .insta-logo {
-    display: none;
-  }
-  .insta-logo-small {
-    display: block;
-    width: 35px;
+@media only screen and (max-width: 720px) {
+  // * {
+  //   overflow: hidden;
+  // }
+  .nav_container {
+    width: 100% !important;
+    align-content: space-around !important;
+
+    .insta-logo {
+      display: none;
+    }
+    .search {
+      // width: 135px !important;
+    }
+    .insta-logo-small {
+      display: block;
+      width: 35px;
+      margin-right: 5%;
+    }
   }
 }
 @media only screen and (max-width: 530px) {
@@ -98,5 +121,4 @@
   .search-lable {
     display: none;
   }
-  
 }
