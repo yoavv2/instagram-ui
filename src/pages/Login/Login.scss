@@ -1,6 +1,29 @@
 @import "../../styles/variables";
 
-.login-container {
-  height: 350px;
-  width: 100vw;
+.login_wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  align-items: center;
+
+  .login_bear__wrap {
+    width: 350px;
+    height: 350px;
+    // border: 1px solid $border-color-grey-secondary;
+  }
+  .login_bear {
+    width: 100%;
+    height: 100%;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .login-container {
+    margin-top: 0;
+    height: 350px;
+    width: 100vw;
+  }
 }
