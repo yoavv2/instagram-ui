@@ -1,5 +1,31 @@
 @import "../../styles/variables";
 
-.profile__posts {
-  width: 600px;
+.profile {
+ 
+}
+.profile_header {
+ display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile_posts {
+  display: grid;
+  grid-template-columns: 300px 300px 300px;
+  grid-gap: 10px;
+  place-content: center;
+  .profile_posts__post {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+}
+.profile_images {
+  border: 1px solid black;
+  background-size: cover;
+
+  &:hover {
+    cursor: pointer;
+    background-color: black;
+
+    opacity: 0.6;
+  }
 }

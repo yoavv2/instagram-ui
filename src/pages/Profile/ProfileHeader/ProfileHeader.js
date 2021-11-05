@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import "./ProfileHeader.scss";
 import Avatar from "../../../common/Avatar/Avatar";
 import { getUser } from "../../../service/user.service";
 
@@ -15,9 +15,9 @@ function ProfileHeader({ username, postNum }) {
   }, [username]);
 
   return (
-    <div className="profile__header">
+    <div className="profileHeader">
       <div className="profile__avatar">
-        <Avatar iconSize="lg" />
+        <Avatar iconSize="lg" image={user.avatar} />
       </div>
       <div>
         <h2>{user.username}</h2>

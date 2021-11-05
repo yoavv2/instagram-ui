@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import "./Profile.scss";
+import config from "../../config/index";
 
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
 
 import Post from "../../common/Post/Post";
 
 import { getPosts } from "../../service/post.service";
+import { getUser } from "../../service/user.service";
 
 function Profile() {
   const [posts, setPosts] = useState([]);
@@ -15,7 +17,7 @@ function Profile() {
   useEffect(() => {
     async function initUser() {
       const posts = await getPosts(username);
-      console.log(`posts`, posts);
+
       setPosts(posts);
     }
     initUser();
@@ -23,11 +25,23 @@ function Profile() {
 
   return (
     <div className="profile">
-      <ProfileHeader username={username} postNum={posts.length} />
+      
+      <ProfileHeader
+        className="profile_header"
+        username={username}
+        postNum={posts.length}
+      />
       <h2>posts</h2>
-      <div className="profile__posts">
+      <div className="profile_posts">
         {posts.map((post) => (
-          <Post key={post._id} data={post} />
+          // <Post className="profile_posts__post" key={post._id} data={post} />
+          <div className="profile_images">
+            <img
+              src={config.apiUrl + "/" + post.image}
+              className="Post__image"
+              alt=""
+            />
+          </div>
         ))}
       </div>
     </div>
