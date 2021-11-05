@@ -16,12 +16,15 @@ function ProfileHeader({ username, postNum }) {
 
   return (
     <div className="profileHeader">
-      <div className="profile__avatar">
+      <div className="profile_avatar">
         <Avatar iconSize="lg" image={user.avatar} />
       </div>
-      <div>
-        <h2>{user.username}</h2>
-        <p>{postNum} posts</p>
+      <div className="profile_detale">
+        <p>{user.username}</p>
+        <p>
+          <strong>{postNum} </strong>posts
+        </p>
+        <h2>{user.fullname}</h2>
       </div>
     </div>
   );
