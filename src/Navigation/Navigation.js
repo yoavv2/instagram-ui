@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 import "./Navigation.scss";
 import Menu from "../common/Menu/Menu";
 
@@ -22,11 +22,14 @@ function Navigation() {
     }, 1000);
     return () => {
       clearTimeout(timeout);
+      setQuery("");
     };
   }, [query]);
+
   useEffect(() => {
     const clickHandler = (e) => {
       setIsClicked(false);
+      setQuery("");
     };
     document.addEventListener("click", clickHandler);
     return () => {
@@ -36,22 +39,29 @@ function Navigation() {
   return (
     <div className="navigation">
       <div className="nav_container">
-        <div className="logo_wrap">
+        <Link to={"/"} className="logo_wrap">
           <img
             className="insta-logo"
             src="/images/insta-logo.png"
             alt="instagram logo"
           />
           <Insta className="insta-logo-small" />
-        </div>
+        </Link>
 
-        <form className="search-wrap" role="search">
+        <form
+          onSubmit={() => setQuery("")}
+          className="search-wrap"
+          role="search"
+        >
           <input
             className="search"
             type="text"
             onClick={(e) => {
               e.stopPropagation();
-              if (!isClicked) setIsClicked(true);
+
+              if (!isClicked) {
+                setIsClicked(true);
+              }
             }}
             onChange={(e) => setQuery(e.target.value)}
             required

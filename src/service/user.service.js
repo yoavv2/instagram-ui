@@ -12,6 +12,7 @@ async function register(user) {
 }
 
 async function login({ username, password }) {
+  
   const res = await fetch(`${config.apiUrl}/login`, {
     method: "POST",
     body: JSON.stringify({ username, password }),

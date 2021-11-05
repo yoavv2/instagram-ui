@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import "./Menu.scss";
 
 import { ReactComponent as Home } from "../../images/home.svg";
@@ -17,7 +17,11 @@ function Menu() {
 
   return (
     <div className="menu">
-      <Home className="menu-icon home" />
+      <Link to={"/"}>
+        {" "}
+        <Home className="menu-icon home" />
+      </Link>
+
       <Messenger className="menu-icon messenger" />
       <Add
         className="menu-icon add"
@@ -25,7 +29,14 @@ function Menu() {
       />
       <Explore className="menu-icon explore" />
       <Notifications className="menu-icon notifications" />
-      <Avatar className="profileIcon" image={user.avatar} iconSize="sm" />
+      <Link to={"/profile/" + user.username}>
+        <Avatar
+          className="profileIcon"
+          image={user.avatar}
+          iconSize="sm"
+          // onClick={() => history.push(`/profile/${user.username}`)}
+        />
+      </Link>
 
       <button
         className="logout"
