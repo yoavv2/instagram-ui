@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import "./Menu.scss";
 
@@ -7,18 +7,31 @@ import { ReactComponent as Explore } from "../../images/explore.svg";
 import { ReactComponent as Messenger } from "../../images/messenger.svg";
 import { ReactComponent as Notifications } from "../../images/notifications.svg";
 import { ReactComponent as Add } from "../../images/add.svg";
+
 import { UserContext } from "../../App";
 import Avatar from "../Avatar/Avatar";
+import DropdownMenu from "./DropdownMenu/DropdownMenu";
 function Menu() {
-  const { user, setUser } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
   const history = useHistory();
-  const location = history.location;
+  // const location = history.location;
+
+  const [isClicked, setIsClicked] = useState(false);
+
+  useEffect(() => {
+    const clickHandler = (e) => {
+      setIsClicked(false);
+    };
+    document.addEventListener("click", clickHandler);
+    return () => {
+      document.removeEventListener("click", clickHandler);
+    };
+  }, []);
 
   return (
     <div className="menu">
       <Link to={"/"}>
-        {" "}
         <Home className="menu-icon home" />
       </Link>
 
@@ -29,25 +42,23 @@ function Menu() {
       />
       <Explore className="menu-icon explore" />
       <Notifications className="menu-icon notifications" />
-      <Link to={"/profile/" + user.username}>
+      <div
+        onClick={(e) => {
+          e.stopPropagation();
+          if (!isClicked) {
+            setIsClicked(true);
+          }
+        }}
+      >
         <Avatar
           className="profileIcon"
           image={user.avatar}
-          iconSize="sm"
+          iconSize="xsm"
           // onClick={() => history.push(`/profile/${user.username}`)}
         />
-      </Link>
+      </div>
 
-      <button
-        className="logout"
-        onClick={() => {
-          localStorage.removeItem("token");
-          history.push("/login");
-          setUser({});
-        }}
-      >
-        log out
-      </button>
+      {isClicked ? <DropdownMenu /> : ""}
     </div>
   );
 }

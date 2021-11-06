@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { createAvatar } from "@dicebear/avatars";
-import * as style from "@dicebear/avatars-bottts-sprites";
+// import { createAvatar } from "@dicebear/avatars";
+// import * as style from "@dicebear/avatars-bottts-sprites";
 import "./Avatar.scss";
 
 function Avatar(props) {
@@ -24,7 +24,7 @@ function Avatar(props) {
 Avatar.propTypes = {
   image: PropTypes.string,
   storyBorder: PropTypes.bool,
-  iconSize: PropTypes.oneOf(["sm", "md", "lg"]),
+  iconSize: PropTypes.oneOf(["xsm", "sm", "md", "lg"]),
 };
 
 export default Avatar;

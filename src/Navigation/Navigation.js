@@ -36,6 +36,9 @@ function Navigation() {
       document.removeEventListener("click", clickHandler);
     };
   }, []);
+
+
+
   return (
     <div className="navigation">
       <div className="nav_container">
@@ -66,6 +69,7 @@ function Navigation() {
             onChange={(e) => setQuery(e.target.value)}
             required
           />
+          
           <label className="search-lable">
             <span className="search-icon">
               <ion-icon name="search-outline"></ion-icon>

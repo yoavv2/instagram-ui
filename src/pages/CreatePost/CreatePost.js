@@ -12,7 +12,7 @@ function CreatePost() {
   const history = useHistory();
   const [image, setImage] = useState();
 
-  const [step, setStep] = useState(0);
+  // const [step, setStep] = useState(0);
   const [body, setBody] = useState("");
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -94,7 +94,11 @@ function CreatePost() {
                   </p>
                 )}
                 {image && (
-                  <img src={URL.createObjectURL(image)} width="500px" />
+                  <img
+                    src={URL.createObjectURL(image)}
+                    width="500px"
+                    alt="post"
+                  />
                 )}
               </div>
 

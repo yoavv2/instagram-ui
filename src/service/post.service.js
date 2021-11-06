@@ -14,7 +14,6 @@ async function create(form) {
 }
 
 async function getFeed() {
-  const token = localStorage.getItem("token");
   const res = await fetch(config.apiUrl + "/post");
 
   return res.json();
