@@ -1,5 +1,12 @@
 @import "../../styles/variables";
 
+.register_wrap {
+  display: flex;
+  justify-content: flex-end;
+
+  position: relative;
+}
+
 .description {
   color: $font-color-secondary;
   font-size: 1em;

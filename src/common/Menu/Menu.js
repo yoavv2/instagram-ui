@@ -44,8 +44,8 @@ function Menu() {
       <Notifications className="menu-icon notifications" />
       <div
         onClick={(e) => {
-          e.stopPropagation();
           if (!isClicked) {
+            e.stopPropagation();
             setIsClicked(true);
           }
         }}

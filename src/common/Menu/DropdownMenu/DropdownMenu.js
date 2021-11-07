@@ -11,7 +11,7 @@ function DropdownMenu() {
   return (
     <div>
       <div className="dropdown_square"></div>
-      <div className="dropdown_background" onClick={(e) => e.stopPropagation()}>
+      <div className="dropdown_background">
         <div className="dropdown__border"></div>
         <Link
           className="dropdown_link dropdown_item"

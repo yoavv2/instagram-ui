@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useRive, useStateMachineInput } from "rive-react";
@@ -26,6 +26,21 @@ function Login() {
   // const { loggedIn, setLoggedIn } = useContext(UserContext);
   // console.log("loggedIn ", loggedIn);
 
+  useEffect(() => {
+    me()
+      .then((loggedUser) => {
+        if (!isLoggedIn(loggedUser)) {
+          return;
+        }
+        history.push("/");
+      })
+      .catch((err) => console.log(err));
+  }, [history]);
+
+  function isLoggedIn(user) {
+    return user.hasOwnProperty("_id");
+  }
+
   async function submit(values) {
     try {
       const { token } = await login(values);
@@ -39,9 +54,11 @@ function Login() {
       console.log("error ", e);
     }
   }
+
   return (
     <div className="login_wrapper">
       {/* <Rive className="login_bear" src={BearLogin} animations="Correct" /> */}
+
       <div className="login_bear__wrap">
         <RiveComponent
           className="login_bear"
