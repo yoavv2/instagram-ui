@@ -17,14 +17,26 @@ function ProfileHeader({ username, postNum }) {
   return (
     <div className="profileHeader">
       <div className="profile_avatar">
-        <Avatar iconSize="lg" image={user.avatar} />
+        <p className="avatar_username">{user.username}</p>
+        <Avatar className="avatar_icon" iconSize="xlg" image={user.avatar} />
+        <h2 className="avatar_fullname">{user.fullname}</h2>
       </div>
-      <div className="profile_detale">
-        <p>{user.username}</p>
-        <p>
-          <strong>{postNum} </strong>posts
-        </p>
-        <h2>{user.fullname}</h2>
+      <div className="header_detale">
+        <p className="detale_username">{user.username}</p>
+        <div className="header_info">
+          {" "}
+          <p className="info_postnumber">
+            <strong>{postNum} </strong>posts
+          </p>
+          <p className="info_follwoers">
+            <strong>X</strong>Follwoers
+          </p>
+          <p className="info_following">
+            <strong>X </strong>Following
+          </p>
+        </div>
+
+        <h2 className="detale_fullname">{user.fullname}</h2>
       </div>
     </div>
   );

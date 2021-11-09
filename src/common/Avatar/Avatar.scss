@@ -37,7 +37,17 @@
     height: 50px;
   }
   &.lg {
+    width: 100px;
+    height: 100px;
+  }
+  &.xlg {
     width: 140px;
     height: 140px;
+  }
+}
+@media only screen and (max-width: 700px) {
+  &.xlg {
+    width: 100px !important;
+    height: 100px !important;
   }
 }

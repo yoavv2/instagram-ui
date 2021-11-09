@@ -19,8 +19,9 @@ function MenuDropDown() {
             <Avatar image={user.avatar} iconSize="xsm" />
           </div>
         </DropdownMenu.Trigger>
-
+        {/* <div className="dropdown_square"></div> */}
         <DropdownMenu.Content className="content">
+          <div className="dropdown_border"></div>
           <DropdownMenu.Item className="item">
             <Link className="dropdown_link" to={"/profile/" + user.username}>
               <Profile /> <span>profile</span>

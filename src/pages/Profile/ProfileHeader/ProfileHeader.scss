@@ -1,22 +1,105 @@
 @import "../../../styles/variables";
 
-.profileHeader {
-  display: flex;
-  position: relative;
-  // flex-direction: column;
-  align-items: center;
-  justify-content: center;
+@media only screen and (min-width: 240px) {
+  .profileHeader {
+    display: flex;
+    border-bottom: 1px solid $border-color-grey-secondary;
+    height: 200px;
+    width: 100%;
+    padding: 10px;
+  }
+  .profile_avatar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
 
-  height: 250px;
-  border-bottom: 1px solid $border-color-grey;
+    .avatar_username {
+      margin-left: 20px;
+    }
+    .avatar_fullname {
+      margin-top: 65px;
+      margin-left: 20px;
+    }
+  }
+  .header_detale {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+    justify-content: center;
+
+    .header_info {
+      display: flex;
+
+      justify-content: space-around;
+      align-content: center;
+      .info_postnumber {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .info_follwoers {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .info_following {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    .detale_username,
+    .detale_fullname {
+      margin-left: 40p2;
+    }
+    .detale_username,
+    .detale_fullname {
+      display: none;
+    }
+  }
 }
-.profile_avatar {
-  position: absolute;
-  left: 30%;
-  top: 5%;
+@media only screen and (min-width: 700px) {
+  .profileHeader {
+    position: relative;
+    width: 90%;
+  }
+  .detale_username,
+  .detale_fullname {
+    display: block !important;
+    margin-left: 150px !important;
+  }
+  .avatar_username,
+  .avatar_fullname {
+    display: none !important;
+  }
+  .profile_avatar {
+    flex: 1;
+    margin-top: 40px;
+    margin-left: 180px;
+  }
+  .header_detale {
+    flex: 2;
+    .header_info {
+    }
+  }
 }
-.profile_detale {
-  position: absolute;
-  left: 40%;
-  top: 8%;
+@media only screen and (min-width: 1000px) {
+  .profileHeader {
+    position: relative;
+    width: 60%;
+  }
+  .profile_avatar {
+    position: absolute;
+
+    left: 0%;
+  }
+  .header_detale {
+    position: absolute;
+    left: 40%;
+    width: 450px;
+  }
 }

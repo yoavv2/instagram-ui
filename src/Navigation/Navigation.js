@@ -79,11 +79,11 @@ function Navigation() {
           </label>
           {isClicked ? (
             <>
-              <div className="search_result__square"></div>
+              {/* <div className="search_result__square"></div> */}
               <ScrollArea.Root>
                 <div className="serach_result__border"></div>
                 <ScrollArea.Viewport
-                  className="search_result__background "
+                  className="search_result__viewport"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <div className="serach_result__border">results</div>

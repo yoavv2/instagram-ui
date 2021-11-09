@@ -64,7 +64,7 @@ function CreatePost() {
       <Exitbtn />
 
       <div className="container" ref={ref}>
-        <div className="creat__post_form">
+        <div className="creat_post__form">
           <h3 className="header">Create post</h3>
           <div className="border"></div>
           <form className="create-form" onSubmit={submit}>
