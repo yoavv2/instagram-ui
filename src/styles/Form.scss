@@ -92,8 +92,9 @@
   }
 
   .error-massage {
-    // color: red;
+    color: red;
     font-size: 12px;
     margin-left: 20px;
+    z-index: 2;
   }
 }

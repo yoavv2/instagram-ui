@@ -32,4 +32,22 @@ async function getPosts(username) {
   return res.json();
 }
 
-export { create, getFeed, getPosts };
+function postLike(postId) {
+  return fetch(config.apiUrl + "/post/" + postId + "/like", {
+    method: "POST",
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
+  });
+}
+
+function postUnlike(postId) {
+  return fetch(config.apiUrl + "/post/" + postId + "/unlike", {
+    method: "POST",
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    },
+  });
+}
+
+export { create, getFeed, getPosts, postLike, postUnlike };

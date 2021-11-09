@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import * as ScrollArea from "@radix-ui/react-scroll-area";
 import "./Navigation.scss";
 import Menu from "../common/Menu/Menu";
 
@@ -17,6 +18,8 @@ function Navigation() {
       setResults([]);
       return;
     }
+    //? debounce
+
     let timeout = setTimeout(async () => {
       await search(query).then((results) => setResults(results));
     }, 1000);
@@ -36,8 +39,6 @@ function Navigation() {
       document.removeEventListener("click", clickHandler);
     };
   }, []);
-
-
 
   return (
     <div className="navigation">
@@ -69,7 +70,7 @@ function Navigation() {
             onChange={(e) => setQuery(e.target.value)}
             required
           />
-          
+
           <label className="search-lable">
             <span className="search-icon">
               <ion-icon name="search-outline"></ion-icon>
@@ -79,21 +80,37 @@ function Navigation() {
           {isClicked ? (
             <>
               <div className="search_result__square"></div>
+              <ScrollArea.Root>
+                <div className="serach_result__border"></div>
+                <ScrollArea.Viewport
+                  className="search_result__background "
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div className="serach_result__border">results</div>
+                  {results.map((result) => (
+                    <SearchResult
+                      onClose={() => setIsClicked(false)}
+                      className="search_result"
+                      user={result}
+                      key={result._id}
+                    />
+                  ))}
+                </ScrollArea.Viewport>
+                <ScrollArea.Scrollbar orientation="vertical">
+                  <ScrollArea.Thumb className="scrolbar_tumb" />
+                </ScrollArea.Scrollbar>
+                <ScrollArea.Scrollbar orientation="horizontal">
+                  <ScrollArea.Thumb className="scrolbar_tumb" />
+                </ScrollArea.Scrollbar>
+                <ScrollArea.Corner />
+              </ScrollArea.Root>
 
-              <div
+              {/* <div
                 className="search_result__background "
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="serach_result__border"></div>
-                {results.map((result) => (
-                  <SearchResult
-                    onClose={() => setIsClicked(false)}
-                    className="search_result"
-                    user={result}
-                    key={result._id}
-                  />
-                ))}
-              </div>
+              </div> */}
             </>
           ) : (
             " "

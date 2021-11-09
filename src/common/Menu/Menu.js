@@ -1,64 +1,72 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import React, {
+  useContext,
+  useEffect,
+  useState,
+  useRef,
+  useCallback,
+} from "react";
+import { Link, useLocation } from "react-router-dom";
 import "./Menu.scss";
+// import { useOnClickOutside } from "../../hooks/useOnClickOutside";
 
 import { ReactComponent as Home } from "../../images/home.svg";
+import { ReactComponent as HomeBlack } from "../../images/home-black.svg";
 import { ReactComponent as Explore } from "../../images/explore.svg";
+import { ReactComponent as ExploreBlack } from "../../images/explore-black.svg";
 import { ReactComponent as Messenger } from "../../images/messenger.svg";
+import { ReactComponent as MessengerBlack } from "../../images/messenger-black.svg";
 import { ReactComponent as Notifications } from "../../images/notifications.svg";
 import { ReactComponent as Add } from "../../images/add.svg";
+import { ReactComponent as AddBlack } from "../../images/add-black.svg";
 
-import { UserContext } from "../../App";
-import Avatar from "../Avatar/Avatar";
-import DropdownMenu from "./DropdownMenu/DropdownMenu";
+import DropdownMenu from "./MenuDropDown/MenuDropDown";
+
 function Menu() {
-  const { user } = useContext(UserContext);
+  const location = useLocation();
 
-  const history = useHistory();
-  // const location = history.location;
+  const { pathname } = location;
 
-  const [isClicked, setIsClicked] = useState(false);
+  const [path, setPath] = useState("");
 
   useEffect(() => {
-    const clickHandler = (e) => {
-      setIsClicked(false);
-    };
-    document.addEventListener("click", clickHandler);
-    return () => {
-      document.removeEventListener("click", clickHandler);
-    };
-  }, []);
+    setPath(pathname);
+  }, [pathname]);
 
   return (
     <div className="menu">
       <Link to={"/"}>
-        <Home className="menu-icon home" />
+        {path === "/" ? (
+          <HomeBlack className="menu-icon" />
+        ) : (
+          <Home className="menu-icon" />
+        )}
       </Link>
-
-      <Messenger className="menu-icon messenger" />
-      <Add
-        className="menu-icon add"
-        onClick={() => history.push("/post/create")}
-      />
-      <Explore className="menu-icon explore" />
-      <Notifications className="menu-icon notifications" />
-      <div
-        onClick={(e) => {
-          if (!isClicked) {
-            e.stopPropagation();
-            setIsClicked(true);
-          }
-        }}
-      >
-        <Avatar
-          className="profileIcon"
-          image={user.avatar}
-          iconSize="xsm"
-          // onClick={() => history.push(`/profile/${user.username}`)}
-        />
+      <Link to={"/post/create"}>
+        {path === "/post/create" ? (
+          <AddBlack className="menu-icon" />
+        ) : (
+          <Add className="menu-icon" />
+        )}
+      </Link>
+      <Link to="/message">
+        {path === "/message" ? (
+          <MessengerBlack className="menu-icon" />
+        ) : (
+          <Messenger className="menu-icon" />
+        )}
+      </Link>
+      <Link to="/explore">
+        {path === "/explore" ? (
+          <ExploreBlack className="menu-icon" />
+        ) : (
+          <Explore className="menu-icon " />
+        )}
+      </Link>
+      <div>
+        <Notifications className="menu-icon notifications" />
       </div>
 
-      {isClicked ? <DropdownMenu /> : ""}
+      <DropdownMenu className="menu-icon" />
     </div>
   );
 }

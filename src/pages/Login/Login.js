@@ -51,6 +51,7 @@ function Login() {
       history.push("/");
     } catch (e) {
       onError.fire();
+
       console.log("error ", e);
     }
   }
@@ -68,7 +69,7 @@ function Login() {
 
       <div className="form-container login-container">
         <h1 className="form-logo">
-          <img src="/images/insta-logo.png" alt="imstagram" className="logo" />
+          <img src="/images/insta-logo.png" alt="instagram" className="logo" />
         </h1>
 
         <Formik
@@ -104,6 +105,7 @@ function Login() {
                   name="username"
                   component="span"
                 />
+
                 <div className="input-rapper">
                   <Field
                     className="form-input "
@@ -131,7 +133,6 @@ function Login() {
                   className="btn-secondary"
                   type="submit"
                 >
-                  {}
                   {isSubmitting ? "Submitting" : "Login"}
                 </button>
               </Form>

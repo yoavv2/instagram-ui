@@ -4,7 +4,7 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-
+  position: relative;
   // // width: 10%;
 
   // // background-color: aqua;
@@ -14,5 +14,10 @@
       cursor: pointer;
     }
   }
-}
 
+  // .dropdown_avatar {
+  //   position: absolute;
+  //   top: 113%;
+  //   left: 100%;
+  // }
+}

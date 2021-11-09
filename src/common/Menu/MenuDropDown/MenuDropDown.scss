@@ -1,49 +1,55 @@
 @import "../../../styles/variables";
 
-.dropdown_square {
-  position: absolute;
-  top: 3.8%;
-  right: 32%;
-  width: 20px;
-  height: 20px;
-  transform: rotate(45deg);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px -2px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 3px;
-  background-color: white;
-  z-index: 2;
+.trigger {
+  all: unset;
 }
-.dropdown_background {
+
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
   position: absolute;
-  top: 4.5%;
-  right: 31%;
-  width: 9%;
+  top: 4.5px;
+  right: -100px;
+
+  width: 150px;
 
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border-radius: 3px;
   background-color: white;
   z-index: 1;
+  animation: scale-in 0.5s ease-out;
 }
-.dropdown__border {
-  margin: 7px;
-}
-.dropdown_item {
+
+.item {
   width: 100%;
   padding: 10px;
   border-bottom: 1px solid $border-color-grey;
+  color: $font-color-primary;
   &:hover {
     background-color: $background-grey;
   }
-  color: $font-color-primary;
+  & :visited {
+    text-decoration: none;
+  }
 }
 .dropdown_link {
   display: flex;
 
   text-decoration: none;
 
-  &.link:visited {
+  & :visited {
     text-decoration: none;
   }
   & > span {

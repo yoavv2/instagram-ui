@@ -33,7 +33,7 @@ function App() {
         setUser(loggedUser);
       })
       .catch((err) => console.log(err));
-  }, [history, location]);
+  }, [history]);
 
   function isLoggedIn(user) {
     return user.hasOwnProperty("_id");
