@@ -24,7 +24,7 @@ function Avatar(props) {
 Avatar.propTypes = {
   image: PropTypes.string,
   storyBorder: PropTypes.bool,
-  iconSize: PropTypes.oneOf(["xsm", "sm", "md", "lg","xlg"]),
+  iconSize: PropTypes.oneOf(["xsm", "sm", "md", "lg", "xlg"]),
 };
 
 export default Avatar;

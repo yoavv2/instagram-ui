@@ -2,14 +2,16 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
+  height: 80px;
   .card_icon {
     margin: 10px;
+    margin-left: 10px;
     &:hover {
       cursor: pointer;
     }
   }
   .like {
+    // margin-top: 25px;
     height: 24px;
     width: 24px;
   }

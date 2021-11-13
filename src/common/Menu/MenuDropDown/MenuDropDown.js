@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./MenuDropDown.scss";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Link, useHistory } from "react-router-dom";
@@ -10,6 +10,7 @@ import { ReactComponent as Logout } from "../../../images/logoutIcon.svg";
 import Avatar from "../../Avatar/Avatar";
 function MenuDropDown() {
   const { user, setUser } = useContext(UserContext);
+
   const history = useHistory();
   return (
     <div>

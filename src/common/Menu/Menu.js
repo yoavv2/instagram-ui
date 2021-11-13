@@ -1,13 +1,6 @@
-import React, {
-  useContext,
-  useEffect,
-  useState,
-  useRef,
-  useCallback,
-} from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Menu.scss";
-// import { useOnClickOutside } from "../../hooks/useOnClickOutside";
 
 import { ReactComponent as Home } from "../../images/home.svg";
 import { ReactComponent as HomeBlack } from "../../images/home-black.svg";
@@ -23,7 +16,7 @@ import DropdownMenu from "./MenuDropDown/MenuDropDown";
 
 function Menu() {
   const location = useLocation();
-
+ 
   const { pathname } = location;
 
   const [path, setPath] = useState("");
