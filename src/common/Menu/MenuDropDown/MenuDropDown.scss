@@ -20,7 +20,7 @@
   align-items: flex-start;
 
   position: absolute;
-  top: 0.9em;
+  top: 1em;
   right: -10em;
 
   width: 150px;
@@ -29,7 +29,7 @@
   border-radius: 3px;
   background-color: white;
   z-index: 1;
-  animation: scale-in 0.5s ease-out;
+  animation: scale-in 0.3s ease-out;
 }
 // .dropdown_square {
 //   position: absolute;
@@ -56,16 +56,18 @@
     background-color: $background-grey;
   }
   & :visited {
+    color: black;
     text-decoration: none;
   }
 }
 .dropdown_link {
   display: flex;
-
   text-decoration: none;
+  color: black;
 
   & :visited {
     text-decoration: none;
+    color: black;
   }
   & > span {
     margin-left: 5px;

@@ -25,14 +25,14 @@ function Navigation() {
     }, 1000);
     return () => {
       clearTimeout(timeout);
-      setQuery("");
+      // setQuery("");
     };
   }, [query]);
 
   useEffect(() => {
     const clickHandler = (e) => {
       setIsClicked(false);
-      setQuery("");
+      // setQuery("");
     };
     document.addEventListener("click", clickHandler);
     return () => {

@@ -15,19 +15,19 @@ function PostLike({ postId, likes, handleLikes }) {
     setHasLiked(true);
 
     // setLikesCount((prev) => prev + 1);
-    handleLikes(likes.length, "+");
+    handleLikes("+");
     postLike(postId).catch(() => {
       setHasLiked(false);
-      handleLikes(likes.length, "-");
+      handleLikes("-");
     });
   }
   function unlike() {
     setHasLiked(false);
     // setLikesCount((prev) => prev - 1);
-    handleLikes(likes.length, "-");
+    handleLikes("-");
     postUnlike(postId).catch(() => {
       setHasLiked(true);
-      handleLikes(likes.length, "+");
+      handleLikes("+");
     });
   }
   useEffect(() => {

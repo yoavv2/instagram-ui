@@ -1,0 +1,31 @@
+@import "../../../styles/variables";
+.crop_container {
+  position: relative;
+  display: flex;
+  
+  width: 100%;
+  height: 500px;
+
+  .crop {
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    background: "#333";
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+  }
+  .crop__done_btn {
+    position: absolute;
+    color: $background-white;
+    background-color: $gradient-four;
+    font-family: inherit;
+    width: 40%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    font-weight: 900;
+    cursor: pointer;
+  }
+}

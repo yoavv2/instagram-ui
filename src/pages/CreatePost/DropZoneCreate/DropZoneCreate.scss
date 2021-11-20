@@ -1,0 +1,29 @@
+@import "../../../styles/variables";
+
+.drag-drop-wrap {
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+
+  width: 600px;
+  height: 500px;
+}
+.dropzone {
+  width: 75%;
+  height: 23em;
+  border: 3px dashed $border-color-grey;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 600px) {
+  .drag-drop-wrap {
+    width: 100% !important;
+    height: 100% !important;
+  }
+}

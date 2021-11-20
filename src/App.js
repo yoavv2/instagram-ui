@@ -10,6 +10,7 @@ import Feed from "./pages/Feed/Feed";
 import Navigation from "./Navigation/Navigation";
 import CreatePost from "./pages/CreatePost/CreatePost";
 import Profile from "./pages/Profile/Profile";
+import PostPage from "./pages/PostPage/PostPage";
 
 export const UserContext = createContext();
 
@@ -33,7 +34,7 @@ function App() {
         setUser(loggedUser);
       })
       .catch((err) => console.log(err));
-  }, [history]);
+  }, [history, location]);
 
   function isLoggedIn(user) {
     return user.hasOwnProperty("_id");
@@ -56,7 +57,14 @@ function App() {
             exact
             path="/post/create"
             component={CreatePost}
-          ></Route>
+          />
+          <Route
+            className="create-post"
+            exact
+            path="/post/:id"
+            component={PostPage}
+          />
+
           <Route exact path="/profile/:username" component={Profile} />
           <Route exact path="/" component={Feed} />
         </Switch>

@@ -62,6 +62,29 @@
       display: none;
     }
   }
+  .follow_btn {
+    display: flex;
+  }
+  .btn_follow {
+    &__massage {
+      padding: 3px;
+      border-radius: 3px;
+      background-color: $background-grey;
+      border: 1px solid $border-color-grey;
+    }
+    &__following {
+      margin-left: 2px;
+      border-radius: 3px;
+      background-color: $background-grey;
+      border: 1px solid $border-color-grey;
+    }
+    &__follow {
+      padding: 3px;
+      border-radius: 3px;
+      background-color: $background-grey;
+      border: 1px solid $border-color-grey;
+    }
+  }
 }
 @media only screen and (min-width: 700px) {
   .profileHeader {

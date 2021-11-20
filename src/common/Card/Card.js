@@ -1,21 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
-import "./Post.scss";
+import "./Card.scss";
 
 import Avatar from "../Avatar/Avatar";
 import config from "../../config/index";
 import CardMenu from "./CardMenu/CardMenu";
+import Carousel from "../Carousel/Carusel";
 import { ReactComponent as Emoji } from "../../images/imoji.svg";
-// import PostLike from "./CardMenu/PostLike/PostLike";
+import { createComment, getComments } from "../../service/post.service";
 
-function Post({ data: post }) {
+function Card({ data: post }) {
   const [likesCount, setLikesCount] = useState(post.likes.length);
 
-  const handleLikes = (likesCount, operator) => {
+  const handleLikes = (operator) => {
     if (operator === "+") setLikesCount((likesCount) => likesCount + 1);
     if (operator === "-") setLikesCount((likesCount) => likesCount - 1);
   };
+
+  const [comments, setComments] = useState([]);
+  const [commentValue, setCommentValue] = useState("");
+
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const comments = await getComments(post._id);
+        setComments(comments);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchComments();
+  }, [post._id]);
+
+  const submit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      const newComment = await createComment(post._id, commentValue);
+      console.log("new comment", newComment);
+      setComments([newComment, ...comments]);
+      setCommentValue("");
+    },
+    [post._id, commentValue, comments]
+  );
 
   return (
     <div className="post_wrapper">
@@ -38,11 +65,7 @@ function Post({ data: post }) {
         </header>
         <div>
           <Link className="link" to={"/post/" + post._id}>
-            <img
-              src={config.apiUrl + "/" + post.image}
-              className="Post__image"
-              alt=""
-            />
+            <Carousel images={post.images} />
           </Link>
           <CardMenu
             handleLikes={handleLikes}
@@ -64,16 +87,34 @@ function Post({ data: post }) {
         </div>
         <div className="comments"></div>
         <div className="timePosted">
-          {/* {moment(post.createdAt).fromNow(true)} ago */}
+          {moment(post.createdAt).fromNow(true)} ago
         </div>
-        <div className="addComment">
+        {/* <div className="addComment">
           <div className="commentText">Add a comment...</div>
           <div className="postText">Post</div>
-          <Emoji />
-        </div>
+        </div> */}
+        <footer>
+          <form onSubmit={submit}>
+            {/* comment create */}
+            <input
+              value={commentValue}
+              onChange={(e) => setCommentValue(e.target.value)}
+              type="text"
+              placeholder="Write your comment"
+            />
+            <Emoji />
+            <button type="submit">Comment</button>
+          </form>
+          <ul>
+            {comments.map((comment) => {
+              // render comment <Comment comment={comment} />
+              return <li>{comment.content}</li>;
+            })}
+          </ul>
+        </footer>
       </article>
     </div>
   );
 }
 
-export default Post;
+export default Card;

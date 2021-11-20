@@ -86,7 +86,7 @@
     .search_result__viewport {
       display: flex;
       position: absolute;
-      top: 10px;
+      top: 13px;
       right: -34%;
       width: 170%;
       height: 400px;
@@ -96,7 +96,7 @@
       border-radius: 3px;
       background-color: white;
       z-index: 1;
-      animation: scale-in 0.5s ease-out;
+      animation: scale-in 0.3s ease-out;
     }
     .serach_result__border {
       margin: 10px;

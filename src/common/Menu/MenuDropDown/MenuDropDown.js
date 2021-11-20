@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./MenuDropDown.scss";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Link, useHistory } from "react-router-dom";
@@ -22,7 +22,7 @@ function MenuDropDown() {
         </DropdownMenu.Trigger>
         {/* <div className="dropdown_square"></div> */}
         <DropdownMenu.Content className="content">
-          <div className="dropdown_border"></div>
+          {/* <div className="dropdown_border"></div> */}
           <DropdownMenu.Item className="item">
             <Link className="dropdown_link" to={"/profile/" + user.username}>
               <Profile /> <span>profile</span>

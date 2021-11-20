@@ -12,7 +12,6 @@ async function register(user) {
 }
 
 async function login({ username, password }) {
-  
   const res = await fetch(`${config.apiUrl}/login`, {
     method: "POST",
     body: JSON.stringify({ username, password }),
@@ -73,5 +72,32 @@ async function search(query) {
   });
   return res.json();
 }
+async function follow(username) {
+  return fetch(config.apiUrl + "/user/" + username + "/follow", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/jason",
+      Authorization: localStorage.getItem("token"),
+    },
+  });
+}
+async function unfollow(username) {
+  return fetch(config.apiUrl + "/user/" + username + "/unfollow", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/jason",
+      Authorization: localStorage.getItem("token"),
+    },
+  });
+}
 
-export { register, login, checkAvailabilityUser, me, getUser, search };
+export {
+  register,
+  login,
+  checkAvailabilityUser,
+  me,
+  getUser,
+  search,
+  follow,
+  unfollow,
+};

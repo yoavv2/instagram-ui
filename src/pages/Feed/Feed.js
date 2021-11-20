@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Feed.scss";
 
-import Post from "../../common/Post/Post.js";
+import Card from "../../common/Card/Card.js";
 import { getFeed } from "../../service/post.service";
 
 function Feed() {
@@ -24,13 +24,11 @@ function Feed() {
       <div className="feed_position"></div>
       <div className="posts">
         {posts.map((post, index) => (
-          <Post key={post._id} data={post} />
+          <Card key={post._id} data={post} />
         ))}
       </div>
     </div>
   );
 }
-
-
 
 export default Feed;

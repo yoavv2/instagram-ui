@@ -3,8 +3,6 @@ import "./CardMenu.scss";
 
 import { ReactComponent as Comment } from "../../../images/comment.svg";
 import { ReactComponent as Share } from "../../../images/share.svg";
-import { ReactComponent as Like } from "../../../images/like.svg";
-import { ReactComponent as Liked } from "../../../images/liked.svg";
 
 import PostLike from "./PostLike/PostLike";
 
