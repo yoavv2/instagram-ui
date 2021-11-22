@@ -6,7 +6,6 @@ import config from "../../config/index";
 
 function PostPage() {
   const { id } = useParams();
- ;
   const [post, setPost] = useState(null);
 
   useEffect(() => {
@@ -24,7 +23,7 @@ function PostPage() {
     <div className="PostPage">
       {post && (
         <div>
-          <img src={config.apiUrl + "/" + post.image} />
+          <img src={config.apiUrl + "/" + post.images} />
           <div>
             <strong>{post.author.username}</strong>
           </div>
