@@ -8,22 +8,25 @@ import "./Carousel.scss";
 
 function Carousel({ images }) {
   const settings = {
+    draggable: true,
+    accessibility: true,
     lazyLoad: true,
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    className: "carousel",
+    arrows: true,
+    useCSS: true,
+    // slidesToShow: 1,
+    // slidesToScroll: 1,
   };
   return (
-    <Slider {...settings}>
-      {images.map((image, i) => (
-        <div key={i}>
-          <img src={config.apiUrl + "/" + image} alt="" />
-        </div>
-      ))}
-    </Slider>
+    <div className="container">
+      <Slider {...settings}>
+        {images.map((image, i) => (
+          <img key={i} src={config.apiUrl + "/" + image} alt="" />
+        ))}
+      </Slider>
+    </div>
   );
 }
 

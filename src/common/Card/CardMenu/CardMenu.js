@@ -1,5 +1,6 @@
 import React from "react";
 import "./CardMenu.scss";
+import { Link } from "react-router-dom";
 
 import { ReactComponent as Comment } from "../../../images/comment.svg";
 import { ReactComponent as Share } from "../../../images/share.svg";
@@ -16,7 +17,9 @@ function CardMenu({ post, handleLikes }) {
         likes={post.likes}
       />
       <div>
-        <Comment className="card_icon" />
+        <Link className="link" to={"/post/" + post._id}>
+          <Comment className="card_icon" />
+        </Link>
       </div>
       <div>
         <Share className="card_icon " />

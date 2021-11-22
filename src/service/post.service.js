@@ -85,8 +85,8 @@ async function getComments(postId) {
   });
   return res.json();
 }
-
 async function createComment(postId, content) {
+  console.log(`postId, content`, postId, content);
   const res = await fetch(config.apiUrl + "/post/" + postId + "/comment", {
     method: "POST",
     headers: {
@@ -97,7 +97,6 @@ async function createComment(postId, content) {
       content,
     }),
   });
-
   return res.json();
 }
 

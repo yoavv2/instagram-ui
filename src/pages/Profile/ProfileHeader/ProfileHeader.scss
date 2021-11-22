@@ -5,8 +5,9 @@
     display: flex;
     border-bottom: 1px solid $border-color-grey-secondary;
     height: 200px;
-    width: 100%;
+    width: 115%;
     padding: 10px;
+    margin-left: 10%;
   }
   .profile_avatar {
     flex: 1;
@@ -28,14 +29,17 @@
     display: flex;
     flex-direction: column;
     align-content: center;
-
+    align-items: stretch;
     justify-content: center;
-
+    .follow_btn {
+      justify-content: center;
+    }
     .header_info {
       display: flex;
 
       justify-content: space-around;
       align-content: center;
+      margin-left: 3px;
       .info_postnumber {
         display: flex;
         flex-direction: column;
@@ -89,7 +93,8 @@
 @media only screen and (min-width: 700px) {
   .profileHeader {
     position: relative;
-    width: 90%;
+    margin-left: 0px !important;
+    // width: 90%;
   }
   .detale_username,
   .detale_fullname {
@@ -103,12 +108,10 @@
   .profile_avatar {
     flex: 1;
     margin-top: 40px;
-    margin-left: 180px;
+    margin-left: 150px;
   }
   .header_detale {
     flex: 2;
-    .header_info {
-    }
   }
 }
 @media only screen and (min-width: 1000px) {
@@ -118,8 +121,7 @@
   }
   .profile_avatar {
     position: absolute;
-
-    left: 0%;
+    left: -125px;
   }
   .header_detale {
     position: absolute;

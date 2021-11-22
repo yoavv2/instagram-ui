@@ -43,15 +43,21 @@
 //   background-color: black;
 //   z-index: 2;
 // }
-.dropdown_border {
-  padding: 5px;
-  // margin: 10px;
+// .dropdown_border {
+//   padding: 5px;
+//   // margin: 10px;
+// }
+.dropDown_arraw {
+  fill: $background-white;
+  width: 20px;
+  height: 10px;
 }
 .item {
   width: 100%;
   padding: 15px;
   border-bottom: 1px solid $border-color-grey;
   color: $font-color-primary;
+
   &:hover {
     background-color: $background-grey;
   }

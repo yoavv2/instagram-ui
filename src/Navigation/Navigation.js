@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
+
 import "./Navigation.scss";
 import Menu from "../common/Menu/Menu";
 
@@ -79,7 +80,6 @@ function Navigation() {
           </label>
           {isClicked ? (
             <>
-              {/* <div className="search_result__square"></div> */}
               <ScrollArea.Root>
                 <div className="serach_result__border"></div>
                 <ScrollArea.Viewport
@@ -96,6 +96,7 @@ function Navigation() {
                     />
                   ))}
                 </ScrollArea.Viewport>
+
                 <ScrollArea.Scrollbar orientation="vertical">
                   <ScrollArea.Thumb className="scrolbar_tumb" />
                 </ScrollArea.Scrollbar>
@@ -104,13 +105,6 @@ function Navigation() {
                 </ScrollArea.Scrollbar>
                 <ScrollArea.Corner />
               </ScrollArea.Root>
-
-              {/* <div
-                className="search_result__background "
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="serach_result__border"></div>
-              </div> */}
             </>
           ) : (
             " "

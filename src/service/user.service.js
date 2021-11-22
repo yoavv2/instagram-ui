@@ -38,6 +38,7 @@ async function me() {
   if (!token) {
     return {};
   }
+
   const res = await fetch(config.apiUrl + "/user/me", {
     method: "GET",
     headers: {

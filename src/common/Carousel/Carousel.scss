@@ -1,7 +1,29 @@
-.carousel {
+// .carousel {
+//   user-select: none;
+//   display: grid;
+//   place-content: center;
+// }
+
+.container {
+  height: 100%;
+  width: 100%;
   user-select: none;
-  img {
-    object-fit: cover;
-    width: 101%;
-  }
+}
+
+.slick-slider {
+  box-sizing: border-box;
+  overflow: "hidden";
+  height: 100%;
+  width: 100%;
+}
+
+.slick-slider img {
+  overflow: hidden;
+
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+.slick-dots {
+  bottom: -4rem;
 }

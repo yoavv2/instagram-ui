@@ -1,10 +1,9 @@
 @import "../../styles/variables";
-
 .create_post__wrapper {
   display: flex;
   flex-direction: column;
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(0, 0, 0, 0.55);
   width: 100%;
   height: 100%;
   flex-direction: column;
@@ -14,10 +13,23 @@
 
   .btn-exit {
     position: absolute;
-    left: 98%;
+    left: 95%;
     top: 1%;
+    z-index: 4;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    opacity: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     &:hover {
       cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    ion-icon {
+      color: white;
     }
   }
   .border {
@@ -36,17 +48,20 @@
     border-radius: 10px;
 
     width: 600px;
-    height: 600px;
+    height: 700px;
   }
   .create_form {
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     width: 100%;
     height: 100%;
 
     .create_form__btn {
+      position: absolute;
+      bottom: 0;
       color: $background-white;
       background-color: $link-color;
       font-family: inherit;
@@ -70,13 +85,36 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .create_form {
+  .creat_post__form {
+    width: 100% !important;
     .create_form__btn {
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 20px;
       // margin-top: 15px;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .creat_post__form {
+    .create_form__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      // margin-top: 15px;
+    }
+  }
+  .btn-exit {
+    left: 85% !important;
+    background-color: black !important;
+    width: 70% !important;
+    height: 70% !important;
+    &:focus {
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.1) !important;
     }
   }
 }

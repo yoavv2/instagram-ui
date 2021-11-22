@@ -1,16 +1,22 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import "./Card.scss";
 
 import Avatar from "../Avatar/Avatar";
-import config from "../../config/index";
+
 import CardMenu from "./CardMenu/CardMenu";
 import Carousel from "../Carousel/Carusel";
 import { ReactComponent as Emoji } from "../../images/imoji.svg";
 import { createComment, getComments } from "../../service/post.service";
+import Picker, { SKIN_TONE_MEDIUM_DARK } from "emoji-picker-react";
+
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 function Card({ data: post }) {
+  const ref = useRef(null);
+  const [chosenEmoji, setChosenEmoji] = useState(null);
+
   const [likesCount, setLikesCount] = useState(post.likes.length);
 
   const handleLikes = (operator) => {
@@ -25,7 +31,7 @@ function Card({ data: post }) {
     const fetchComments = async () => {
       try {
         const comments = await getComments(post._id);
-        setComments(comments);
+        setComments(comments.slice(0).reverse());
       } catch (err) {
         console.log(err);
       }
@@ -44,6 +50,16 @@ function Card({ data: post }) {
     [post._id, commentValue, comments]
   );
 
+  const onEmojiClick = (event, emojiObject) => {
+    console.log(`chosenEmoji`, emojiObject.emoji);
+    const cursor = ref.current.selectionStart;
+    const text =
+      commentValue.slice(0, cursor) +
+      emojiObject.emoji +
+      commentValue.slice(cursor);
+
+    setCommentValue(text);
+  };
   return (
     <div className="post_wrapper">
       <article className="Post">
@@ -64,9 +80,8 @@ function Card({ data: post }) {
           <div className="Post__date"></div>
         </header>
         <div>
-          <Link className="link" to={"/post/" + post._id}>
-            <Carousel images={post.images} />
-          </Link>
+          <Carousel images={post.images} />
+
           <CardMenu
             handleLikes={handleLikes}
             post={post}
@@ -76,45 +91,124 @@ function Card({ data: post }) {
         <div className="like_count">
           <strong>{likesCount} likes</strong>
         </div>
-        <div className="likedBy">
-          <span>
-            Liked by <strong>likedByText</strong> and
-            <strong>likedByNumber others</strong>
-          </span>
-        </div>
+        {likesCount > 0 && (
+          <div className="likedBy">
+            <span>
+              Liked by <strong>You</strong> and
+            </span>
+            <span>
+              <strong>{likesCount - 1} others</strong>
+            </span>
+          </div>
+        )}
         <div className="Post__content">
           <h1 className="Post__description">{post.body}</h1>
         </div>
-        <div className="comments"></div>
+
+        <div className="card_comment_view">
+          {comments[0] ? (
+            <div className="comment">
+              <h3>{comments[0].author.fullname}</h3>
+              <p>{comments[0].content}</p>
+              <span>{moment(comments[0].createdAt).fromNow(true)} ago</span>
+            </div>
+          ) : (
+            ""
+          )}
+          {comments[1] ? (
+            <div className="comment">
+              <h3>{comments[0].author.fullname}</h3>
+              <p>{comments[1].content}</p>
+              <span>{moment(comments[1].createdAt).fromNow(true)} ago</span>
+            </div>
+          ) : (
+            ""
+          )}
+          {comments[2] ? (
+            <div className="comment">
+              <h3>{comments[0].author.fullname}</h3>
+              <p>{comments[2].content}</p>
+              <span>{moment(comments[2].createdAt).fromNow(true)} ago</span>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+
         <div className="timePosted">
           {moment(post.createdAt).fromNow(true)} ago
         </div>
-        {/* <div className="addComment">
-          <div className="commentText">Add a comment...</div>
-          <div className="postText">Post</div>
-        </div> */}
-        <footer>
-          <form onSubmit={submit}>
-            {/* comment create */}
-            <input
-              value={commentValue}
-              onChange={(e) => setCommentValue(e.target.value)}
-              type="text"
-              placeholder="Write your comment"
-            />
-            <Emoji />
-            <button type="submit">Comment</button>
-          </form>
-          <ul>
-            {comments.map((comment) => {
+
+        {/* <ul>
+          {comments.length > 0 &&
+            comments.map((comment, i) => {
               // render comment <Comment comment={comment} />
-              return <li>{comment.content}</li>;
+              return <li key={comment._id}>{comment.content}</li>;
             })}
-          </ul>
+        </ul> */}
+
+        <footer>
+          <form className="add_comment__form" onSubmit={submit}>
+            <DropdownMenu.Root modal="false">
+              <DropdownMenu.Trigger className="emoji_trigger">
+                <Emoji />
+              </DropdownMenu.Trigger>
+
+              <DropdownMenu.Content
+                side="right"
+                side="top"
+                className="emoji_content"
+              >
+                <DropdownMenu.Item>
+                  <Picker
+                    onEmojiClick={onEmojiClick}
+                    disableAutoFocus={true}
+                    skinTone={SKIN_TONE_MEDIUM_DARK}
+                    groupNames={{ smileys_people: "PEOPLE" }}
+                    disableSearchBar={true}
+                    native
+                  />
+                </DropdownMenu.Item>
+                <DropdownMenu.Arrow className="dropDown_arrow" />
+              </DropdownMenu.Content>
+            </DropdownMenu.Root>
+
+            <input
+              ref={ref}
+              className="add_comment__input "
+              name="description"
+              value={commentValue}
+              onChange={(e) => {
+                setCommentValue(e.target.value);
+              }}
+              type="text"
+              placeholder="Add a comment..."
+              autoComplete="off"
+            />
+
+            <button
+              disabled={!commentValue}
+              className="add_comment__btn"
+              type="submit"
+            >
+              Post
+            </button>
+          </form>
         </footer>
       </article>
     </div>
   );
 }
+const EmojiData = ({ chosenEmoji }) => (
+  <div>
+    <strong>Unified:</strong> {chosenEmoji.unified}
+    <br />
+    <strong>Names:</strong> {chosenEmoji.names.join(", ")}
+    <br />
+    <strong>Symbol:</strong> {chosenEmoji.emoji}
+    <br />
+    <strong>ActiveSkinTone:</strong> {chosenEmoji.activeSkinTone}
+  </div>
+);
 
 export default Card;

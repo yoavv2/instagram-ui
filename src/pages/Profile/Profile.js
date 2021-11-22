@@ -35,12 +35,17 @@ function Profile() {
 
         <h2>posts</h2>
 
-        <div className="profile_posts">
+        <div className="profile_gallery">
+          {/* <div className="grid_border"> */}
           {posts.map((post) => (
-            <div key={post._id} className="profile_images">
-              <Carousel images={post.images} />
+            <div className="gallery_images" key={post._id}>
+              <Carousel
+                className="gallery_images__image"
+                images={post.images}
+              />
             </div>
           ))}
+          {/* </div> */}
         </div>
       </div>
     </div>

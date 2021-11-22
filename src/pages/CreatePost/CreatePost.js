@@ -2,17 +2,20 @@ import React, { useEffect, useRef, useState, createContext } from "react";
 
 import { useHistory } from "react-router-dom";
 import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "./CreatePost.scss";
+
 import Exitbtn from "../../common/Exitbtn/Exitbtn";
 import DropZoneCreate from "./DropZoneCreate/DropZoneCreate";
 import ImageCrop from "./ImageCrop/ImageCrop";
 
 import { create } from "../../service/post.service";
+
 export const PostCreateContext = createContext([]);
 
 function CreatePost() {
+  const [aspectRatio, setAspectRatio] = useState(4 / 3);
   const [displayedImages, setDisplayedImages] = useState([]);
   const history = useHistory();
 
@@ -49,23 +52,12 @@ function CreatePost() {
         // description,
         images,
       };
-      await create(formToSubmit);
-      history.push("/");
+      await create(formToSubmit).then(() => history.push("/"));
     } catch (err) {
       console.log(err);
     }
   };
-  const [aspectRatio, setAspectRatio] = useState(4 / 3);
-  const aspects = [4 / 3, 16 / 9, 1 / 1];
-  function getAspectLabel(aspect) {
-    if (aspect === 4 / 3) {
-      return "4 / 3";
-    } else if (aspect === 16 / 9) {
-      return "16 / 9";
-    } else {
-      return "1 / 1";
-    }
-  }
+
   const settings = {
     draggable: false,
     dots: false,
@@ -80,9 +72,9 @@ function CreatePost() {
   return (
     <PostCreateContext.Provider value={{ images, setImages }}>
       <div className="create_post__wrapper">
-        <Exitbtn />
+        <Exitbtn className="btn-exit" />
 
-        <div className="container" ref={ref}>
+        <div className="create_post__wrapper">
           <div className="creat_post__form">
             <h3 className="header">Create post</h3>
             <div className="border"></div>
@@ -99,28 +91,12 @@ function CreatePost() {
                       index={i}
                       displayedImages={displayedImages[i]}
                       aspectRatio={aspectRatio}
+                      setAspectRatio={setAspectRatio}
                     />
                   ))}
                 </Slider>
               )}
-              {images.length > 0 && (
-                <div className="controller">
-                  <label htmlFor="aspect">Select an Aspect Ratio:</label>
-                  <select
-                    name="aspect"
-                    id="aspect"
-                    onChange={(e) =>
-                      setAspectRatio(aspects[e.target.selectedIndex])
-                    }
-                  >
-                    {aspects.map((aspect, i) => (
-                      <option key={i} name="aspect" id="aspect">
-                        {getAspectLabel(aspect)}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              )}
+              {images.length > 0 && <div className="controller"></div>}
               <button
                 onClick={submit}
                 type="submit"

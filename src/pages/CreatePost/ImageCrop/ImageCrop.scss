@@ -2,30 +2,92 @@
 .crop_container {
   position: relative;
   display: flex;
-  
+  justify-content: flex-start;
+  align-items: flex-end;
   width: 100%;
   height: 500px;
 
-  .crop {
-    position: absolute;
-    width: 100%;
-    height: 200px;
-    background: "#333";
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
+  .ratio_btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.55);
+    opacity: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
   }
+
   .crop__done_btn {
-    position: absolute;
-    color: $background-white;
-    background-color: $gradient-four;
-    font-family: inherit;
-    width: 40%;
-    height: 30px;
-    border: none;
-    border-radius: 5px;
-    font-weight: 900;
-    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.55);
+    opacity: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    ion-icon {
+      color: white;
+    }
+  }
+}
+@keyframes scale-in {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.crop_triger {
+  position: absolute;
+}
+.crop_content {
+  // position: absolute;
+  background-color: rgba(0, 0, 0, 0.55);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation: scale-in 0.3s ease-out;
+  border-radius: 3px;
+  // left: 50px;
+}
+.crop_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.55);
+    color: white;
+  }
+  & :visited {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .crop_container {
+    margin: 0 auto !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .crop_container {
+    margin: 0 auto !important;
   }
 }
