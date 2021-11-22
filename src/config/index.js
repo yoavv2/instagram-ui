@@ -1,7 +1,7 @@
 import { development } from "./development";
 import { production } from "./production";
 
-let enviroment = develpoment;
+let enviroment = development;
 if (process.env.NODE_ENV === "production") {
   enviroment = production;
 }
