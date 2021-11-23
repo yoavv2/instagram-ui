@@ -31,6 +31,7 @@
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "react-slick": "^0.28.1",
+    "react-virtuoso": "^2.2.8",
     "rive-react": "^0.0.22",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^1.1.2",

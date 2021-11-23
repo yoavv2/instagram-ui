@@ -11,6 +11,7 @@ import Navigation from "./Navigation/Navigation";
 import CreatePost from "./pages/CreatePost/CreatePost";
 import Profile from "./pages/Profile/Profile";
 import PostPage from "./pages/PostPage/PostPage";
+import Explore from "./pages/Explore/Explore";
 
 export const UserContext = createContext();
 
@@ -66,6 +67,7 @@ function App() {
           />
 
           <Route exact path="/profile/:username" component={Profile} />
+          <Route exact path="/explore" component={Explore} />
           <Route exact path="/" component={Feed} />
         </Switch>
       </div>

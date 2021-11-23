@@ -114,7 +114,6 @@ function Navigation() {
         <div className="nav-menu">
           <Menu />
         </div>
-        <div></div>
       </div>
     </div>
   );

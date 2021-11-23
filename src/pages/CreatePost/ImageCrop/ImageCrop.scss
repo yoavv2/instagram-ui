@@ -7,27 +7,12 @@
   width: 100%;
   height: 500px;
 
-  .ratio_btn {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.55);
-    opacity: 50%;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    &:hover {
-      cursor: pointer;
-      background-color: rgba(0, 0, 0, 0.1);
-    }
-  }
-
   .crop__done_btn {
+    all: unset;
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.55);
+    background-color: rgba(80, 9, 9, 0.55);
     opacity: 50%;
     position: relative;
     display: flex;
@@ -35,7 +20,7 @@
     align-items: center;
     &:hover {
       cursor: pointer;
-      background-color: rgba(0, 0, 0, 0.1);
+      background-color: rgba(0, 0, 0, 1);
     }
     ion-icon {
       color: white;
@@ -52,8 +37,23 @@
     transform: scale(1);
   }
 }
-.crop_triger {
+.crop_trigger {
+  all: unset;
   position: absolute;
+
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: rgba(80, 9, 9, 0.55);
+  opacity: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 1);
+  }
 }
 .crop_content {
   // position: absolute;
@@ -62,6 +62,11 @@
   animation: scale-in 0.3s ease-out;
   border-radius: 3px;
   // left: 50px;
+  .dropdown_arraw {
+    width: 20px;
+    height: 10px;
+    fill: rgba(0, 0, 0, 0.55);
+  }
 }
 .crop_item {
   display: flex;
@@ -69,7 +74,7 @@
   align-items: center;
   padding: 20px;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.55);
+    background-color: rgba(0, 0, 0, 0.1);
     color: white;
   }
   & :visited {

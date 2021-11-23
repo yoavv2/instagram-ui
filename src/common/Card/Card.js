@@ -199,16 +199,16 @@ function Card({ data: post }) {
     </div>
   );
 }
-const EmojiData = ({ chosenEmoji }) => (
-  <div>
-    <strong>Unified:</strong> {chosenEmoji.unified}
-    <br />
-    <strong>Names:</strong> {chosenEmoji.names.join(", ")}
-    <br />
-    <strong>Symbol:</strong> {chosenEmoji.emoji}
-    <br />
-    <strong>ActiveSkinTone:</strong> {chosenEmoji.activeSkinTone}
-  </div>
-);
+// const EmojiData = ({ chosenEmoji }) => (
+//   <div>
+//     <strong>Unified:</strong> {chosenEmoji.unified}
+//     <br />
+//     <strong>Names:</strong> {chosenEmoji.names.join(", ")}
+//     <br />
+//     <strong>Symbol:</strong> {chosenEmoji.emoji}
+//     <br />
+//     <strong>ActiveSkinTone:</strong> {chosenEmoji.activeSkinTone}
+//   </div>
+// );
 
 export default Card;

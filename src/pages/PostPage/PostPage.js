@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
+import "./PostPage.scss";
 import { useParams } from "react-router-dom";
-// import Card from "../../common/Card/Card";
+import Carousel from "../../common/Carousel/Carusel";
+import Card from "../../common/Card/Card";
+
 import { getOnePost } from "../../service/post.service";
-import config from "../../config/index";
+// import config from "../../config/index";
 
 function PostPage() {
   const { id } = useParams();
@@ -20,19 +23,8 @@ function PostPage() {
   console.log(`post`, post);
 
   return (
-    <div className="PostPage">
-      {post && (
-        <div>
-          <img src={config.apiUrl + "/" + post.images} />
-          <div>
-            <strong>{post.author.username}</strong>
-          </div>
-          <p>{post.body}</p>
-        </div>
-      )}
-      <div className="PostPage__comments">
-        <h3>Comments</h3>
-      </div>
+    <div className="postPage">
+      <Card data={post} />
     </div>
   );
 }

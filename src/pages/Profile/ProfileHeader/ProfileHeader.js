@@ -69,7 +69,12 @@ function ProfileHeader({ username, postNum }) {
                   className="btn_follow__following"
                   onClick={handleUnfollow}
                 >
-                  <img src="/images/follower.png" alt="following" />
+                  <img
+                    src="/images/follower.png"
+                    alt="following"
+                    width="12px"
+                    height="12px"
+                  />
                 </button>
               </div>
             ) : (
@@ -81,13 +86,16 @@ function ProfileHeader({ username, postNum }) {
         </div>
         <div className="header_info">
           <p className="info_postnumber">
-            <strong>{postNum} </strong>posts
+            <strong>{postNum} </strong> <br />
+            posts
           </p>
           <p className="info_follwoers">
-            <strong>{folowersCount}</strong>Follwoers
+            <strong>{folowersCount}</strong> <br />
+            Follwoers
           </p>
           <p className="info_following">
-            <strong>{user?.following?.length}</strong>Following
+            <strong>{user?.following?.length}</strong> <br />
+            Following
           </p>
         </div>
 

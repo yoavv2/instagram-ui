@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./Feed.scss";
 
 import Card from "../../common/Card/Card.js";
 import { getFeed } from "../../service/post.service";
+import { Virtuoso } from "react-virtuoso";
 
 function Feed() {
   const [posts, setPosts] = useState([]);
@@ -10,23 +11,31 @@ function Feed() {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const posts = await getFeed();
-        setPosts(posts.slice(0).reverse());
+        const cards = await getFeed();
+        setPosts(cards.slice(0).reverse());
       } catch (err) {
         console.log(err);
       }
     };
     getPosts();
   }, []);
+  const elemnt = useCallback((index, post) => {
+    return (
+      <div className="card_feed" key={post._id}>
+        <Card data={post} />
+      </div>
+    );
+  }, []);
 
   return (
     <div className="feed-container">
-      <div className="feed_position"></div>
-      <div className="posts">
-        {posts.map((post, index) => (
-          <Card key={post._id} data={post} />
-        ))}
-      </div>
+      <Virtuoso
+        data={posts}
+        // style={{ borderRadius: "0" }}
+        totalCount={posts.length}
+        itemContent={elemnt}
+      />
+    
     </div>
   );
 }

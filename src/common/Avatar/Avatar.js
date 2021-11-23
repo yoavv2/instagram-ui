@@ -9,15 +9,15 @@ function Avatar(props) {
 
   return (
     <div className={storyBorder ? "storyBorder" : ""}>
-      <div className="avatar_wrapp">
-        <img className={`avatar  ${iconSize}`} src={image} alt="profile" />
-        {/* <div
+    {/* <div className={"avatar_wrapp "}> */}
+      <img className={`avatar  ${iconSize}`} src={image} alt="profile" />
+      {/* <div
           dangerouslySetInnerHTML={{
             __html: createAvatar(style, { seed: }),
           }}
         /> */}
-      </div>
-    </div>
+    {/* </div> */}
+     </div>
   );
 }
 

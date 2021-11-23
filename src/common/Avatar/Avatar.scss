@@ -1,7 +1,22 @@
 @import "../../styles/variables";
 
 .storyBorder {
-  padding: 2px;
+  // width: 35px;
+  // height: 35px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.storyBorder::after {
+  border-radius: 50%;
+  content: "";
+  width: 107%;
+  height: 108%;
+  position: absolute;
+  z-index: -1;
+  left: -4%;
+  top: -4%;
   background: linear-gradient(
     200deg,
     $gradient-one 25%,
@@ -11,16 +26,22 @@
   );
   // background: $font-color-secondary;
   border-radius: 50%;
+  animation: spin 5s linear infinite;
 }
-.avatar_wrapp {
-  width: 35px;
-  height: 35px;
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .avatar {
   border-radius: 50%;
   border: 2px solid $background-white;
-  display: block;
+  width: 32px;
+  height: 32px;
+  // object-fit: contain;
+  // display: block;
 
   &:hover {
     cursor: pointer;

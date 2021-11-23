@@ -49,9 +49,10 @@ function CreatePost() {
 
     try {
       const formToSubmit = {
-        // description,
+       
         images,
       };
+      console.log(`images`, images);
       await create(formToSubmit).then(() => history.push("/"));
     } catch (err) {
       console.log(err);

@@ -32,7 +32,7 @@ function ImageCrop({ displayedImages, index, setAspectRatio, aspectRatio }) {
     async (e) => {
       e.preventDefault();
       console.log("displayed", displayedImages);
-      console.log("images1", images);
+      console.log("befor upload", images);
       const croppedImage = await getCroppedImg(
         displayedImages,
         croppedAreaPixels
@@ -40,7 +40,7 @@ function ImageCrop({ displayedImages, index, setAspectRatio, aspectRatio }) {
       const uploadedImages = images;
       uploadedImages[index] = croppedImage;
       setImages(uploadedImages);
-      console.log("images2", uploadedImages);
+      console.log(" uploadedImages", uploadedImages);
     },
     [croppedAreaPixels, displayedImages, images, index, setImages]
   );
@@ -71,9 +71,9 @@ function ImageCrop({ displayedImages, index, setAspectRatio, aspectRatio }) {
           className="crop_trigger"
           // onSelect={(e) => console.log(aspects[e.target.selectedIndex])}
         >
-          <div className="ratio_btn">
-            <Ratio className="ratio_btn__btn" />
-          </div>
+          {/* <div className="ratio_btn"> */}
+          <Ratio className="ratio_btn__btn" />
+          {/* </div> */}
         </DropdownMenu.Trigger>
         <DropdownMenu.Content side="top" align="start" className="crop_content">
           <DropdownMenu.Item
@@ -95,7 +95,7 @@ function ImageCrop({ displayedImages, index, setAspectRatio, aspectRatio }) {
           >
             <span> {getAspectLabel(aspects[0])} </span> <SixOnNine />
           </DropdownMenu.Item>
-          <DropdownMenu.Arrow />
+          <DropdownMenu.Arrow className="dropdown_arraw" />
         </DropdownMenu.Content>
       </DropdownMenu.Root>
       <button className="crop__done_btn" onClick={cropComplete}>
