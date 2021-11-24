@@ -17,6 +17,20 @@
       grid-gap: 10px;
       margin: 0 5px;
     }
+
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1px solid $border-color-grey-secondary;
+      font-family: $font;
+      color: $font-color-primary;
+      font-size: 1em;
+      .gallery_icon {
+        width: 20px;
+        height: 20px;
+      }
+    }
     .gallery_images {
       position: relative;
       // flex: 1 0 22rem;
@@ -42,7 +56,11 @@
         right: 0;
         background: rgba(0, 0, 0, 0.3);
       }
-
+      .carousel_icon {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
       .item-info {
         display: none;
         list-style: none;

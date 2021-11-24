@@ -14,6 +14,9 @@
   height: 100vh;
 }
 @media only screen and (max-width: 600px) {
+  .feed-container {
+    width: 100%;
+  }
   .posts {
     width: 100%;
   }

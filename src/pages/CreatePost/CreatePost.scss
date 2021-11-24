@@ -11,6 +11,27 @@
   justify-content: center;
   overflow: hidden; /* Hide scrollbars */
 
+  .header {
+    height: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid $border-color-grey;
+    position: relative;
+    h3 {
+    }
+    .btn_next {
+      position: absolute;
+      top: 15px;
+      right: 10px;
+      color: $link-color;
+      font-weight: 700;
+      // font-size: 1em;
+      cursor: pointer;
+    }
+  }
+
   .btn-exit {
     position: absolute;
     left: 95%;
@@ -84,6 +105,28 @@
   // }
 }
 
+.root {
+  position: relative;
+}
+.add_description__triger {
+  background-color: yellow;
+  all: unset;
+}
+.add_description__input {
+  display: flex;
+}
+.input_rapper {
+  background-color: yellow;
+  position: absolute;
+  top: 500px;
+  right: 500px;
+
+  .description_input {
+    background-color: aqua;
+    width: 100px;
+    height: 100px;
+  }
+}
 @media only screen and (max-width: 600px) {
   .creat_post__form {
     width: 100% !important;

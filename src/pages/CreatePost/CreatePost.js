@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState, createContext } from "react";
+import * as Dialog from "@radix-ui/react-dialog";
 
 import { useHistory } from "react-router-dom";
 import Slider from "react-slick";
@@ -17,42 +18,44 @@ export const PostCreateContext = createContext([]);
 function CreatePost() {
   const [aspectRatio, setAspectRatio] = useState(4 / 3);
   const [displayedImages, setDisplayedImages] = useState([]);
-  const history = useHistory();
 
   const [images, setImages] = useState([]);
 
   const [description, setDescription] = useState("");
+  const [step, setStep] = useState(0);
+  const [isClicked, setIsClicked] = useState(false);
 
   const ref = useRef();
 
-  useEffect(() => {
-    const checkIfClickedOutside = (e) => {
-      //* If the menu is open and the clicked target is not within the menu,
-      //* then close the menu
+  // useEffect(() => {
+  //   const checkIfClickedOutside = (e) => {
+  //     //* If the menu is open and the clicked target is not within the menu,
+  //     //* then close the menu
 
-      if (ref.current && !ref.current.contains(e.target)) {
-        history.goBack();
-      }
-    };
+  //     if (ref.current && !ref.current.contains(e.target)) {
+  //       history.goBack();
+  //     }
+  //   };
 
-    document.addEventListener("mousedown", checkIfClickedOutside);
+  //   document.addEventListener("mousedown", checkIfClickedOutside);
 
-    return () => {
-      // Cleanup the event listener
-      document.removeEventListener("mousedown", checkIfClickedOutside);
-    };
-  });
+  //   return () => {
+  //     // Cleanup the event listener
+  //     document.removeEventListener("mousedown", checkIfClickedOutside);
+  //   };
+  // });
 
   // //* submiting the post
+  const history = useHistory();
   const submit = async (e) => {
     e.preventDefault();
 
     try {
       const formToSubmit = {
-       
         images,
+        description,
       };
-      console.log(`images`, images);
+      // console.log(`images`, images);
       await create(formToSubmit).then(() => history.push("/"));
     } catch (err) {
       console.log(err);
@@ -68,17 +71,27 @@ function CreatePost() {
     slidesToScroll: 1,
     className: "carousel",
   };
-  console.log(`displayedImages => `, displayedImages);
-  console.log(`images => `, images);
+  // console.log(`displayedImages => `, displayedImages);
+  // console.log(`images => `, images);
+  const handelNextPage = () => {
+    setStep((prev) => prev + 1);
+  };
   return (
-    <PostCreateContext.Provider value={{ images, setImages }}>
+    <PostCreateContext.Provider value={{ images, setImages, step, setStep }}>
       <div className="create_post__wrapper">
         <Exitbtn className="btn-exit" />
 
         <div className="create_post__wrapper">
           <div className="creat_post__form">
-            <h3 className="header">Create post</h3>
-            <div className="border"></div>
+            <div className="header">
+              <h3>Create post</h3>
+
+              <div className="btn_next" onClick={handelNextPage}>
+                Next
+              </div>
+
+              {/* <Dialog.Close /> */}
+            </div>
             <form className="create_form" onSubmit={submit}>
               {images.length == 0 && (
                 <DropZoneCreate setDisplayedImages={setDisplayedImages} />
@@ -97,12 +110,8 @@ function CreatePost() {
                   ))}
                 </Slider>
               )}
-              {images.length > 0 && <div className="controller"></div>}
-              <button
-                onClick={submit}
-                type="submit"
-                className="create_form__btn"
-              >
+
+              <button type="submit" className="create_form__btn">
                 Create
               </button>
             </form>

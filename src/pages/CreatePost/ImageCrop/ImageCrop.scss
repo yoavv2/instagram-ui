@@ -50,17 +50,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   &:hover {
-    cursor: pointer;
     background-color: rgba(0, 0, 0, 1);
   }
 }
 .crop_content {
   // position: absolute;
+  width: 200px;
   background-color: rgba(0, 0, 0, 0.55);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   animation: scale-in 0.3s ease-out;
   border-radius: 3px;
+  cursor: pointer;
   // left: 50px;
   .dropdown_arraw {
     width: 20px;
@@ -76,6 +78,7 @@
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
     color: white;
+    fill: white;
   }
   & :visited {
     color: white;

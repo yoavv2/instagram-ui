@@ -4,7 +4,8 @@ import { useParams } from "react-router";
 import "./Profile.scss";
 
 import config from "../../config/index";
-
+import { ReactComponent as CarouselIcon } from "../../images/svg-carousel.svg";
+import { ReactComponent as GalleryIcon } from "../../images/GalleryIcon.svg";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
 import { getPosts } from "../../service/post.service";
 
@@ -35,8 +36,11 @@ function Profile() {
         username={username}
         postNum={posts.length}
       />
+      <header>
+        <GalleryIcon className="gallery_icon" />
 
-      <h2>posts</h2>
+        <h2>Posts</h2>
+      </header>
 
       <div className="profile_gallery">
         {posts.map((post) => (
@@ -51,6 +55,11 @@ function Profile() {
               </span>
               <p>{post.likes.length}</p>
             </div>
+            {post.images.length > 1 && (
+              <div className="carousel_icon">
+                <CarouselIcon />
+              </div>
+            )}
             <img src={IMAGE_PATH + "/" + post.images[0]} alt="images" />
           </Link>
         ))}

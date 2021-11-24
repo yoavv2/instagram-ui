@@ -1,9 +1,10 @@
 import config from "../config/index";
 import { base64StringToBlob } from "blob-util";
+
 async function create(post) {
   if (!post.images) return;
   const form = new FormData();
-  console.log(post.images);
+  // console.log(post.images);
   // images are base64
   const imagesPromises = post.images.map(async (image) => {
     const cleanBase64 = image.split(";base64,").pop();
@@ -16,10 +17,10 @@ async function create(post) {
     console.log(blobs);
     const files = blobs.map((blob, i) => {
       const imageFile = new File([blob], `image${i}`, { type: "image/jpeg" });
-      console.log(`imageFile`, imageFile);
+      // console.log(`imageFile`, imageFile);
       form.append("images", imageFile);
     });
-    // form.append("description", post.description);
+    form.append("description", post.description);
     const res = await fetch(config.apiUrl + "/post", {
       method: "POST",
       body: form,

@@ -13,7 +13,8 @@ import Picker, { SKIN_TONE_MEDIUM_DARK } from "emoji-picker-react";
 
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
-function Card({ data: post }) {
+function Card({ data: post, className }) {
+  console.log(`post`, post);
   const ref = useRef(null);
   const [chosenEmoji, setChosenEmoji] = useState(null);
 
@@ -61,8 +62,8 @@ function Card({ data: post }) {
     setCommentValue(text);
   };
   return (
-    <div className="post_wrapper">
-      <article className="Post">
+    <div className={className || "post_wrapper"}>
+      <article className={(className, "post" || "Post")}>
         <header>
           <div className="Post__user">
             <Avatar
@@ -135,7 +136,7 @@ function Card({ data: post }) {
           )}
         </div>
 
-        <div className="timePosted">
+        <div className={className ? "timePosted_post" : "timePosted"}>
           {moment(post.createdAt).fromNow(true)} ago
         </div>
 
@@ -148,7 +149,10 @@ function Card({ data: post }) {
         </ul> */}
 
         <footer>
-          <form className="add_comment__form" onSubmit={submit}>
+          <form
+            className={className ? " add_comment" : "add_comment__form"}
+            onSubmit={submit}
+          >
             <DropdownMenu.Root modal="false">
               <DropdownMenu.Trigger className="emoji_trigger">
                 <Emoji />

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./PostPage.scss";
 import { useParams } from "react-router-dom";
-import Carousel from "../../common/Carousel/Carusel";
+// import Carousel from "../../common/Carousel/Carusel";
 import Card from "../../common/Card/Card";
 
 import { getOnePost } from "../../service/post.service";
@@ -14,17 +14,15 @@ function PostPage() {
   useEffect(() => {
     async function initPost() {
       const res = await getOnePost(id);
-      console.log(res);
+      console.log("res", res);
       setPost(res);
     }
     initPost();
   }, [id]);
 
-  console.log(`post`, post);
-
   return (
     <div className="postPage">
-      <Card data={post} />
+      {post && <Card data={post} className="PostPage" />}
     </div>
   );
 }

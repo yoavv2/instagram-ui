@@ -11,7 +11,7 @@ import { ReactComponent as SixOnNine } from "../../../images/16on9.svg";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 function ImageCrop({ displayedImages, index, setAspectRatio, aspectRatio }) {
-  const { images, setImages } = useContext(PostCreateContext);
+  const { images, setImages, step, setStep } = useContext(PostCreateContext);
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState({});
@@ -31,8 +31,8 @@ function ImageCrop({ displayedImages, index, setAspectRatio, aspectRatio }) {
   const cropComplete = useCallback(
     async (e) => {
       e.preventDefault();
-      console.log("displayed", displayedImages);
-      console.log("befor upload", images);
+      // console.log("displayed", displayedImages);
+      // console.log("befor upload", images);
       const croppedImage = await getCroppedImg(
         displayedImages,
         croppedAreaPixels
@@ -40,7 +40,8 @@ function ImageCrop({ displayedImages, index, setAspectRatio, aspectRatio }) {
       const uploadedImages = images;
       uploadedImages[index] = croppedImage;
       setImages(uploadedImages);
-      console.log(" uploadedImages", uploadedImages);
+      setStep((prev) => prev + 1);
+      // console.log(" uploadedImages", uploadedImages);
     },
     [croppedAreaPixels, displayedImages, images, index, setImages]
   );
@@ -75,7 +76,7 @@ function ImageCrop({ displayedImages, index, setAspectRatio, aspectRatio }) {
           <Ratio className="ratio_btn__btn" />
           {/* </div> */}
         </DropdownMenu.Trigger>
-        <DropdownMenu.Content side="top" align="start" className="crop_content">
+        <DropdownMenu.Content side="top" className="crop_content">
           <DropdownMenu.Item
             className="crop_item"
             onSelect={() => setAspectRatio(aspects[2])}
