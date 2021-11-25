@@ -81,7 +81,6 @@ function Navigation() {
           {isClicked ? (
             <>
               <ScrollArea.Root>
-                <div className="serach_result__border"></div>
                 <ScrollArea.Viewport
                   className="search_result__viewport"
                   onClick={(e) => e.stopPropagation()}

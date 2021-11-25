@@ -31,11 +31,10 @@ function Feed() {
     <div className="feed-container">
       <Virtuoso
         data={posts}
-        // style={{ borderRadius: "0" }}
+        style={{ height: "1200px" }}
         totalCount={posts.length}
         itemContent={elemnt}
       />
-    
     </div>
   );
 }

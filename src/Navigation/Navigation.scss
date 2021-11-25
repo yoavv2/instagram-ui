@@ -71,20 +71,7 @@
         transform: scale(1);
       }
     }
-    // .search_result__square {
-    //   position: absolute;
-    //   top: 80%;
-    //   right: 50%;
-    //   width: 20px;
-    //   height: 20px;
-    //   transform: rotate(45deg);
-    //   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-    //     0 6px -2px 0 rgba(0, 0, 0, 0.19);
-    //   border-radius: 3px;
-    //   background-color: white;
-    //   z-index: 2;
-    //   animation: scale-in 0.7s linear;
-    // }
+
     .search_result__viewport {
       display: flex;
       position: absolute;
@@ -101,7 +88,7 @@
       animation: scale-in 0.3s ease-out;
     }
     .serach_result__border {
-      margin: 10px;
+      margin: 10px 150px;
     }
   }
 

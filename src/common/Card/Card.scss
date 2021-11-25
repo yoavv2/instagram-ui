@@ -4,7 +4,7 @@
   width: 100%;
   display: block;
 }
-.post_wrapper {
+.Post_wrapper {
   border: 1px solid $border-color-grey;
   background-color: $background-white;
   margin-bottom: 3.5em;
@@ -19,17 +19,21 @@
     padding: 0.75em;
     // background-color: aqua;
 
-    .Post__user {
+    .Post_user {
       display: flex;
       align-items: center;
       width: 15%;
       justify-content: space-between;
     }
+
+    .Post_user_username {
+      margin-left: 5px;
+    }
     .profileIcon {
       margin-bottom: 0;
     }
   }
-  .Post__image {
+  .Post_image {
     max-height: 600px;
   }
   .timePosted {
@@ -111,118 +115,35 @@
     transform: translate(-50%, -50%);
   }
 }
-.dropDown_arrow {
-  fill: $background-white;
-  width: 20px;
-  height: 10px;
-}
-.card_comment_view {
+.comments_viewPort {
   display: flex;
-  flex-direction: column;
-  margin-left: 20px;
+  width: 100%;
+  height: 50px;
+  overflow: scroll;
 
+  // .card_comment_view {
+  //   display: flex;
+  //   flex-direction: column;
+  //   margin-left: 20px;
+  font-size: 0.9em;
   .comment {
     display: flex;
     align-items: center;
-    // height: 40px;
-    &p {
+    margin-left: 1em;
+
+    a {
+      margin: 0;
+      text-decoration: none;
+      color: $font-color-primary;
+    }
+    p {
+      margin: 0;
       margin-left: 5px;
     }
-    &span {
+    strong {
+      margin: 0;
       margin-left: 5px;
     }
   }
-
-  .timePosted_post {
-    font-size: 0.9em;
-    padding-left: 1em;
-    padding-bottom: 1em;
-    color: $font-color-secondary;
-    border-bottom: 1px solid $border-color-grey-secondary;
-  }
-}
-
-@media only screen and (min-width: 240px) {
-  .add_comment {
-    height: 50px;
-    border-top: 1px solid $border-color-grey;
-    display: flex;
-    align-items: center;
-
-    .add_comment__input {
-      flex: 2;
-      border: 1px solid $border-color-grey;
-      border: none;
-      border-radius: 3px;
-      background-color: $background-white;
-
-      // width: 80%;
-      height: 100%;
-      outline: none;
-      margin-left: 10px;
-      // padding-left: 20%;
-    }
-    .add_comment__btn {
-      background-color: $background-white;
-      color: $link-color;
-      font-family: inherit;
-
-      border: none;
-      border-radius: 5px;
-      font-weight: 900;
-      cursor: pointer;
-      margin-right: 10px;
-    }
-    .add_comment__btn[disabled] {
-      color: $link-color;
-      opacity: 0.5;
-      pointer-events: none;
-    }
-    .emoji_trigger {
-      all: unset;
-      background-color: white;
-      margin-left: 10px;
-    }
-    .emoji_content {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
-  .dropDown_arrow {
-    fill: $background-white;
-    width: 20px;
-    height: 10px;
-  }
-  .card_comment_view {
-    display: flex;
-    flex-direction: column;
-    margin-left: 20px;
-
-    .comment {
-      display: flex;
-      align-items: center;
-
-      &p {
-        margin-left: 5px;
-      }
-      &span {
-        margin-left: 5px;
-      }
-    }
-  }
-}
-
-@media only screen and (max-width: 640px) {
-  .post_wrapper {
-    border: none;
-    background-color: $background-grey;
-    margin-bottom: 0.75em;
-    width: 100%;
-  }
-
-  .add_comment__form {
-    display: none !important;
-  }
+  // }
 }

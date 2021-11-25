@@ -10,13 +10,13 @@ import Carousel from "../Carousel/Carusel";
 import { ReactComponent as Emoji } from "../../images/imoji.svg";
 import { createComment, getComments } from "../../service/post.service";
 import Picker, { SKIN_TONE_MEDIUM_DARK } from "emoji-picker-react";
-
+import * as ScrollArea from "@radix-ui/react-scroll-area";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 function Card({ data: post, className }) {
   console.log(`post`, post);
   const ref = useRef(null);
-  const [chosenEmoji, setChosenEmoji] = useState(null);
+  // const [chosenEmoji, setChosenEmoji] = useState(null);
 
   const [likesCount, setLikesCount] = useState(post.likes.length);
 
@@ -62,10 +62,10 @@ function Card({ data: post, className }) {
     setCommentValue(text);
   };
   return (
-    <div className={className || "post_wrapper"}>
-      <article className={(className, "post" || "Post")}>
+    <div className={"Post_wrapper"}>
+      <article className={className ? "post" : "Post"}>
         <header>
-          <div className="Post__user">
+          <div className={"Post_user"}>
             <Avatar
               className="profileIcon"
               image={post.author.avatar}
@@ -73,12 +73,10 @@ function Card({ data: post, className }) {
               iconSize="sm"
             />
             <Link className="link" to={"/profile/" + post.author.username}>
-              <span className="Post__user__username">
-                {post.author.username}
-              </span>
+              <span className="Post_user_username">{post.author.username}</span>
             </Link>
           </div>
-          <div className="Post__date"></div>
+          <div className="Post_date"></div>
         </header>
         <div>
           <Carousel images={post.images} />
@@ -86,7 +84,7 @@ function Card({ data: post, className }) {
           <CardMenu
             handleLikes={handleLikes}
             post={post}
-            className="post__menu"
+            className="post_menu"
           />
         </div>
         <div className="like_count">
@@ -102,34 +100,76 @@ function Card({ data: post, className }) {
             </span>
           </div>
         )}
-        <div className="Post__content">
-          <h1 className="Post__description">{post.body}</h1>
+        <div className="Post_content">
+          <h1 className="Post_description">{post.body}</h1>
         </div>
 
-        <div className="card_comment_view">
+        {/* <div className="card_comment_view">
           {comments[0] ? (
             <div className="comment">
-              <h3>{comments[0].author.fullname}</h3>
+              <Link to={"/profile/" + comments[0].author.username}>
+                <strong>{comments[0].author.fullname}</strong>
+              </Link>
               <p>{comments[0].content}</p>
-              <span>{moment(comments[0].createdAt).fromNow(true)} ago</span>
+              <span>
+                {moment(comments[0].createdAt)
+                  .fromNow(true)
+                  .replace(" minutes", "m")
+                  .replace(" minute", "m")
+                  .replace(" seconds", "s")
+                  .replace(" second", "s")
+                  .replace(" days", "d")
+                  .replace(" day", "d")
+                  .replace(" hours", "h")
+                  .replace(" hour", "h")
+                  .replace("an", "1")}
+              </span>
             </div>
           ) : (
             ""
           )}
           {comments[1] ? (
             <div className="comment">
-              <h3>{comments[0].author.fullname}</h3>
+              <Link to={"/profile/" + comments[1].author.username}>
+                <strong>{comments[0].author.fullname}</strong>
+              </Link>
               <p>{comments[1].content}</p>
-              <span>{moment(comments[1].createdAt).fromNow(true)} ago</span>
+              <span>
+                {moment(comments[1].createdAt)
+                  .fromNow(true)
+                  .replace(" minutes", "m")
+                  .replace(" minute", "m")
+                  .replace(" seconds", "s")
+                  .replace(" second", "s")
+                  .replace(" days", "d")
+                  .replace(" day", "d")
+                  .replace(" hours", "h")
+                  .replace(" hour", "h")
+                  .replace("an", "1")}
+              </span>
             </div>
           ) : (
             ""
           )}
           {comments[2] ? (
             <div className="comment">
-              <h3>{comments[0].author.fullname}</h3>
+              <Link to={"/profile/" + comments[2].author.username}>
+                <strong>{comments[0].author.fullname}</strong>
+              </Link>
               <p>{comments[2].content}</p>
-              <span>{moment(comments[2].createdAt).fromNow(true)} ago</span>
+              <span>
+                {moment(comments[2].createdAt)
+                  .fromNow(true)
+                  .replace(" minutes", "m")
+                  .replace(" minute", "m")
+                  .replace(" seconds", "s")
+                  .replace(" second", "s")
+                  .replace(" days", "d")
+                  .replace(" day", "d")
+                  .replace(" hours", "h")
+                  .replace(" hour", "h")
+                  .replace("an", "1")}
+              </span>
             </div>
           ) : (
             ""
@@ -137,16 +177,52 @@ function Card({ data: post, className }) {
         </div>
 
         <div className={className ? "timePosted_post" : "timePosted"}>
+          {moment(post.createdAt).fromNow()}
+        </div> */}
+
+        <ScrollArea.Root>
+          <ScrollArea.Viewport className="comments_viewPort">
+            {comments.length > 0 &&
+              comments.map((comment, i) => {
+                // render comment <Comment comment={comment} />
+                return (
+                  <div
+                    className="comment"
+                    style={{ display: "flex", alignItems: "center" }}
+                  >
+                    <Link to={"/profile/" + comment.author.username}>
+                      <strong>{comment.author.fullname}</strong>
+                    </Link>
+                    <p style={{ marginLeft: "5px" }}>{comment.content}</p>
+                    <strong>
+                      {moment(comments.createdAt)
+                        .fromNow()
+                        .replace("a few", "")
+                        .replace(" minutes", " m")
+                        .replace(" minute", " m")
+                        .replace(" seconds", " s")
+                        .replace(" second", " s")
+                        .replace(" days", " d")
+                        .replace(" day", " d")
+                        .replace(" hours", " h")
+                        .replace(" hour", " h")
+                        .replace("an", " 1")}
+                    </strong>
+                  </div>
+                );
+              })}
+          </ScrollArea.Viewport>
+          <ScrollArea.Scrollbar orientation="horizontal">
+            <ScrollArea.Thumb />
+          </ScrollArea.Scrollbar>
+          <ScrollArea.Scrollbar orientation="vertical">
+            <ScrollArea.Thumb />
+          </ScrollArea.Scrollbar>
+          <ScrollArea.Corner />
+        </ScrollArea.Root>
+        <div className={className ? "timePosted_post" : "timePosted"}>
           {moment(post.createdAt).fromNow(true)} ago
         </div>
-
-        {/* <ul>
-          {comments.length > 0 &&
-            comments.map((comment, i) => {
-              // render comment <Comment comment={comment} />
-              return <li key={comment._id}>{comment.content}</li>;
-            })}
-        </ul> */}
 
         <footer>
           <form
