@@ -28,11 +28,12 @@
     "react-dom": "^17.0.2",
     "react-dropzone": "^11.4.2",
     "react-easy-crop": "^3.5.3",
+    "react-responsive-carousel": "^3.2.22",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "react-slick": "^0.28.1",
-    "react-virtuoso": "^2.2.8",
     "rive-react": "^0.0.22",
+    "sass": "^1.43.5",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.10"
@@ -60,8 +61,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "node-sass": "^6.0.1"
   }
 }

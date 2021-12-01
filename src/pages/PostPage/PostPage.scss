@@ -1,4 +1,169 @@
 @import "../../styles/variables";
 
 @media only screen and (min-width: 240px) {
+  .postPage_wrap {
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+
+    .btn-exit {
+      position: absolute;
+      z-index: 4;
+      left: 94.5%;
+      top: 1%;
+
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+    }
+
+    .postPage_card {
+      background-color: $background-white;
+      width: 90%;
+      height: 50%;
+      border-radius: 0 10px 10px 0px;
+      position: relative;
+      display: flex;
+
+      .postPage_carousel {
+        flex: 1;
+      }
+
+      .postPage_detales {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+
+        .postPage_header {
+          display: flex;
+          align-items: center;
+          width: 100%;
+          height: 70px;
+
+          border-radius: 0 10px 0 0;
+          border-bottom: 1px solid $border-color-grey;
+          padding-left: 10px;
+          .link {
+            text-decoration: none;
+            color: $font-color-primary;
+            font-weight: 600;
+            span {
+              margin-left: 5px;
+            }
+          }
+        }
+
+        .postPage_comments {
+          flex: 3;
+          display: flex;
+          flex-direction: column;
+          // background-color: brown;
+          width: 100%;
+
+          .comments_viewport {
+            flex: 1;
+            width: 100%;
+            max-height: 430px;
+
+            // background-color: aqua;
+
+            .comment {
+              display: flex;
+              align-items: center;
+              margin-left: 1em;
+
+              a {
+                margin: 0;
+                text-decoration: none;
+                color: $font-color-primary;
+              }
+              p {
+                margin: 0;
+                margin-left: 5px;
+              }
+              strong {
+                margin: 0;
+                margin-left: 5px;
+              }
+            }
+          }
+          .timePosted {
+            font-size: 10px;
+
+            padding: 1em 0 1em 1em;
+            color: $font-color-secondary;
+          }
+        }
+
+        .postPage_actions {
+          // background-color: aqua;
+          // flex: 1;
+          width: 100%;
+          align-self: flex-end;
+          border-top: 1px solid $border-color-grey;
+          height: 110px;
+        }
+        .add_comment__form {
+          width: 100%;
+          align-self: flex-end;
+          bottom: 50%;
+
+          height: 50px;
+
+          border-top: 1px solid $border-color-grey;
+          display: flex;
+          align-items: center;
+
+          .add_comment__input {
+            flex: 2;
+            border: 1px solid $border-color-grey;
+            border: none;
+            border-radius: 3px;
+            background-color: $background-white;
+
+            // width: 80%;
+            height: 100%;
+            outline: none;
+            margin-left: 10px;
+            // padding-left: 20%;
+          }
+          .add_comment__btn {
+            background-color: $background-white;
+            color: $link-color;
+            font-family: inherit;
+
+            border: none;
+            border-radius: 5px;
+            font-weight: 900;
+            cursor: pointer;
+            margin-right: 10px;
+          }
+          .add_comment__btn[disabled] {
+            color: $link-color;
+            opacity: 0.5;
+            pointer-events: none;
+          }
+          .emoji_trigger {
+            all: unset;
+            background-color: white;
+            margin-left: 10px;
+          }
+          .emoji_content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
+      }
+    }
+  }
 }

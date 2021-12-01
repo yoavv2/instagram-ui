@@ -2,17 +2,17 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-top: 10px;
   // height: 80px;
   .card_icon {
-    margin: 10px;
+    display: inline-block;
+    // margin: 10px;
     margin-left: 10px;
+
+    height: 24px;
+    width: 24px;
     &:hover {
       cursor: pointer;
     }
-  }
-  .like {
-    // margin-top: 25px;
-    height: 24px;
-    width: 24px;
   }
 }

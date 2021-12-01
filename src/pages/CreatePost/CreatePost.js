@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, createContext } from "react";
-import * as Dialog from "@radix-ui/react-dialog";
+
 
 import { useHistory } from "react-router-dom";
 import Slider from "react-slick";
@@ -69,7 +69,7 @@ function CreatePost() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    className: "carousel",
+    className: "carousel_create",
   };
   // console.log(`displayedImages => `, displayedImages);
   // console.log(`images => `, images);
@@ -81,41 +81,40 @@ function CreatePost() {
       <div className="create_post__wrapper">
         <Exitbtn className="btn-exit" />
 
-        <div className="create_post__wrapper">
-          <div className="creat_post__form">
-            <div className="header">
-              <h3>Create post</h3>
+        <div className="creat_post__form">
+          <div className="header">
+            <h3>Create post</h3>
 
-              <div className="btn_next" onClick={handelNextPage}>
+            {/* <div className="btn_next" onClick={handelNextPage}>
                 Next
-              </div>
+              </div> */}
 
-              {/* <Dialog.Close /> */}
-            </div>
-            <form className="create_form" onSubmit={submit}>
-              {images.length == 0 && (
-                <DropZoneCreate setDisplayedImages={setDisplayedImages} />
-              )}
-              {images.length > 0 && (
-                <Slider {...settings}>
-                  {images.map((image, i) => (
+            {/* <Dialog.Close /> */}
+          </div>
+          <form className="create_form" onSubmit={submit}>
+            {images.length == 0 && (
+              <DropZoneCreate setDisplayedImages={setDisplayedImages} />
+            )}
+            {images.length > 0 && (
+              <Slider {...settings}>
+                {images.map((image, i) => (
+                  <div key={i} className="image_crop_wrap">
                     <ImageCrop
-                      key={i}
                       image={image}
                       index={i}
                       displayedImages={displayedImages[i]}
                       aspectRatio={aspectRatio}
                       setAspectRatio={setAspectRatio}
                     />
-                  ))}
-                </Slider>
-              )}
+                  </div>
+                ))}
+              </Slider>
+            )}
 
-              <button type="submit" className="create_form__btn">
-                Create
-              </button>
-            </form>
-          </div>
+            <button type="submit" className="create_form__btn">
+              Create
+            </button>
+          </form>
         </div>
       </div>
     </PostCreateContext.Provider>

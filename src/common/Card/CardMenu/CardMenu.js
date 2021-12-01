@@ -21,9 +21,8 @@ function CardMenu({ post, handleLikes }) {
           <Comment className="card_icon" />
         </Link>
       </div>
-      <div>
-        <Share className="card_icon " />
-      </div>
+
+      <Share className="card_icon" />
     </div>
   );
 }

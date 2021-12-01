@@ -3,7 +3,6 @@ import "./Feed.scss";
 
 import Card from "../../common/Card/Card.js";
 import { getFeed } from "../../service/post.service";
-import { Virtuoso } from "react-virtuoso";
 
 function Feed() {
   const [posts, setPosts] = useState([]);
@@ -19,22 +18,19 @@ function Feed() {
     };
     getPosts();
   }, []);
-  const elemnt = useCallback((index, post) => {
-    return (
-      <div className="card_feed" key={post._id}>
-        <Card data={post} />
-      </div>
-    );
-  }, []);
+  // const elemnt = useCallback((index, post) => {
+  //   return (
+  //     <div className="card_feed" key={post._id}>
+  //       <Card data={post} />
+  //     </div>
+  //   );
+  // }, []);
 
   return (
-    <div className="feed-container">
-      <Virtuoso
-        data={posts}
-        style={{ height: "1200px" }}
-        totalCount={posts.length}
-        itemContent={elemnt}
-      />
+    <div className="feed_container">
+      {posts.map((post, i) => (
+        <Card className="card" data={post} key={i} />
+      ))}
     </div>
   );
 }

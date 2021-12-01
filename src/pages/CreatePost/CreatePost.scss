@@ -1,163 +1,160 @@
 @import "../../styles/variables";
-.create_post__wrapper {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.55);
-  width: 100%;
-  height: 100%;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden; /* Hide scrollbars */
 
-  .header {
-    height: 50px;
-    width: 100%;
+@media only screen and (min-width: 240px) {
+  .create_post__wrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 1px solid $border-color-grey;
-    position: relative;
-    h3 {
-    }
-    .btn_next {
-      position: absolute;
-      top: 15px;
-      right: 10px;
-      color: $link-color;
-      font-weight: 700;
-      // font-size: 1em;
-      cursor: pointer;
-    }
-  }
-
-  .btn-exit {
-    position: absolute;
-    left: 95%;
-    top: 1%;
-    z-index: 4;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    opacity: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    &:hover {
-      cursor: pointer;
-      background-color: rgba(0, 0, 0, 0.1);
-    }
-    ion-icon {
-      color: white;
-    }
-  }
-  .border {
-    width: 100%;
-    height: 2px;
-    background-color: $background-grey;
-  }
-
-  .creat_post__form {
-    display: flex;
-
-    flex-direction: column;
-    align-items: center;
-
-    background-color: $background-white;
-    border-radius: 10px;
-
-    width: 600px;
-    height: 700px;
-  }
-  .create_form {
-    display: flex;
-    position: relative;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
 
-    .create_form__btn {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.55);
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+
+    .btn-exit {
       position: absolute;
-      bottom: 0;
-      color: $background-white;
-      background-color: $link-color;
-      font-family: inherit;
-      width: 75%;
-      height: 30px;
-      border: none;
-      border-radius: 5px;
-      font-weight: 900;
-      cursor: pointer;
+      z-index: 4;
+      left: 94.5%;
+      top: 1%;
+
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
     }
-  }
-  .carousel {
-    width: 100%;
-    height: 600px;
-  }
 
-  // .cropper {
-  //   width: 100%;
-  //   height: 100%;
-  // }
-}
+    .creat_post__form {
+      width: 90%;
+      height: 80%;
 
-.root {
-  position: relative;
-}
-.add_description__triger {
-  background-color: yellow;
-  all: unset;
-}
-.add_description__input {
-  display: flex;
-}
-.input_rapper {
-  background-color: yellow;
-  position: absolute;
-  top: 500px;
-  right: 500px;
+      background-color: $background-white;
+      border-radius: 10px;
 
-  .description_input {
-    background-color: aqua;
-    width: 100px;
-    height: 100px;
-  }
-}
-@media only screen and (max-width: 600px) {
-  .creat_post__form {
-    width: 100% !important;
-    .create_form__btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      // margin-top: 15px;
+      .header {
+        height: 50px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid $border-color-grey;
+      }
+
+      .create_form {
+        background-color: $background-white;
+        margin-top: 5px;
+        // position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 90%;
+        border-radius: 10px;
+        .create_form__btn {
+          margin-top: 5px;
+          color: $background-white;
+          background-color: $link-color;
+          font-family: inherit;
+          width: 75%;
+          height: 30px;
+          border: none;
+          border-radius: 5px;
+          font-weight: 900;
+          cursor: pointer;
+        }
+      }
+    }
+    .carousel_create {
+      width: 100%;
     }
   }
 }
-
-@media only screen and (max-width: 600px) {
-  .creat_post__form {
-    .create_form__btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      // margin-top: 15px;
-    }
-  }
-  .btn-exit {
-    left: 85% !important;
-    background-color: black !important;
-    width: 70% !important;
-    height: 70% !important;
-    &:focus {
-      cursor: pointer;
-      background-color: rgba(0, 0, 0, 0.1) !important;
-    }
+@media only screen and (min-width: 740px) {
+  div.creat_post__form {
+    width: 600px !important;
+    height: 800px !important;
   }
 }
+
+//     .btn_next {
+//       position: absolute;
+//       top: 15px;
+//       right: 10px;
+//       color: $link-color;
+//       font-weight: 700;
+//       // font-size: 1em;
+//       cursor: pointer;
+//     }
+
+//   .create_form {
+//     display: flex;
+//     position: relative;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//     width: 100%;
+//     height: 100%;
+
+//   }
+
+//   // .cropper {
+//   //   width: 100%;
+//   //   height: 100%;
+//   // }
+// }
+
+// .root {
+//   position: relative;
+// }
+// .add_description__triger {
+//   background-color: yellow;
+//   all: unset;
+// }
+// .add_description__input {
+//   display: flex;
+// }
+// .input_rapper {
+//   background-color: yellow;
+//   position: absolute;
+//   top: 500px;
+//   right: 500px;
+
+//   .description_input {
+//     background-color: aqua;
+//     width: 100px;
+//     height: 100px;
+//   }
+// }
+// @media only screen and (max-width: 600px) {
+//   .creat_post__form {
+//     width: 100% !important;
+//     .create_form__btn {
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//       padding: 20px;
+//       // margin-top: 15px;
+//     }
+//   }
+// }
+
+// @media only screen and (max-width: 600px) {
+//   .creat_post__form {
+//     .create_form__btn {
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//       padding: 20px;
+//       // margin-top: 15px;
+//     }
+//   }
+//   .btn-exit {
+//     left: 85% !important;
+//     background-color: black !important;
+//     width: 70% !important;
+//     height: 70% !important;
+//     &:focus {
+//       cursor: pointer;
+//       background-color: rgba(0, 0, 0, 0.1) !important;
+//     }
+//   }
+// }
