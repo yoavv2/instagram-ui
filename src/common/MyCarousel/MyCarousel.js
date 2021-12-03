@@ -16,16 +16,12 @@ function MyCarousel({ images }) {
         useKeyboardArrows={true}
         swipeable={true}
         // width="100%"
-       
+
         centerSlidePercentage="100"
       >
         {images.map((image, i) => (
           <div key={i}>
-            <img
-              src={config.apiUrl + "/" + image}
-              alt=""
-              style={{ objectFit: "cover" }}
-            />
+            <img src={image} alt="" style={{ objectFit: "cover" }} />
           </div>
         ))}
       </Carousel>

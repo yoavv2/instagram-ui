@@ -60,7 +60,7 @@ function Profile() {
                 <CarouselIcon />
               </div>
             )}
-            <img src={IMAGE_PATH + "/" + post.images[0]} alt="images" />
+            <img src={post.images[0]} alt="images" />
           </Link>
         ))}
       </div>

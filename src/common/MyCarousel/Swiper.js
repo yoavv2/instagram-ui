@@ -71,7 +71,7 @@ function Swiper({ images }) {
               onMouseUp={handleMouseUp}
               draggable="false"
               className="image"
-              src={config.apiUrl + "/" + image}
+              src={image}
               alt={image.description}
             />
             {/*  )} */}
