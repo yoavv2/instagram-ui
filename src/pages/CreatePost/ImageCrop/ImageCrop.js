@@ -69,7 +69,7 @@ function ImageCrop({ displayedImages, index, setAspectRatio, aspectRatio }) {
       </div>
       <DropdownMenu.Root className="crop_actions">
         <DropdownMenu.Trigger
-          className="crop_trigger"
+          className="crop_btn trigger"
           // onSelect={(e) => console.log(aspects[e.target.selectedIndex])}
         >
           {/* <div className="ratio_btn"> */}
@@ -99,7 +99,7 @@ function ImageCrop({ displayedImages, index, setAspectRatio, aspectRatio }) {
           <DropdownMenu.Arrow className="dropdown_arraw" />
         </DropdownMenu.Content>
       </DropdownMenu.Root>
-      <button className="crop__done_btn" onClick={cropComplete}>
+      <button className="crop_btn done" onClick={cropComplete}>
         <ion-icon className="crop_icon" name="crop-outline"></ion-icon>
       </button>
     </div>

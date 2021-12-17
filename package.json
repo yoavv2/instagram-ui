@@ -5,7 +5,6 @@
   "dependencies": {
     "@dicebear/avatars": "^4.10.0",
     "@dicebear/avatars-bottts-sprites": "^4.10.0",
-    "@dicebear/avatars-male-sprites": "^4.10.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.16",

@@ -16,12 +16,12 @@
     .btn-exit {
       position: absolute;
       z-index: 4;
-      left: 94.5%;
-      top: 1%;
+      left: 86.5%;
+      top: 2%;
 
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      width: 30px;
+      height: 30px;
     }
 
     .creat_post__form {
@@ -32,12 +32,32 @@
       border-radius: 10px;
 
       .header {
+        position: relative;
         height: 50px;
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         border-bottom: 1px solid $border-color-grey;
+
+        .btn_next {
+          position: absolute;
+          top: 15px;
+          right: 10px;
+          opacity: 0.5;
+          color: $link-color;
+          background-color: white;
+          border: none;
+          font-size: 0.9rem;
+          font-weight: 700;
+
+          cursor: pointer;
+
+          &.true {
+            opacity: 1;
+            // color: $link-color;
+          }
+        }
       }
 
       .create_form {
@@ -51,6 +71,7 @@
         border-radius: 10px;
         .create_form__btn {
           margin-top: 5px;
+          margin-bottom: 5px;
           color: $background-white;
           background-color: $link-color;
           font-family: inherit;
@@ -74,16 +95,6 @@
     height: 800px !important;
   }
 }
-
-//     .btn_next {
-//       position: absolute;
-//       top: 15px;
-//       right: 10px;
-//       color: $link-color;
-//       font-weight: 700;
-//       // font-size: 1em;
-//       cursor: pointer;
-//     }
 
 //   .create_form {
 //     display: flex;
