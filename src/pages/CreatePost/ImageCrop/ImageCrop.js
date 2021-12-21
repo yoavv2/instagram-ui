@@ -31,8 +31,7 @@ function ImageCrop({ displayedImages, index, setAspectRatio, aspectRatio }) {
   const cropComplete = useCallback(
     async (e) => {
       e.preventDefault();
-      // console.log("displayed", displayedImages);
-      // console.log("befor upload", images);
+
       const croppedImage = await getCroppedImg(
         displayedImages,
         croppedAreaPixels

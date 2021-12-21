@@ -7,14 +7,12 @@ import { getFeed } from "../../service/post.service";
 
 function Feed() {
   const [posts, setPosts] = useState([]);
-  
 
   useEffect(() => {
     const getPosts = async () => {
       try {
         const cards = await getFeed();
         setPosts(cards.slice(0).reverse());
-        console.log(`fuckk`);
       } catch (err) {
         console.log(err);
       }

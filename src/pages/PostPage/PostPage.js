@@ -18,12 +18,15 @@ import { getOnePost } from "../../service/post.service";
 function PostPage() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
+  const [likesCount, setLikesCount] = useState(null);
   const ref = useRef(null);
+
   useEffect(() => {
     async function initPost() {
       const res = await getOnePost(id);
       console.log("res", res);
       setPost(res);
+      setLikesCount(res.likes.length);
     }
     initPost();
   }, [id]);
@@ -41,7 +44,8 @@ function PostPage() {
     };
     fetchComments();
   }, [id]);
-  const [likesCount, setLikesCount] = useState(post?.likes.length);
+
+  console.log(`likesCount`, likesCount);
 
   const handleLikes = (operator) => {
     if (operator === "+") setLikesCount((likesCount) => likesCount + 1);
@@ -92,19 +96,34 @@ function PostPage() {
             <div className="postPage_comments">
               <ScrollArea.Root>
                 <ScrollArea.Viewport className="comments_viewport">
+                  <div className="postPage_body">
+                    <Avatar
+                      image={post.author.avatar}
+                      storyBorder={true}
+                      iconSize="xsm"
+                    />
+                    <p>
+                      <strong>{post.author.username}</strong>
+                    </p>
+                    <p>{post.body}</p>
+                  </div>
                   {comments.length > 0 &&
                     comments.map((comment, i) => {
                       return (
-                        <div
-                          key={i}
-                          className="comment"
-                          style={{ display: "flex", alignItems: "center" }}
-                        >
+                        <div key={i} className="postPage_comment">
                           <Link to={"/profile/" + comment.author.username}>
-                            <strong>{comment.author.fullname}</strong>
+                            <Avatar
+                              image={comment.author.avatar}
+                              storyBorder={false}
+                              iconSize="xsm"
+                            />
+                            <p>
+                              <strong>{comment.author.username}</strong>
+                              {comment.content}
+                            </p>
                           </Link>
-                          <p style={{ marginLeft: "5px" }}>{comment.content}</p>
-                          <strong>
+
+                          <p className="time_commented">
                             {moment(comment.createdAt)
                               .fromNow(true)
                               .replace("a few", "")
@@ -117,7 +136,7 @@ function PostPage() {
                               .replace(" hours", "h")
                               .replace(" hour", "h")
                               .replace("an", "1")}
-                          </strong>
+                          </p>
                         </div>
                       );
                     })}
@@ -151,7 +170,7 @@ function PostPage() {
                   .replace(" hours", " HOURS")
                   .replace(" hour", " HOUR")
                   .replace("an", "1")}
-                AGO
+                _AGO
               </div>
             </div>
             <form className="add_comment__form" onSubmit={submit}>
@@ -160,11 +179,7 @@ function PostPage() {
                   <Emoji />
                 </DropdownMenu.Trigger>
 
-                <DropdownMenu.Content
-                  side="right"
-                  side="top"
-                  className="emoji_content"
-                >
+                <DropdownMenu.Content side="top" className="emoji_content">
                   <DropdownMenu.Item>
                     <Picker
                       onEmojiClick={onEmojiClick}

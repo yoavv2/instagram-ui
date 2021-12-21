@@ -96,8 +96,12 @@ function Card({ data: post }) {
             </div>
           )}
         </div>
-        <div className="Post_content">
-          <h1 className="Post_description">{post.body}</h1>
+
+        <div className="post_content">
+          <p>
+            <strong>{post.author.username}</strong>
+          </p>
+          <p>{post.body}</p>
         </div>
         {comments.length > 2 && (
           <Link to={"/post/" + post._id} className="view_comments_link">
@@ -108,15 +112,14 @@ function Card({ data: post }) {
           {comments.length > 0 &&
             comments.slice(0, 2).map((comment, i) => {
               return (
-                <div
-                  key={i}
-                  className="comment"
-                  style={{ display: "flex", alignItems: "center" }}
-                >
+                <div key={i} className="comment">
                   <Link to={"/profile/" + comment.author.username}>
-                    <strong>{comment.author.fullname}</strong>
+                    <p>
+                      <strong>{comment.author.username}</strong>
+                      {comment.content}
+                    </p>
                   </Link>
-                  <p style={{ marginLeft: "5px" }}>{comment.content}</p>
+
                   <strong>
                     {moment(comment.createdAt)
                       .fromNow(true)
@@ -159,8 +162,8 @@ function Card({ data: post }) {
             </DropdownMenu.Trigger>
 
             <DropdownMenu.Content
-              side="right"
               side="top"
+              // side="top"
               className="emoji_content"
             >
               <DropdownMenu.Item>
@@ -173,7 +176,9 @@ function Card({ data: post }) {
                   native
                 />
               </DropdownMenu.Item>
-              <DropdownMenu.Arrow className="dropDown_arrow" />
+              <DropdownMenu.Arrow
+                style={{ fill: "#fff", width: 20, height: 10 }}
+              />
             </DropdownMenu.Content>
           </DropdownMenu.Root>
 

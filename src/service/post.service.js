@@ -20,7 +20,7 @@ async function create(post) {
       // console.log(`imageFile`, imageFile);
       form.append("images", imageFile);
     });
-    form.append("description", post.description);
+    form.append("body", post.body);
     const res = await fetch(config.apiUrl + "/post", {
       method: "POST",
       body: form,
