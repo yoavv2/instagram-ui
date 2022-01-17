@@ -97,10 +97,10 @@ function Navigation() {
                 </ScrollArea.Viewport>
 
                 <ScrollArea.Scrollbar orientation="vertical">
-                  <ScrollArea.Thumb className="scrolbar_tumb" />
+                  <ScrollArea.Thumb className="scrollbar_thumb" />
                 </ScrollArea.Scrollbar>
                 <ScrollArea.Scrollbar orientation="horizontal">
-                  <ScrollArea.Thumb className="scrolbar_tumb" />
+                  <ScrollArea.Thumb className="scrollbar_thumb" />
                 </ScrollArea.Scrollbar>
                 <ScrollArea.Corner />
               </ScrollArea.Root>

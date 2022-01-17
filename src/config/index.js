@@ -1,9 +1,9 @@
 import { development } from "./development";
 import { production } from "./production";
 
-let enviroment = development;
+let environment = development;
 if (process.env.NODE_ENV === "production") {
-  enviroment = production;
+  environment = production;
 }
 
-export default enviroment;
+export default environment;

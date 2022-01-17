@@ -6,7 +6,7 @@ function IconsValidate(props) {
     <span>
       {props.isTouch ? (
         !props.err ? (
-          <span className={"succes-icon"}>
+          <span className={"success-icon"}>
             <ion-icon name="checkmark-circle-outline"></ion-icon>
           </span>
         ) : (

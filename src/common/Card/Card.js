@@ -81,7 +81,7 @@ function Card({ data: post }) {
 
       <CardMenu handleLikes={handleLikes} post={post} className="card_menu" />
 
-      <div className="card_detales">
+      <div className="card_details">
         <div className="likes_count">
           <strong>{likesCount} likes</strong>
 
@@ -143,8 +143,8 @@ function Card({ data: post }) {
           {moment(post.createdAt)
             .fromNow(true)
             .replace("a few", "")
-            .replace(" minutes", " MINUITES")
-            .replace(" minute", " MINUITE")
+            .replace(" minutes", " MINUTES")
+            .replace(" minute", " MINUTE")
             .replace(" seconds", "SECONDS")
             .replace(" second", " SECOND")
             .replace(" days", " DAYS")
