@@ -19,7 +19,9 @@ the Project includes 6 pages:
 - profile page,
 - create-post page 
 
-the goal of this project was to combine all the technologies and concepts I learned into a one big project.
+the goal of this project was to combine all the technologies and concepts I learned into one big project.
+
+I chose to copy the Instagram UI design because I wanted to focus more on the app logic and less on the design.
 
 # The Stack and Explanation
   
