@@ -1,19 +1,19 @@
-import React, { useEffect, useRef, useState, createContext } from "react";
+import React, { useEffect, useRef, useState, createContext } from 'react';
 
-import { useHistory } from "react-router-dom";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import * as Dialog from "@radix-ui/react-dialog";
+import { useHistory } from 'react-router-dom';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import * as Dialog from '@radix-ui/react-dialog';
 
-import "./CreatePost.scss";
+import './CreatePost.scss';
 
-import Exitbtn from "../../common/Exitbtn/Exitbtn";
-import DropZoneCreate from "./DropZoneCreate/DropZoneCreate";
-import ImageCrop from "./ImageCrop/ImageCrop";
+import Exitbtn from '../../common/Exitbtn/Exitbtn';
+import DropZoneCreate from './DropZoneCreate/DropZoneCreate';
+import ImageCrop from './ImageCrop/ImageCrop';
 
-import { create } from "../../service/post.service";
-import { ReactComponent as Prev } from "../../images/prev.svg";
+import { create } from '../../service/post.service';
+import { ReactComponent as Prev } from '../../images/prev.svg';
 
 export const PostCreateContext = createContext([]);
 
@@ -23,7 +23,7 @@ function CreatePost() {
 
   const [images, setImages] = useState([]);
 
-  const [body, setBody] = useState("");
+  const [body, setBody] = useState('');
   const [step, setStep] = useState(0);
   // const [isClicked, setIsClicked] = useState(false);
 
@@ -41,7 +41,7 @@ function CreatePost() {
         body,
       };
 
-      await create(formToSubmit).then(() => history.push("/"));
+      await create(formToSubmit).then(() => history.push('/'));
     } catch (err) {
       console.log(err);
     }
@@ -54,7 +54,7 @@ function CreatePost() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    className: "carousel_create",
+    className: 'carousel_create',
   };
 
   const handelNextPage = () => {
@@ -77,7 +77,7 @@ function CreatePost() {
   const Croping = () => (
     <Slider {...settings}>
       {images.map((image, i) => (
-        <div key={i} className="image_crop_wrap">
+        <div key={i} className='image_crop_wrap'>
           <ImageCrop
             image={image}
             index={i}
@@ -100,33 +100,33 @@ function CreatePost() {
       handleTextChange(text);
     };
     return (
-      <div className="post_description">
+      <div className='post_description'>
         <Slider {...settings}>
           {images.map((image, i) => (
-            <div key={i} className="image_preview">
-              <img src={image} alt="preview" style={{ maxWidth: 600 }} />
+            <div key={i} className='image_preview'>
+              <img src={image} alt='preview' style={{ maxWidth: 600 }} />
             </div>
           ))}
         </Slider>
 
-        <Dialog.Root className="post_description__dialog_root">
+        <Dialog.Root className='post_description__dialog_root'>
           <Dialog.Trigger
             style={{
-              all: "unset",
-              width: "70%",
-              color: "#0095f6",
-              background: "#fff",
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
+              all: 'unset',
+              width: '70%',
+              color: '#0095f6',
+              background: '#fff',
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
               borderRadius: 4,
-              padding: "0 15px",
+              padding: '0 15px',
               fontSize: 15,
               lineHeight: 1,
               fontWeight: 500,
               height: 30,
               boxShadow: `0 0 0 1px #dbdbdb`,
-              cursor: "pointer",
+              cursor: 'pointer',
             }}
           >
             <div>Write a caption...</div>
@@ -134,23 +134,23 @@ function CreatePost() {
 
           <Dialog.Overlay />
           <Dialog.Content
-            className="dialog__content"
+            className='dialog__content'
             style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "white",
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'white',
               borderRadius: 6,
               boxShadow:
-                "hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px",
-              position: "fixed",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: "90vw",
-              maxWidth: "450px",
-              height: "35vh",
+                'hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px',
+              position: 'fixed',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              width: '90vw',
+              maxWidth: '450px',
+              height: '35vh',
               padding: 25,
             }}
           >
@@ -159,38 +159,38 @@ function CreatePost() {
 
             <textarea
               ref={textAreaRef}
-              name="textArea"
-              spellCheck="false"
+              name='textArea'
+              spellCheck='false'
               style={{
-                all: "unset",
-                width: "100%",
-                flex: "1",
-                display: "inline-flex",
-                alignItems: "center",
-                justifyContent: "center",
+                all: 'unset',
+                width: '100%',
+                flex: '1',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
                 borderRadius: 4,
-                padding: "0 10px",
+                padding: '0 10px',
                 fontSize: 15,
                 lineHeight: 1,
-                color: "#262626",
+                color: '#262626',
                 boxShadow: `0 0 0 1px #dbdbdb`,
                 height: 400,
               }}
             />
-            <Dialog.Close style={{ background: "#fff", all: "unset" }}>
+            <Dialog.Close style={{ background: '#fff', all: 'unset' }}>
               <button
-                aria-label="Close"
-                type="submit"
+                aria-label='Close'
+                type='submit'
                 onClick={submitCaption}
                 style={{
-                  all: "unset",
-                  color: "#0095f6",
-                  background: "#fff",
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  all: 'unset',
+                  color: '#0095f6',
+                  background: '#fff',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                   borderRadius: 4,
-                  padding: "0 15px",
+                  padding: '0 15px',
                   fontSize: 15,
                   lineHeight: 1,
                   fontWeight: 500,
@@ -210,14 +210,14 @@ function CreatePost() {
 
   return (
     <PostCreateContext.Provider value={{ images, setImages, step, setStep }}>
-      <div className="create_post__wrapper">
-        <Exitbtn className="btn-exit" />
+      <div className='create_post__wrapper'>
+        <Exitbtn className='btn-exit' />
 
-        <div className="creat_post__form">
-          <div className="header">
+        <div className='creat_post__form'>
+          <div className='header'>
             {step > 1 && (
               <button className={`btn_prev`} onClick={handlePrev}>
-                <Prev className="icon_prev" />
+                <Prev className='icon_prev' />
               </button>
             )}
             <h3>Create post</h3>
@@ -231,7 +231,7 @@ function CreatePost() {
               </button>
             )}
           </div>
-          <form className="create_form" onSubmit={submit}>
+          <form className='create_form' onSubmit={submit}>
             {step == 0 && (
               <DropZoneCreate setDisplayedImages={setDisplayedImages} />
             )}
@@ -243,7 +243,7 @@ function CreatePost() {
               />
             )}
             {step == 3 && (
-              <button type="submit" className={`btn_share`}>
+              <button type='submit' className={`btn_share`}>
                 share
               </button>
             )}
