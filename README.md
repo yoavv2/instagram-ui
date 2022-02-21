@@ -26,11 +26,13 @@ the goal of this project was to combine all the technologies and concepts I lear
 
 I chose to copy the Instagram UI design because I wanted to focus more on the app logic and less on the design.
 
+still, I built the design using SCSS and not UI framework.
 # The Stack and Explanation
   
- - React,
- - Context API,
- - SCSS,
+ - React
+ - Context API
+ - SCSS
+
  
  # Problems and Throught Process
   
@@ -39,6 +41,7 @@ As my first large project using react I ran into a few bumps along the way,
 one particularly difficult area was the organization and structure of the code. 
 
 Because of this project size, I realize how important maintaining an organized structure would be.
+
 
 
 
