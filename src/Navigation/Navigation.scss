@@ -1,4 +1,4 @@
-@import "../styles/variables";
+@import '../styles/variables';
 
 .navigation {
   display: flex;
@@ -34,7 +34,7 @@
       outline: none;
       padding-left: 20%;
     }
-    .search-lable {
+    .search-label {
       position: absolute;
 
       top: 10%;
@@ -87,12 +87,12 @@
       z-index: 1;
       animation: scale-in 0.3s ease-out;
     }
-    .serach_result__border {
+    .search_result__border {
       margin: 10px 150px;
     }
   }
 
-  .search:focus + .search-lable {
+  .search:focus + .search-label {
     transform: translate(-120%, 0%);
     .search-icon {
       display: none;
@@ -103,7 +103,7 @@
       display: block !important;
     }
   }
-  .search:valid + .search-lable {
+  .search:valid + .search-label {
     display: none;
   }
   .insta-logo {
@@ -139,7 +139,7 @@
 @media only screen and (max-width: 530px) {
   .search,
   .search-icon,
-  .search-lable,
+  .search-label,
   .search_result__viewport,
   .search_result {
     overflow: hidden;

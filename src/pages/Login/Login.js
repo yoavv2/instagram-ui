@@ -15,12 +15,15 @@ function Login() {
   const STATE_MACHINE_NAME = "State Machine 1";
   const history = useHistory();
   const { setUser } = useContext(UserContext);
+ 
+ 
   const { rive, RiveComponent } = useRive({
     src: BearLogin,
     // animations: "Correct",
     stateMachines: STATE_MACHINE_NAME,
     autoplay: true,
   });
+  
   const onError = useStateMachineInput(rive, STATE_MACHINE_NAME, "Incorrect");
   const onSucsess = useStateMachineInput(rive, STATE_MACHINE_NAME, "Correct");
   // const { loggedIn, setLoggedIn } = useContext(UserContext);

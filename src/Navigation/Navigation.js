@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import * as ScrollArea from "@radix-ui/react-scroll-area";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import * as ScrollArea from '@radix-ui/react-scroll-area';
 
-import "./Navigation.scss";
-import Menu from "../common/Menu/Menu";
+import './Navigation.scss';
+import Menu from '../common/Menu/Menu';
 
-import { search } from "../service/user.service";
-import SearchResult from "./SearchResult/SearchResult";
-import { ReactComponent as Insta } from "../images/insta-logo-small.svg";
+import { search } from '../service/user.service';
+import SearchResult from './SearchResult/SearchResult';
+import { ReactComponent as Insta } from '../images/insta-logo-small.svg';
 
 function Navigation() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [isClicked, setIsClicked] = useState(false);
 
@@ -24,6 +24,7 @@ function Navigation() {
     let timeout = setTimeout(async () => {
       await search(query).then((results) => setResults(results));
     }, 1000);
+
     return () => {
       clearTimeout(timeout);
       // setQuery("");
@@ -35,32 +36,32 @@ function Navigation() {
       setIsClicked(false);
       // setQuery("");
     };
-    document.addEventListener("click", clickHandler);
+    document.addEventListener('click', clickHandler);
     return () => {
-      document.removeEventListener("click", clickHandler);
+      document.removeEventListener('click', clickHandler);
     };
   }, []);
 
   return (
-    <div className="navigation">
-      <div className="nav_container">
-        <Link to={"/"} className="logo_wrap">
+    <div className='navigation'>
+      <div className='nav_container'>
+        <Link to={'/'} className='logo_wrap'>
           <img
-            className="insta-logo"
-            src="/images/insta-logo.png"
-            alt="instagram logo"
+            className='insta-logo'
+            src='/images/insta-logo.png'
+            alt='instagram logo'
           />
-          <Insta className="insta-logo-small" />
+          <Insta className='insta-logo-small' />
         </Link>
 
         <form
-          onSubmit={() => setQuery("")}
-          className="search-wrap"
-          role="search"
+          onSubmit={() => setQuery('')}
+          className='search-wrap'
+          role='search'
         >
           <input
-            className="search"
-            type="text"
+            className='search'
+            type='text'
             onClick={(e) => {
               e.stopPropagation();
 
@@ -72,45 +73,45 @@ function Navigation() {
             required
           />
 
-          <label className="search-lable">
-            <span className="search-icon">
-              <ion-icon name="search-outline"></ion-icon>
+          <label className='search-label'>
+            <span className='search-icon'>
+              <ion-icon name='search-outline'></ion-icon>
             </span>
-            <span className="search-text">search</span>
+            <span className='search-text'>search</span>
           </label>
           {isClicked ? (
             <>
               <ScrollArea.Root>
                 <ScrollArea.Viewport
-                  className="search_result__viewport"
+                  className='search_result__viewport'
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <div className="serach_result__border">results</div>
+                  <div className='search_result__border'>results</div>
                   {results.map((result) => (
                     <SearchResult
                       onClose={() => setIsClicked(false)}
-                      className="search_result"
+                      className='search_result'
                       user={result}
                       key={result._id}
                     />
                   ))}
                 </ScrollArea.Viewport>
 
-                <ScrollArea.Scrollbar orientation="vertical">
-                  <ScrollArea.Thumb className="scrollbar_thumb" />
+                <ScrollArea.Scrollbar orientation='vertical'>
+                  <ScrollArea.Thumb className='scrollbar_thumb' />
                 </ScrollArea.Scrollbar>
-                <ScrollArea.Scrollbar orientation="horizontal">
-                  <ScrollArea.Thumb className="scrollbar_thumb" />
+                <ScrollArea.Scrollbar orientation='horizontal'>
+                  <ScrollArea.Thumb className='scrollbar_thumb' />
                 </ScrollArea.Scrollbar>
                 <ScrollArea.Corner />
               </ScrollArea.Root>
             </>
           ) : (
-            " "
+            ' '
           )}
         </form>
 
-        <div className="nav-menu">
+        <div className='nav-menu'>
           <Menu />
         </div>
       </div>
