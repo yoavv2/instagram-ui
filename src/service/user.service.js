@@ -1,52 +1,137 @@
 import config from "../config/index";
 
 async function register(user) {
-  const res = await fetch(config.apiUrl + "/user", {
-    method: "POST",
-    body: JSON.stringify(user),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  return res.json();
+  try {
+    const res = await fetch(config.apiUrl + "/user", {
+      method: "POST",
+      body: JSON.stringify(user),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!res.ok) {
+      const contentType = res.headers.get('content-type');
+      let error;
+      if (contentType && contentType.includes('application/json')) {
+        error = await res.json();
+        console.error('Registration failed:', error);
+      } else {
+        const text = await res.text();
+        console.error('Registration failed with non-JSON response:', text);
+        error = { message: 'Server error' };
+      }
+      throw new Error(error.message || 'Failed to register');
+    }
+    return await res.json();
+  } catch (err) {
+    console.error('Registration error:', err);
+    throw err;
+  }
 }
 
 async function login({ username, password }) {
-  const res = await fetch(`${config.apiUrl}/login`, {
-    method: "POST",
-    body: JSON.stringify({ username, password }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  return await res.json();
+  try {
+    const res = await fetch(`${config.apiUrl}/login`, {
+      method: "POST",
+      body: JSON.stringify({ username, password }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!res.ok) {
+      const contentType = res.headers.get('content-type');
+      let error;
+      if (contentType && contentType.includes('application/json')) {
+        error = await res.json();
+        console.error('Login failed:', error);
+      } else {
+        const text = await res.text();
+        console.error('Login failed with non-JSON response:', text);
+        error = { message: 'Server error' };
+      }
+      throw new Error(error.message || 'Failed to login');
+    }
+    return await res.json();
+  } catch (err) {
+    console.error('Login error:', err);
+    throw err;
+  }
 }
+
 async function checkAvailabilityUser(username) {
-  const res = await fetch(`${config.apiUrl}/user/available`, {
-    method: "POST",
-    body: JSON.stringify({ username }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const isAvailable = await res.json();
-  return isAvailable;
+  console.log('Checking username availability:', username);
+  try {
+    const res = await fetch(`${config.apiUrl}/user/available`, {
+      method: "POST",
+      body: JSON.stringify({ username }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    if (!res.ok) {
+      const contentType = res.headers.get('content-type');
+      let error;
+      if (contentType && contentType.includes('application/json')) {
+        error = await res.json();
+        console.error('Username availability check failed:', error);
+      } else {
+        const text = await res.text();
+        console.error('Username availability check failed with non-JSON response:', text);
+        error = { message: 'Server error' };
+      }
+      throw new Error(error.message || 'Failed to check username availability');
+    }
+    return await res.json();
+  } catch (err) {
+    console.error('Username availability check error:', err);
+    throw err;
+  }
 }
 
 async function me() {
+  console.log('me() service called');
   const token = localStorage.getItem("token");
+  console.log('Token from localStorage:', token);
+  
   if (!token) {
+    console.log('No token found in localStorage');
     return {};
   }
 
-  const res = await fetch(config.apiUrl + "/user/me", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token,
-    },
-  });
-  return res.json();
+  try {
+    console.log('Making request to /user/me');
+    const res = await fetch(config.apiUrl + "/user/me", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`  
+      },
+    });
+    
+    console.log('Response status:', res.status);
+    console.log('Response headers:', Object.fromEntries(res.headers.entries()));
+    
+    if (!res.ok) {
+      const contentType = res.headers.get('content-type');
+      let error;
+      if (contentType && contentType.includes('application/json')) {
+        error = await res.json();
+        console.error('Me request failed with JSON response:', error);
+      } else {
+        const text = await res.text();
+        console.error('Me request failed with text response:', text);
+        error = { message: text || 'Server error' };
+      }
+      throw new Error(error.message);
+    }
+    
+    const data = await res.json();
+    console.log('Me request successful, data:', data);
+    return data;
+  } catch (err) {
+    console.error('Me request error:', err);
+    throw err;
+  }
 }
 
 async function getUser(username) {
@@ -54,42 +139,161 @@ async function getUser(username) {
   if (!token) {
     return {};
   }
-  const res = await fetch(config.apiUrl + "/user/" + username, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: token,
-    },
-  });
-  return res.json();
+
+  try {
+    const res = await fetch(config.apiUrl + "/user/" + username, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (!res.ok) {
+      const contentType = res.headers.get('content-type');
+      let error;
+      if (contentType && contentType.includes('application/json')) {
+        error = await res.json();
+        console.error('Get user request failed:', error);
+      } else {
+        const text = await res.text();
+        console.error('Get user request failed with non-JSON response:', text);
+        error = { message: 'Server error' };
+      }
+      throw new Error(error.message || 'Failed to get user data');
+    }
+    return await res.json();
+  } catch (err) {
+    console.error('Get user request error:', err);
+    throw err;
+  }
 }
+
 async function search(query) {
-  const res = await fetch(config.apiUrl + "/search/user/" + query, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: localStorage.getItem("token"),
-    },
-  });
-  return res.json();
+  try {
+    const res = await fetch(config.apiUrl + "/search/user/" + query, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    if (!res.ok) {
+      const contentType = res.headers.get('content-type');
+      let error;
+      if (contentType && contentType.includes('application/json')) {
+        error = await res.json();
+        console.error('Search request failed:', error);
+      } else {
+        const text = await res.text();
+        console.error('Search request failed with non-JSON response:', text);
+        error = { message: 'Server error' };
+      }
+      throw new Error(error.message || 'Failed to search users');
+    }
+    return await res.json();
+  } catch (err) {
+    console.error('Search request error:', err);
+    throw err;
+  }
 }
+
 async function follow(username) {
-  return fetch(config.apiUrl + "/user/" + username + "/follow", {
-    method: "POST",
-    headers: {
-      "Content-type": "application/jason",
-      Authorization: localStorage.getItem("token"),
-    },
-  });
+  try {
+    const res = await fetch(config.apiUrl + "/user/" + username + "/follow", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    if (!res.ok) {
+      const contentType = res.headers.get('content-type');
+      let error;
+      if (contentType && contentType.includes('application/json')) {
+        error = await res.json();
+        console.error('Follow request failed:', error);
+      } else {
+        const text = await res.text();
+        console.error('Follow request failed with non-JSON response:', text);
+        error = { message: 'Server error' };
+      }
+      throw new Error(error.message || 'Failed to follow user');
+    }
+    return await res.json();
+  } catch (err) {
+    console.error('Follow request error:', err);
+    throw err;
+  }
 }
+
 async function unfollow(username) {
-  return fetch(config.apiUrl + "/user/" + username + "/unfollow", {
-    method: "POST",
-    headers: {
-      "Content-type": "application/jason",
-      Authorization: localStorage.getItem("token"),
-    },
-  });
+  try {
+    const res = await fetch(config.apiUrl + "/user/" + username + "/unfollow", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    if (!res.ok) {
+      const contentType = res.headers.get('content-type');
+      let error;
+      if (contentType && contentType.includes('application/json')) {
+        error = await res.json();
+        console.error('Unfollow request failed:', error);
+      } else {
+        const text = await res.text();
+        console.error('Unfollow request failed with non-JSON response:', text);
+        error = { message: 'Server error' };
+      }
+      throw new Error(error.message || 'Failed to unfollow user');
+    }
+    return await res.json();
+  } catch (err) {
+    console.error('Unfollow request error:', err);
+    throw err;
+  }
+}
+
+async function updateAvatar(file) {
+  console.log('Sending avatar update request with file:', file);
+  const formData = new FormData();
+  formData.append('avatar', file);
+
+  try {
+    console.log('Headers:', {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`
+    });
+    
+    const res = await fetch(`${config.apiUrl}/user/avatar`, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+    
+    if (!res.ok) {
+      const contentType = res.headers.get('content-type');
+      let error;
+      if (contentType && contentType.includes('application/json')) {
+        error = await res.json();
+        console.error('Avatar update failed:', error);
+      } else {
+        const text = await res.text();
+        console.error('Avatar update failed with non-JSON response:', text);
+        error = { message: 'Server error' };
+      }
+      throw new Error(error.message || 'Failed to update avatar');
+    }
+    
+    const data = await res.json();
+    console.log('Avatar update response:', data);
+    return data;
+  } catch (err) {
+    console.error('Avatar update error:', err);
+    throw err;
+  }
 }
 
 export {
@@ -101,4 +305,5 @@ export {
   search,
   follow,
   unfollow,
+  updateAvatar
 };

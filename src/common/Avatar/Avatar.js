@@ -1,23 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import { createAvatar } from "@dicebear/avatars";
-// import * as style from "@dicebear/avatars-bottts-sprites";
 import "./Avatar.scss";
 
-function Avatar(props) {
-  const { iconSize, image, storyBorder } = props;
+function Avatar({ iconSize, image, storyBorder, onClick, style, className }) {
+  const handleClick = (e) => {
+    e.stopPropagation();
+    if (onClick) {
+      onClick(e);
+    }
+  };
 
   return (
-    <div className={storyBorder ? "storyBorder" : ""}>
-    {/* <div className={"avatar_wrapp "}> */}
-      <img className={`avatar  ${iconSize}`} src={image} alt="profile" />
-      {/* <div
-          dangerouslySetInnerHTML={{
-            __html: createAvatar(style, { seed: }),
-          }}
-        /> */}
-    {/* </div> */}
-     </div>
+    <div 
+      className={`avatar-wrapper ${storyBorder ? "storyBorder" : ""}`}
+      onClick={handleClick}
+    >
+      <img 
+        className={`avatar ${iconSize} ${className || ''}`} 
+        src={image} 
+        alt="profile" 
+        style={style}
+      />
+    </div>
   );
 }
 
@@ -25,6 +29,9 @@ Avatar.propTypes = {
   image: PropTypes.string,
   storyBorder: PropTypes.bool,
   iconSize: PropTypes.oneOf(["xsm", "sm", "md", "lg", "xlg"]),
+  onClick: PropTypes.func,
+  style: PropTypes.object,
+  className: PropTypes.string
 };
 
 export default Avatar;

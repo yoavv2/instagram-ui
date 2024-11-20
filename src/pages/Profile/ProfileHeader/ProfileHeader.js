@@ -12,6 +12,7 @@ import {
   follow,
   unfollow,
   me as getMyself,
+  updateAvatar
 } from "../../../service/user.service";
 import { UserContext } from "../../../App";
 
@@ -23,6 +24,11 @@ function ProfileHeader({ username, postNum }) {
   const isFollowing = useMemo(() => {
     return me?.following?.includes(user._id);
   }, [user, me]);
+
+  const isMyProfile = useMemo(() => {
+    console.log('Checking if profile is mine:', { username, myUsername: me?.username });
+    return me?.username === username;
+  }, [me, username]);
 
   const handleFollow = useCallback(() => {
     follow(username).then(() => {
@@ -42,6 +48,38 @@ function ProfileHeader({ username, postNum }) {
     });
   }, [username, setMe]);
 
+  const handleAvatarClick = useCallback((e) => {
+    console.log('Avatar clicked, isMyProfile:', isMyProfile);
+    if (!isMyProfile) {
+      console.log('Not my profile, ignoring click');
+      return;
+    }
+    
+    console.log('Opening file picker');
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      console.log('File selected:', file.name);
+      try {
+        const updatedUser = await updateAvatar(file);
+        console.log('Avatar updated:', updatedUser);
+        setUser(updatedUser);
+        setMe(updatedUser);
+        
+        // Refresh the user data to get the new avatar
+        const refreshedUser = await getUser(username);
+        setUser(refreshedUser);
+      } catch (err) {
+        console.error('Failed to update avatar:', err);
+      }
+    };
+    input.click();
+  }, [isMyProfile, setMe, username]);
+
   useEffect(() => {
     async function initUser() {
       const user = await getUser(username);
@@ -55,7 +93,14 @@ function ProfileHeader({ username, postNum }) {
     <div className="profileHeader">
       <div className="profile_avatar">
         <p className="avatar_username">{user.username}</p>
-        <Avatar className="avatar_icon" iconSize="xlg" image={user.avatar} />
+        <div className="avatar-container" style={{ cursor: isMyProfile ? 'pointer' : 'default' }}>
+          <Avatar 
+            className="avatar_icon" 
+            iconSize="xlg" 
+            image={user.avatar} 
+            onClick={handleAvatarClick}
+          />
+        </div>
         <h2 className="avatar_fullname">{user.fullname}</h2>
       </div>
       <div className="header_detale">
@@ -91,7 +136,7 @@ function ProfileHeader({ username, postNum }) {
           </p>
           <p className="info_follwoers">
             <strong>{folowersCount}</strong> <br />
-            Follwoers
+            Followers
           </p>
           <p className="info_following">
             <strong>{user?.following?.length}</strong> <br />

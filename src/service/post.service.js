@@ -39,26 +39,58 @@ async function getFeed() {
 }
 
 async function getOnePost(postId) {
-  const res = await fetch(config.apiUrl + "/post/" + postId, {
-    method: "GET",
-    headers: {
-      Authorization: localStorage.getItem("token"),
-    },
-  });
-  return res.json();
+  const token = localStorage.getItem("token");
+  if (!token) {
+    console.error('No token found');
+    return null;
+  }
+
+  try {
+    const res = await fetch(config.apiUrl + "/post/" + postId, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) {
+      console.error('Failed to fetch post:', res.status, res.statusText);
+      return null;
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error('Error fetching post:', err);
+    return null;
+  }
 }
+
 async function getPosts(username) {
   const token = localStorage.getItem("token");
   if (!token) return [];
 
-  const res = await fetch(config.apiUrl + "/user/" + username + "/post", {
-    method: "GET",
-    headers: {
-      Authorization: token,
-    },
-  });
-  return res.json();
+  try {
+    const res = await fetch(config.apiUrl + "/user/" + username + "/post", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    
+    if (!res.ok) {
+      console.error('Failed to fetch posts:', res.status, res.statusText);
+      return [];
+    }
+    
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch (err) {
+    console.error('Error fetching posts:', err);
+    return [];
+  }
 }
+
 function postLike(postId) {
   return fetch(config.apiUrl + "/post/" + postId + "/like", {
     method: "POST",
@@ -86,6 +118,7 @@ async function getComments(postId) {
   });
   return res.json();
 }
+
 async function createComment(postId, content) {
   console.log(`postId, content`, postId, content);
   const res = await fetch(config.apiUrl + "/post/" + postId + "/comment", {

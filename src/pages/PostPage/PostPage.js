@@ -18,208 +18,229 @@ import { getOnePost } from "../../service/post.service";
 function PostPage() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
-  const [likesCount, setLikesCount] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [likesCount, setLikesCount] = useState(0);
+  const [comments, setComments] = useState([]);
+  const [commentValue, setCommentValue] = useState("");
   const ref = useRef(null);
 
   useEffect(() => {
     async function initPost() {
-      const res = await getOnePost(id);
-      console.log("res", res);
-      setPost(res);
-      setLikesCount(res.likes.length);
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await getOnePost(id);
+        
+        if (!data) {
+          setError('Post not found');
+          return;
+        }
+        
+        setPost(data);
+        setLikesCount(data.likes?.length || 0);
+        
+        // Fetch comments
+        const comments = await getComments(id);
+        setComments(Array.isArray(comments) ? comments.slice(0).reverse() : []);
+      } catch (err) {
+        console.error('Error loading post:', err);
+        setError('Failed to load post');
+      } finally {
+        setLoading(false);
+      }
     }
     initPost();
   }, [id]);
 
-  const [comments, setComments] = useState([]);
-  const [commentValue, setCommentValue] = useState("");
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        const comments = await getComments(id);
-        setComments(comments.slice(0).reverse());
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchComments();
-  }, [id]);
-
-  console.log(`likesCount`, likesCount);
-
   const handleLikes = (operator) => {
-    if (operator === "+") setLikesCount((likesCount) => likesCount + 1);
-    if (operator === "-") setLikesCount((likesCount) => likesCount - 1);
+    if (operator === "+") setLikesCount((prev) => prev + 1);
+    if (operator === "-") setLikesCount((prev) => Math.max(0, prev - 1));
   };
 
   const onEmojiClick = (event, emojiObject) => {
-    console.log(`chosenEmoji`, emojiObject.emoji);
     const cursor = ref.current.selectionStart;
     const text =
       commentValue.slice(0, cursor) +
       emojiObject.emoji +
       commentValue.slice(cursor);
-
     setCommentValue(text);
   };
+
   const submit = useCallback(
     async (e) => {
       e.preventDefault();
-      const newComment = await createComment(id, commentValue);
-      console.log("new comment", newComment);
-      setComments([newComment, ...comments]);
-      setCommentValue("");
+      if (!commentValue.trim()) return;
+      
+      try {
+        const newComment = await createComment(id, commentValue);
+        if (newComment) {
+          setComments(prev => [newComment, ...prev]);
+          setCommentValue("");
+        }
+      } catch (err) {
+        console.error('Error creating comment:', err);
+      }
     },
-    [id, commentValue, comments]
+    [id, commentValue]
   );
+
+  if (loading) {
+    return (
+      <div className="postPage_wrap">
+        <div className="loading">Loading...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="postPage_wrap">
+        <div className="error">{error}</div>
+      </div>
+    );
+  }
+
+  if (!post) {
+    return (
+      <div className="postPage_wrap">
+        <div className="error">Post not found</div>
+      </div>
+    );
+  }
+
   return (
     <div className="postPage_wrap">
       <Exitbtn className="exit-btn" />
-      {post ? (
-        <article className="postPage_card">
-          <div className="postPage_carousel">
-            <Swiper images={post.images} />
-          </div>
-          <div className="postPage_detales">
-            <header className="postPage_header">
-              <Avatar
-                image={post.author.avatar}
-                storyBorder={true}
-                iconSize="sm"
-              />
+      <article className="postPage_card">
+        <div className="postPage_carousel">
+          <Swiper images={post.images || []} />
+        </div>
+        <div className="postPage_detales">
+          <header className="postPage_header">
+            <Avatar
+              image={post.author?.avatar}
+              storyBorder={true}
+              iconSize="sm"
+            />
+            <Link className="link" to={"/profile/" + post.author?.username}>
+              <span>{post.author?.username}</span>
+            </Link>
+          </header>
 
-              <Link className="link" to={"/profile/" + post.author.username}>
-                <span>{post.author.username}</span>
-              </Link>
-            </header>
-
-            <div className="postPage_comments">
-              <ScrollArea.Root>
-                <ScrollArea.Viewport className="comments_viewport">
-                  <div className="postPage_body">
-                    <Avatar
-                      image={post.author.avatar}
-                      storyBorder={true}
-                      iconSize="xsm"
-                    />
-                    <p>
-                      <strong>{post.author.username}</strong>
-                    </p>
+          <div className="postPage_comments">
+            <ScrollArea.Root>
+              <ScrollArea.Viewport className="comments_viewport">
+                <div className="postPage_body">
+                  <Avatar
+                    image={post.author?.avatar}
+                    storyBorder={true}
+                    iconSize="sm"
+                  />
+                  <div className="postPage_content">
+                    <Link
+                      className="link"
+                      to={"/profile/" + post.author?.username}
+                    >
+                      <span>{post.author?.username}</span>
+                    </Link>
                     <p>{post.body}</p>
                   </div>
-                  {comments.length > 0 &&
-                    comments.map((comment, i) => {
-                      return (
-                        <div key={i} className="postPage_comment">
-                          <Link to={"/profile/" + comment.author.username}>
-                            <Avatar
-                              image={comment.author.avatar}
-                              storyBorder={false}
-                              iconSize="xsm"
-                            />
-                            <p>
-                              <strong>{comment.author.username}</strong>
-                              {comment.content}
-                            </p>
-                          </Link>
-
-                          <p className="time_commented">
-                            {moment(comment.createdAt)
-                              .fromNow(true)
-                              .replace("a few", "")
-                              .replace(" minutes", "m")
-                              .replace(" minute", "m")
-                              .replace(" seconds", "s")
-                              .replace(" second", "s")
-                              .replace(" days", "d")
-                              .replace(" day", "d")
-                              .replace(" hours", "h")
-                              .replace(" hour", "h")
-                              .replace("an", "1")}
-                          </p>
-                        </div>
-                      );
-                    })}
-                </ScrollArea.Viewport>
-                <ScrollArea.Scrollbar orientation="horizontal">
-                  <ScrollArea.Thumb />
-                </ScrollArea.Scrollbar>
-                <ScrollArea.Scrollbar orientation="vertical">
-                  <ScrollArea.Thumb />
-                </ScrollArea.Scrollbar>
-                <ScrollArea.Corner />
-              </ScrollArea.Root>
-            </div>
-            <div className="postPage_actions">
-              <CardMenu
-                handleLikes={handleLikes}
-                post={post}
-                className="card_menu"
-              />
-              <strong>{likesCount} likes</strong>
-              <div className={"timePosted"}>
-                {moment(post.createdAt)
-                  .fromNow(true)
-                  .replace("a few", "")
-                  .replace(" minutes", " MINUITES")
-                  .replace(" minute", " MINUITE")
-                  .replace(" seconds", "SECONDS")
-                  .replace(" second", " SECOND")
-                  .replace(" days", " DAYS")
-                  .replace(" day", " DAY")
-                  .replace(" hours", " HOURS")
-                  .replace(" hour", " HOUR")
-                  .replace("an", "1")}
-                _AGO
-              </div>
-            </div>
-            <form className="add_comment__form" onSubmit={submit}>
-              <DropdownMenu.Root modal="false">
-                <DropdownMenu.Trigger className="emoji_trigger">
-                  <Emoji />
-                </DropdownMenu.Trigger>
-
-                <DropdownMenu.Content side="top" className="emoji_content">
-                  <DropdownMenu.Item>
-                    <Picker
-                      onEmojiClick={onEmojiClick}
-                      disableAutoFocus={true}
-                      skinTone={SKIN_TONE_MEDIUM_DARK}
-                      groupNames={{ smileys_people: "PEOPLE" }}
-                      disableSearchBar={true}
-                      native
+                </div>
+                {comments.map((comment) => (
+                  <div key={comment._id} className="postPage_comment">
+                    <Avatar
+                      image={comment.author?.avatar}
+                      storyBorder={true}
+                      iconSize="sm"
                     />
-                  </DropdownMenu.Item>
-                  <DropdownMenu.Arrow className="dropDown_arrow" />
-                </DropdownMenu.Content>
-              </DropdownMenu.Root>
-
-              <input
-                ref={ref}
-                className="add_comment__input "
-                name="description"
-                value={commentValue}
-                onChange={(e) => {
-                  setCommentValue(e.target.value);
-                }}
-                type="text"
-                placeholder="Add a comment..."
-                autoComplete="off"
-              />
-
-              <button
-                disabled={!commentValue}
-                className="add_comment__btn"
-                type="submit"
-              >
-                Post
-              </button>
-            </form>
+                    <div className="comment_content">
+                      <Link
+                        className="link"
+                        to={"/profile/" + comment.author?.username}
+                      >
+                        <span>{comment.author?.username}</span>
+                      </Link>
+                      <p>{comment.content}</p>
+                      <span className="comment_time">
+                        {moment(comment.createdAt).fromNow()}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </ScrollArea.Viewport>
+              <ScrollArea.Scrollbar orientation="vertical">
+                <ScrollArea.Thumb />
+              </ScrollArea.Scrollbar>
+            </ScrollArea.Root>
           </div>
-        </article>
-      ) : (
-        ""
-      )}
+          <div className="postPage_actions">
+            <CardMenu
+              handleLikes={handleLikes}
+              post={post}
+              className="card_menu"
+            />
+            <strong>{likesCount} likes</strong>
+            <div className={"timePosted"}>
+              {moment(post.createdAt)
+                .fromNow(true)
+                .replace("a few", "")
+                .replace(" minutes", " MINUITES")
+                .replace(" minute", " MINUITE")
+                .replace(" seconds", "SECONDS")
+                .replace(" second", " SECOND")
+                .replace(" days", " DAYS")
+                .replace(" day", " DAY")
+                .replace(" hours", " HOURS")
+                .replace(" hour", " HOUR")
+                .replace("an", "1")}
+              _AGO
+            </div>
+          </div>
+          <form className="add_comment__form" onSubmit={submit}>
+            <DropdownMenu.Root modal="false">
+              <DropdownMenu.Trigger className="emoji_trigger">
+                <Emoji />
+              </DropdownMenu.Trigger>
+
+              <DropdownMenu.Content side="top" className="emoji_content">
+                <DropdownMenu.Item>
+                  <Picker
+                    onEmojiClick={onEmojiClick}
+                    disableAutoFocus={true}
+                    skinTone={SKIN_TONE_MEDIUM_DARK}
+                    groupNames={{ smileys_people: "PEOPLE" }}
+                    disableSearchBar={true}
+                    native
+                  />
+                </DropdownMenu.Item>
+                <DropdownMenu.Arrow className="dropDown_arrow" />
+              </DropdownMenu.Content>
+            </DropdownMenu.Root>
+
+            <input
+              ref={ref}
+              className="add_comment__input "
+              name="description"
+              value={commentValue}
+              onChange={(e) => {
+                setCommentValue(e.target.value);
+              }}
+              type="text"
+              placeholder="Add a comment..."
+              autoComplete="off"
+            />
+
+            <button
+              disabled={!commentValue}
+              className="add_comment__btn"
+              type="submit"
+            >
+              Post
+            </button>
+          </form>
+        </div>
+      </article>
     </div>
   );
 }
