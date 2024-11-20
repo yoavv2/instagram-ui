@@ -1,6 +1,11 @@
 import config from "../config/index";
 import { base64StringToBlob } from "blob-util";
 
+function getAuthHeader() {
+  const token = localStorage.getItem("token");
+  return token ? `Bearer ${token}` : '';
+}
+
 async function create(post) {
   if (!post.images) return;
   const form = new FormData();
@@ -25,7 +30,7 @@ async function create(post) {
       method: "POST",
       body: form,
       headers: {
-        Authorization: localStorage.getItem("token"),
+        Authorization: getAuthHeader(),
       },
     });
     return res.json();
@@ -33,23 +38,21 @@ async function create(post) {
 }
 
 async function getFeed() {
-  const res = await fetch(config.apiUrl + "/post");
+  const res = await fetch(config.apiUrl + "/post", {
+    headers: {
+      Authorization: getAuthHeader(),
+    },
+  });
 
   return res.json();
 }
 
 async function getOnePost(postId) {
-  const token = localStorage.getItem("token");
-  if (!token) {
-    console.error('No token found');
-    return null;
-  }
-
   try {
     const res = await fetch(config.apiUrl + "/post/" + postId, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: getAuthHeader(),
       },
     });
 
@@ -67,53 +70,49 @@ async function getOnePost(postId) {
 }
 
 async function getPosts(username) {
-  const token = localStorage.getItem("token");
-  if (!token) return [];
-
   try {
     const res = await fetch(config.apiUrl + "/user/" + username + "/post", {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: getAuthHeader(),
       },
     });
     
     if (!res.ok) {
       console.error('Failed to fetch posts:', res.status, res.statusText);
-      return [];
+      throw new Error(`Failed to fetch posts: ${res.statusText}`);
     }
     
     const data = await res.json();
-    return Array.isArray(data) ? data : [];
+    return data;
   } catch (err) {
     console.error('Error fetching posts:', err);
-    return [];
+    throw err;
   }
 }
 
-function postLike(postId) {
+async function postLike(postId) {
   return fetch(config.apiUrl + "/post/" + postId + "/like", {
     method: "POST",
     headers: {
-      Authorization: localStorage.getItem("token"),
+      Authorization: getAuthHeader(),
     },
   });
 }
 
-function postUnlike(postId) {
+async function postUnlike(postId) {
   return fetch(config.apiUrl + "/post/" + postId + "/unlike", {
     method: "POST",
     headers: {
-      Authorization: localStorage.getItem("token"),
+      Authorization: getAuthHeader(),
     },
   });
 }
 
 async function getComments(postId) {
   const res = await fetch(config.apiUrl + "/post/" + postId + "/comment", {
-    method: "GET",
     headers: {
-      Authorization: localStorage.getItem("token"),
+      Authorization: getAuthHeader(),
     },
   });
   return res.json();
@@ -125,7 +124,7 @@ async function createComment(postId, content) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: localStorage.getItem("token"),
+      Authorization: getAuthHeader(),
     },
     body: JSON.stringify({
       content,
@@ -141,6 +140,6 @@ export {
   getOnePost,
   postLike,
   postUnlike,
-  createComment,
   getComments,
+  createComment,
 };

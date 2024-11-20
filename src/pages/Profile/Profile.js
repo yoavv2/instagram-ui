@@ -20,8 +20,8 @@ function Profile() {
       try {
         setLoading(true);
         setError(null);
-        const userPosts = await getPosts(username);
-        setPosts(userPosts.slice(0).reverse());
+        const response = await getPosts(username);
+        setPosts(response.posts || []);
       } catch (err) {
         console.error('Error loading posts:', err);
         setError(err.message || 'Failed to load posts');
@@ -49,46 +49,45 @@ function Profile() {
     <div className='profile_container'>
       <ProfileHeader
         className='profile_header'
+        postsCount={posts.length}
         username={username}
-        postNum={posts.length}
       />
       <header>
         <GalleryIcon className='gallery_icon' />
         <h2>Posts</h2>
       </header>
-
       <div className='profile_gallery'>
-        {posts && posts.length > 0 ? (
-          posts.map((post) => (
-            <Link
-              to={'/post/' + post._id}
-              className='gallery_images'
-              key={post._id}
-            >
-              <div className='item-info'>
-                <span>
-                  <ion-icon name='heart'></ion-icon>
-                </span>
-                <p>{post.likes?.length || 0}</p>
-              </div>
+        {posts.map((post) => (
+          <Link key={post._id} to={'/post/' + post._id} className='gallery_item'>
+            <div className='gallery_images'>
               <img
-                src={post.images && post.images[0] ? getImageUrl(post.images[0]) : 'https://via.placeholder.com/300?text=No+image'}
-                alt={`Post by ${post.author?.username || 'user'}`}
+                src={getImageUrl(post.images[0])}
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = 'https://via.placeholder.com/300?text=Image+not+found';
+                  e.target.src = 'https://via.placeholder.com/300?text=Error+loading+image';
                 }}
+                alt={post.body || 'Post image'}
               />
-              {post.images && post.images.length > 1 && (
-                <div className='carousel_icon'>
-                  <CarouselIcon />
-                </div>
+              {post.images.length > 1 && (
+                <CarouselIcon className='carousel_icon' />
               )}
-            </Link>
-          ))
-        ) : (
-          <div className='no-posts'>No posts yet</div>
-        )}
+              <div className='item-info'>
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                  </svg>
+                  <p>{post.likes?.length || 0}</p>
+                </span>
+                <span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24">
+                    <path d="M21.99 4c0-1.1-.89-2-1.99-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14l4 4-.01-18zM17 11h-4v4h-2v-4H7V9h4V5h2v4h4v2z"/>
+                  </svg>
+                  <p>{post.comments?.length || 0}</p>
+                </span>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
   );

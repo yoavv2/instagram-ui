@@ -3,9 +3,9 @@
 .profile_container {
   flex-direction: column;
   align-items: center;
-  max-width: 900px;
+  max-width: 935px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 30px 20px;
 
   header {
     display: flex;
@@ -13,7 +13,7 @@
     align-items: center;
     gap: 8px;
     padding: 16px 0;
-    margin-bottom: 24px;
+    margin-bottom: 44px;
     border-bottom: 1px solid $border-color-grey-secondary;
     font-family: $font;
     color: $font-color-primary;
@@ -33,11 +33,17 @@
 
   .profile_gallery {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 4px;
+    width: 100%;
     
     @media (min-width: 640px) {
       gap: 28px;
+    }
+
+    .gallery_item {
+      text-decoration: none;
+      color: inherit;
     }
 
     .gallery_images {
@@ -45,12 +51,22 @@
       aspect-ratio: 1;
       background: #000;
       cursor: pointer;
-      text-decoration: none;
+      overflow: hidden;
 
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .carousel_icon {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        color: #fff;
+        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+        z-index: 2;
       }
 
       .item-info {
@@ -61,30 +77,37 @@
         color: #fff;
         justify-content: center;
         align-items: center;
-        gap: 8px;
+        gap: 30px;
         font-family: $font;
+        z-index: 1;
         
         span {
           display: flex;
           align-items: center;
-        }
+          gap: 8px;
 
-        p {
-          margin: 0;
-          font-weight: 600;
+          svg {
+            width: 20px;
+            height: 20px;
+            filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+          }
+
+          p {
+            margin: 0;
+            font-weight: 600;
+            font-size: 16px;
+          }
         }
       }
 
-      &:hover .item-info {
-        display: flex;
-      }
+      &:hover {
+        img {
+          transform: scale(1.05);
+        }
 
-      .carousel_icon {
-        position: absolute;
-        top: 8px;
-        right: 8px;
-        color: #fff;
-        filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.3));
+        .item-info {
+          display: flex;
+        }
       }
     }
   }

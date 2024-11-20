@@ -1,5 +1,13 @@
 import config from "../config/index";
 
+function getAuthHeader() {
+  const token = localStorage.getItem("token");
+  console.log('Raw token from localStorage:', token);
+  const authHeader = token ? `Bearer ${token}` : '';
+  console.log('Generated auth header:', authHeader);
+  return authHeader;
+}
+
 async function register(user) {
   try {
     const res = await fetch(config.apiUrl + "/user", {
@@ -31,13 +39,14 @@ async function register(user) {
 
 async function login({ username, password }) {
   try {
-    const res = await fetch(`${config.apiUrl}/login`, {
+    const res = await fetch(`${config.apiUrl}/user/login`, {
       method: "POST",
       body: JSON.stringify({ username, password }),
       headers: {
         "Content-Type": "application/json",
       },
     });
+    
     if (!res.ok) {
       const contentType = res.headers.get('content-type');
       let error;
@@ -51,7 +60,13 @@ async function login({ username, password }) {
       }
       throw new Error(error.message || 'Failed to login');
     }
-    return await res.json();
+    
+    const data = await res.json();
+    console.log('Login response:', data);
+    if (!data.token) {
+      throw new Error('No token received from server');
+    }
+    return data;
   } catch (err) {
     console.error('Login error:', err);
     throw err;
@@ -90,43 +105,45 @@ async function checkAvailabilityUser(username) {
 
 async function me() {
   console.log('me() service called');
-  const token = localStorage.getItem("token");
-  console.log('Token from localStorage:', token);
+  const authHeader = getAuthHeader();
+  console.log('Auth header for /me request:', authHeader);
   
-  if (!token) {
-    console.log('No token found in localStorage');
+  if (!authHeader) {
+    console.log('No auth header available');
     return {};
   }
 
   try {
     console.log('Making request to /user/me');
+    const headers = {
+      "Content-Type": "application/json",
+      "Authorization": authHeader
+    };
+    console.log('Request headers:', headers);
+
     const res = await fetch(config.apiUrl + "/user/me", {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`  
-      },
+      headers: headers
     });
     
     console.log('Response status:', res.status);
-    console.log('Response headers:', Object.fromEntries(res.headers.entries()));
     
     if (!res.ok) {
       const contentType = res.headers.get('content-type');
       let error;
       if (contentType && contentType.includes('application/json')) {
         error = await res.json();
-        console.error('Me request failed with JSON response:', error);
+        console.error('Me request failed:', error);
       } else {
         const text = await res.text();
-        console.error('Me request failed with text response:', text);
-        error = { message: text || 'Server error' };
+        console.error('Me request failed with non-JSON response:', text);
+        error = { message: 'Server error' };
       }
-      throw new Error(error.message);
+      throw new Error(error.message || 'Failed to get user data');
     }
     
     const data = await res.json();
-    console.log('Me request successful, data:', data);
+    console.log('Me request successful:', data);
     return data;
   } catch (err) {
     console.error('Me request error:', err);

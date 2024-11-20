@@ -47,15 +47,25 @@ function Login() {
   async function submit(values) {
     try {
       const { token } = await login(values);
+      console.log('Received token from login:', token);
+      // Store raw token
+      localStorage.removeItem('token'); // Clear any existing token
       localStorage.setItem("token", token);
+      console.log('Stored token in localStorage:', localStorage.getItem("token"));
+      
       const loggedUser = await me();
+      console.log('Logged in user:', loggedUser);
+      
+      if (!isLoggedIn(loggedUser)) {
+        throw new Error('Invalid login response');
+      }
       setUser(loggedUser);
       onSucsess.fire();
       history.push("/");
-    } catch (e) {
+    } catch (err) {
+      console.error('Login failed:', err);
+      localStorage.removeItem('token'); // Clear token on error
       onError.fire();
-
-      console.log("error ", e);
     }
   }
 
